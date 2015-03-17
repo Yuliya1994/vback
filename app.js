@@ -32,9 +32,10 @@ app.use(session({
     secret: 'oi928%@21jdfdsJd'
 }));
 
+require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
-require('./config/passport')(passport);
+
 
 var accessLogStream = fs.createWriteStream('access.log', {flags: 'a'});
 app.use(logger('combined', {stream: accessLogStream}));

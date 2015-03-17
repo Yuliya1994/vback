@@ -6,6 +6,15 @@ module.exports = function(app, passport) {
         res.render('index');
     });
 
+    app.get('/login', function(req, res) {
+        res.render('login');
+    });
+
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect: '/',
+        failureRedirect: '/signup'
+    }));
+
     app.get('/signup', function(req, res) {
         console.log(config.url);
         res.render('signup');
@@ -16,4 +25,8 @@ module.exports = function(app, passport) {
         failureRedirect: '/signup'
     }));
 
-}
+    app.get('/profile', function(req, res) {
+        res.render('profile', {user: req.user});
+    });
+
+};
