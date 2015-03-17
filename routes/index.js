@@ -1,9 +1,19 @@
-var express = require('express');
-var router = express.Router();
+var config = require('../config/db');
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
-});
+module.exports = function(app, passport) {
 
-module.exports = router;
+    app.get('/', function(req, res) {
+        res.render('index');
+    });
+
+    app.get('/signup', function(req, res) {
+        console.log(config.url);
+        res.render('signup');
+    });
+
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect: '/',
+        failureRedirect: '/signup'
+    }));
+
+}
