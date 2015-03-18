@@ -1,4 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google').Strategy;
 var User = require("../models/user");
 
 module.exports = function(passport) {
@@ -55,18 +56,46 @@ module.exports = function(passport) {
                 }
 
                 if (!user) {
-                    console.log('user doesnt exist');
                     return done(null, false, {message: "user doesn't exist"});
                 }
 
                 if (user.local.password !== password) {
-                    console.log('password isnt correct');
                     return done(null, false, {message: "password isn't correct"});
                 }
 
-                console.log('its ok');
+
                 return done(null, user);
             });
 
         }));
+
+    passport.use(new GoogleStrategy({
+        returnURL: 'http://localhost:3000/auth/google/return',
+        realm: 'http://localhost:3000'
+    }, function(id, profile, done){
+        id = id.substr((id.indexOf('=')+1));
+
+        User.findOne({'google.id': id}, function(err, user){
+            if(err) {
+                console.log('horror');
+                console.log(err);
+                return done(err);
+            }
+
+            if(!user) {
+                var newUser = new User();
+                newUser.google.id = id;
+                newUser.google.profile = profile;
+                newUser.local.email = profile.emails[0].value;
+
+                newUser.save(function(err) {
+                    if(err) {
+                        throw err;
+                    }
+                });
+            }
+
+            return done(null, user||newUser);
+        });
+    }));
 };

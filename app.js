@@ -12,11 +12,8 @@ mongoose.connect(config.url);
 var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var passport = require('passport')
-    , LocalStrategy = require('passport-local').Strategy;
+var passport = require('passport');
 
-
-var users = require('./routes/users');
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
