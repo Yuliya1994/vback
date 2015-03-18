@@ -1,6 +1,10 @@
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google').Strategy;
+var GitHubStrategy = require('passport-github').Strategy;
 var User = require("../models/user");
+
+var GITHUB_CLIENT_ID = "9fed19d59ffcfce73c1b";
+var GITHUB_CLIENT_SECRET = "78b9a3e98886090d2f8b1397f285767a4569dd3d";
 
 module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
@@ -51,7 +55,6 @@ module.exports = function(passport) {
         function(req, email, password, done) {
             User.findOne({ 'local.email' :  email }, function(err, user) {
                 if (err) {
-                    console.log(err);
                     return done(err);
                 }
 
@@ -77,8 +80,6 @@ module.exports = function(passport) {
 
         User.findOne({'google.id': id}, function(err, user){
             if(err) {
-                console.log('horror');
-                console.log(err);
                 return done(err);
             }
 
@@ -98,4 +99,33 @@ module.exports = function(passport) {
             return done(null, user||newUser);
         });
     }));
+
+    passport.use(new GitHubStrategy({
+            clientID: GITHUB_CLIENT_ID,
+            clientSecret: GITHUB_CLIENT_SECRET,
+            callbackURL: "http://localhost:3000/auth/github/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+            User.findOne({'github.id': profile.id}, function(err, user){
+                if(err) {
+                    return done(err);
+                }
+
+                if(!user) {
+                    var newUser = new User();
+                    newUser.github.id = profile.id;
+                    newUser.github.profile = profile;
+                    newUser.local.email = profile.emails[0].value;
+
+                    newUser.save(function(err) {
+                        if(err) {
+                            throw err;
+                        }
+                    });
+                }
+
+                return done(null, user||newUser);
+            });
+        }
+    ));
 };

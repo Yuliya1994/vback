@@ -35,4 +35,11 @@ module.exports = function(app, passport) {
     app.get('/auth/google/return',
         passport.authenticate('google', { successRedirect: '/profile',
             failureRedirect: '/login' }));
+
+    app.get('/auth/github',
+        passport.authenticate('github'));
+
+    app.get('/auth/github/callback',
+        passport.authenticate('github', { successRedirect: '/profile',
+            failureRedirect: '/login' }));
 };

@@ -1,13 +1,23 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
+    common: {
+        id: String
+    },
+
     local: {
         email: String,
         password: String
     },
 
     google: {
-        id: String
+        id: String,
+        profile: Object
+    },
+
+    github: {
+        id: String,
+        profile: Object
     }
 });
 
