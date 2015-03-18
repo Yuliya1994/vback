@@ -30,9 +30,9 @@ module.exports = function(app, passport) {
         res.render('profile', {user: req.user});
     });
 
-    app.get('/auth/google', passport.authenticate('google'));
+    app.get('/auth/google', passport.authenticate('google',{ scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
-    app.get('/auth/google/return',
+    app.get('/auth/google/callback',
         passport.authenticate('google', { successRedirect: '/profile',
             failureRedirect: '/login' }));
 

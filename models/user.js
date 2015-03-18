@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
     common: {
-        id: String
+        id: String,
+        profile: Object
     },
 
     local: {
