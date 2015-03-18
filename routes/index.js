@@ -7,22 +7,23 @@ module.exports = function(app, passport) {
     });
 
     app.get('/login', function(req, res) {
-        res.render('login');
+        res.render('login', {message: req.flash("error")});
     });
 
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/',
-        failureRedirect: '/signup'
+        successRedirect: '/profile',
+        failureRedirect: '/login',
+        failureFlash : true
     }));
 
     app.get('/signup', function(req, res) {
-        console.log(config.url);
-        res.render('signup');
+        res.render('signup', {message: req.flash("error")});
     });
 
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect: '/',
-        failureRedirect: '/signup'
+        failureRedirect: '/signup',
+        failureFlash : true
     }));
 
     app.get('/profile', function(req, res) {

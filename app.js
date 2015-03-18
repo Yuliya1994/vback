@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var config = require('./config/db');
 mongoose.connect(config.url);
 
+var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport')
@@ -29,13 +30,15 @@ app.use(methodOverride());
 
 app.use(cookieParser());
 app.use(session({
-    secret: 'oi928%@21jdfdsJd'
+    secret: 'oi928%@21jdfdsJd',
+    resave: true,
+    saveUninitialized: true
 }));
 
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 
 var accessLogStream = fs.createWriteStream('access.log', {flags: 'a'});
 app.use(logger('combined', {stream: accessLogStream}));

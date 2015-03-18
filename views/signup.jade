@@ -3,6 +3,8 @@ extends layout
 block content
 
     h1 Sign Up
+    p= message
+
     form(method='post', action='/signup')
         p
             label(for='email') Email
