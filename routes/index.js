@@ -1,12 +1,15 @@
-var config = require('../config/db');
+
 var user = require('../controllers/user');
 var access = require('../middlewares.js');
+var templates = require('../config/templates');
+
 
 module.exports = function(app, passport) {
 
-    app.get('/', function(req, res) {
-        console.log('access: ' + user.getAccessLevel(req, res));
-        res.render('index');
+    app.get('/', access.isAuth, function(req, res) {
+        var mainTemplate = templates[user.getAccessLevel(req, res)];
+
+        res.render(mainTemplate, {template: mainTemplate});
     });
 
     app.get('/login', function(req, res) {

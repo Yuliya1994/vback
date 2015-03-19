@@ -1,4 +1,4 @@
-var app = angular.module('VacationApp', ['ngDialog']);
+var app = angular.module('VacationApp', ['ngDialog', 'datePicker']);
 
 
 app.controller('CalendarController', ['$scope', 'ngDialog', 'CalendarService', function($scope, ngDialog, CalendarService){
@@ -105,7 +105,7 @@ app.controller('CalendarController', ['$scope', 'ngDialog', 'CalendarService', f
     $scope.openVacationParameters = function(vac){
         $scope.vac = vac;
         ngDialog.open({
-            template: './vacation.html',
+            template: '../templates/vacation.html',
             className: 'ngdialog-theme-default',
             scope: $scope
         });

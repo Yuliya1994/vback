@@ -84,3 +84,18 @@ button:hover{
 #username{
 
 }
+
+div.error {
+    font-size: 10pt;
+    color: #fff;
+    opacity: 0.7;
+    background-color: #FF5722;
+}
+
+p.sign_up {
+    font-size: 10pt;
+}
+
+p.sign_up a {
+    color: #fff;
+}

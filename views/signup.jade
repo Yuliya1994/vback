@@ -1,18 +1,18 @@
 extends layout
-
 block content
+    link(rel='stylesheet', href='../css/login-form.css')
 
-    h1 Sign Up
-    p= message
+    div.link_back
+        a(href='../')
+            i.fa.fa-long-arrow-left   Назад
+    .wrap
+        | Регистрация
+        form(method='post', action='/signup')
+            div.error.text-warning= message
 
-    form(method='post', action='/signup')
-        p
-            label(for='email') Email
-        p
-            input(type='email', name='email', placeholder='email')
-        p
-            label(for='password') Password
-        p
-            input(type='password', name='password', placeholder='password')
-        p
-            button(type='submit') Sign Up
+            input#username(type='text', placeholder='Email...', name='email')
+
+            input#password(type='password', placeholder='******', name='password')
+
+            button.btn.btn-lg(type='submit')
+                i.fa.fa-user-plus Зарегистрироваться

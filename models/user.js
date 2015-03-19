@@ -4,6 +4,7 @@ var userSchema = mongoose.Schema({
     common: {
         id: String,
         access: {type: Number, default: 1},
+        rank: {type: Number, default: 0},
         profile: Object
     },
 

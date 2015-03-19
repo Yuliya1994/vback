@@ -1,18 +1,31 @@
 extends layout
 
+
 block content
-    h1 Login
-    p= message
-    form(method='post', action='/login')
-        p
-            input(type='text', name='email', placeholder='login')
-        p
-            input(type='password', name='password', placeholder='password')
-        p
-            button(type='submit') Sign In
+    link(rel='stylesheet', href='../css/login-form.css')
 
+    .wrap
+        | Войти
+        form(method='post', action='/login')
+            div.error.text-warning= message
 
-    p
-        a(href='/auth/google') Sign In with Google
-    p
-        a(href='/auth/github') Sign In with GitHub
+            input#username(type='text', placeholder='Email...', name='email')
+
+            input#password(type='password', placeholder='******', name='password')
+
+            .text-center.social
+                p.sign_up
+                    a(href='signup') Регистрация
+                | Авторизоваться через социальные сети
+                .social-links
+                    i.fa.fa-vk(title='vk')
+
+                    i.fa.fa-google-plus(title='Google+')
+
+                    i.fa.fa-facebook-official(title='Facebook')
+
+                    i.fa.fa-github(title='GitHub')
+
+                button.btn.btn-lg(type='submit')
+                    i.fa.fa-sign-in Войти
+

@@ -43,12 +43,13 @@ module.exports = function(passport) {
                     newUser.local.password = password;
 
                     var commonProfile = {
-                        username: '',
+                        username: null,
                         email: email,
                         photo: null
                     };
 
-                    newUser.addCommonData(null, 1, commonProfile);
+                    //duplicate object_id in common with local strategy
+                    newUser.addCommonData(newUser._id,  commonProfile);
 
                     newUser.save(function(err) {
                         if(err) {
@@ -149,7 +150,7 @@ module.exports = function(passport) {
                         };
 
 
-                        newUser.addCommonData(profile.id, commonProfile);
+                        newUser.addCommonData(profile.id,commonProfile);
                         console.log(newUser);
 
                         newUser.save(function (err) {
