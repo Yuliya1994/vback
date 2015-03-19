@@ -1,0 +1,121 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic);
+
+body {
+  background-color: #303F9F;
+  font-family: 'Roboto', sans-serif;
+}
+
+div.range-control {
+    margin-bottom: 10px;
+    color: #fff;
+
+}
+
+div.range-control a {
+    color: #fff;
+}
+
+a.navbar-brand {
+    font-size: 22pt;
+}
+
+.fa-sun-o {
+    color: #FFC107;
+}
+.fashion-bg{
+  position: absolute;
+  background-color: #3F51B5;
+  min-width: 100%;
+  min-height: 100px;
+  z-index: -999;
+
+}
+
+.main {
+  font-size: 10pt;
+}
+.main a {
+  color: #536DFE;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+}
+
+.year-control{
+  margin-top: 5px;
+}
+
+.month-control {
+  border-bottom: 3px solid #009688;
+}
+
+.year-fix {
+    font-size: 18pt;
+}
+
+.sort-calendar {
+  background-color: #fff ;
+  font-stretch: condensed;
+  font-weight: 200;
+  border: 4px solid #B2DFDB;
+  border-bottom: none;
+  padding: 5px;
+  text-align: center;
+  font-size: 12pt;
+}
+
+.date-pick i {
+    transition: color 2s;
+}
+.date-pick i:hover {
+    color: #009688;
+    margin-bottom: 5px;
+}
+
+.table-calendar a {
+  font-size: 10pt;
+  text-decoration: none;
+}
+
+.table-calendar {
+  font-family: 'Roboto', sans-serif;
+  -webkit-box-shadow: 0px 4px 0px 0px rgba(29, 38, 95, 0.75);
+  -moz-box-shadow:    0px 4px 0px 0px rgba(29, 38, 95, 0.75);
+  box-shadow:         0px 4px 0px 0px rgba(29, 38, 95, 0.75);
+
+  border: 2px solid #B2DFDB;
+  border-top: none;
+}
+
+
+.nav-list {
+  margin-top: 20px;
+}
+
+.nav-text {
+  font-size: 12pt;
+  transition: border 1s;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+}
+
+.nav-text:hover {
+  border-bottom: 3px solid #303F9F;
+}
+
+.date-pick {
+  font-size: 14pt;
+  padding: 0;
+}
+
+.month-pick {
+
+}
+
+.btn-success {
+  background-color: #00796B; !important
+}
+
+footer {
+  color: #fff;
+}

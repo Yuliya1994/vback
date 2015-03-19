@@ -1,0 +1,10 @@
+div.profile {
+    min-height: 350px;
+    font-family: 'Roboto', sans-serif;
+    -webkit-box-shadow: 0px 4px 0px 0px rgba(29, 38, 95, 0.75);
+    -moz-box-shadow:    0px 4px 0px 0px rgba(29, 38, 95, 0.75);
+    box-shadow:         0px 4px 0px 0px rgba(29, 38, 95, 0.75);
+
+    background-color: #fff;
+    border: 2px solid #B2DFDB;
+}

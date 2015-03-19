@@ -1,0 +1,119 @@
+.table-calendar {
+    font-size: 9pt;
+    background: #fff;
+}
+
+.vac-stats {
+    list-style-type: none;
+    margin-top: 2%;
+    font-size: 8pt;
+    color: #101010;
+}
+
+thead {
+    background-color: #e3f2fd;
+    border-top: 3px solid #a8a8a8;
+}
+
+div.month-control {
+    font-size: 16pt;
+}
+
+
+
+tr.control-row {
+    font-weight: bold;
+}
+
+
+
+td.rangeEmpty {
+    background-color: #fff;
+}
+
+td.rangeActive {
+    background-color: #e2e2e2;
+    cursor:pointer;
+    border-right: none;
+}
+
+td.rangeActive:hover {
+    background-color: #f2dede;
+
+}
+
+td.table-header {
+    -webkit-transition: background-color 1s; /* Safari */
+    transition: background-color 1s;
+    height: 37px;
+    max-height: 57px;
+}
+
+td.table-header:first-of-type {
+    width: 10%;
+}
+
+td.table-header:hover {
+    background-color: #e2e2e2;
+}
+
+td.rangeAccepted {
+    background-color: #009688;
+    cursor:pointer;
+    -webkit-transition: background-color 1s; /* Safari */
+    transition: background-color 1s;
+}
+
+td.rangeAccepted:hover {
+    background-color: #00796B;
+}
+
+td.rangeRefused {
+    background-color: #D32F2F;
+    cursor:pointer;
+    -webkit-transition: background-color 1s; /* Safari */
+    transition: background-color 1s;
+    border-right: none;
+}
+
+td.rangeRefused:hover {
+    background-color: #b71c1c;
+}
+
+i {
+    cursor: pointer;
+}
+
+
+.start {
+    background-image: url('../img/plane.png');
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.end {
+    background-image: url('../img/worker.png');
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.vac-parameter {
+    -webkit-transition:text-shadow 0.5s; /* Safari */
+    transition: color 0.5s;
+    font-size: 14px;
+}
+
+.vac-parameter:hover {
+    color: #009688;
+}
+
+.week-day {
+    font-size: 7pt;
+    color: #a8a8a8;
+}
+
+.week-end {
+    color: #fc8c84;
+}

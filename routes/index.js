@@ -1,8 +1,11 @@
 var config = require('../config/db');
+var user = require('../controllers/user');
+var access = require('../middlewares.js');
 
 module.exports = function(app, passport) {
 
     app.get('/', function(req, res) {
+        console.log('access: ' + user.getAccessLevel(req, res));
         res.render('index');
     });
 
@@ -11,10 +14,12 @@ module.exports = function(app, passport) {
     });
 
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/profile',
+        successRedirect: '/',
         failureRedirect: '/login',
         failureFlash : true
     }));
+
+    app.get('/logout', user.logout);
 
     app.get('/signup', function(req, res) {
         res.render('signup', {message: req.flash("error")});
@@ -26,20 +31,20 @@ module.exports = function(app, passport) {
         failureFlash : true
     }));
 
-    app.get('/profile', function(req, res) {
-        res.render('profile', {user: req.user});
+    app.get('/profile', access.isAuth, function(req, res) {
+        res.render('profile', {user: req.user.common.profile});
     });
 
     app.get('/auth/google', passport.authenticate('google',{ scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
     app.get('/auth/google/callback',
-        passport.authenticate('google', { successRedirect: '/profile',
+        passport.authenticate('google', { successRedirect: '/',
             failureRedirect: '/login' }));
 
     app.get('/auth/github',
         passport.authenticate('github'));
 
     app.get('/auth/github/callback',
-        passport.authenticate('github', { successRedirect: '/profile',
+        passport.authenticate('github', { successRedirect: '/',
             failureRedirect: '/login' }));
 };

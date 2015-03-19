@@ -3,11 +3,13 @@ var mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
     common: {
         id: String,
+        access: {type: Number, default: 1},
         profile: Object
     },
 
     local: {
         email: String,
+        username: String,
         password: String
     },
 
@@ -22,8 +24,10 @@ var userSchema = mongoose.Schema({
     }
 });
 
-userSchema.validPassword = function(password) {
-    return this.local.password === password;
+userSchema.methods.addCommonData = function(id,  profile) {
+    var self = this;
+    self.common.id = id||null;
+    self.common.profile = profile;
 };
 
 module.exports = mongoose.model('User', userSchema);

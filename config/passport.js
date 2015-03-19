@@ -1,3 +1,8 @@
+/*
+* Levels:
+* 0 - Admin
+* 1 - User
+* */
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var GitHubStrategy = require('passport-github').Strategy;
@@ -8,7 +13,6 @@ var GITHUB_CLIENT_SECRET = "78b9a3e98886090d2f8b1397f285767a4569dd3d";
 
 var GOOGLE_CLIENT_ID = "734848012369-smap58ll438ssshkjq74325bo3m82r2s.apps.googleusercontent.com";
 var GOOGLE_CLIENT_SECRET = 'iPrF9hHLWzKV60vG5W5hlpei';
-
 
 module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
@@ -25,7 +29,7 @@ module.exports = function(passport) {
         usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: true
-    }, function(req, email, password, done){
+    }, function(req, email,  password, done){
             User.findOne({'local.email': email}, function(err, user) {
                 if(err){
                     return done(err);
@@ -37,6 +41,14 @@ module.exports = function(passport) {
                     var newUser = new User();
                     newUser.local.email = email;
                     newUser.local.password = password;
+
+                    var commonProfile = {
+                        username: '',
+                        email: email,
+                        photo: null
+                    };
+
+                    newUser.addCommonData(null, 1, commonProfile);
 
                     newUser.save(function(err) {
                         if(err) {
@@ -92,10 +104,15 @@ module.exports = function(passport) {
             if(!user) {
                 var newUser = new User();
                 newUser.google.id = profile.id;
-                newUser.common.id = profile.id;
-
                 newUser.google.profile = profile;
-                newUser.common.profile = profile;
+
+                var commonProfile = {
+                    username: profile.name,
+                    email: profile.emails[0].value,
+                    photo: null
+                };
+
+                newUser.addCommonData(profile.id, commonProfile);
 
                 newUser.save(function(err) {
                     if(err) {
@@ -124,7 +141,16 @@ module.exports = function(passport) {
                         var newUser = new User();
                         newUser.github.id = profile.id;
                         newUser.github.profile = profile;
-                        newUser.local.email = profile.emails[0].value;
+
+                        var commonProfile = {
+                            username: profile._json.name,
+                            email: profile.emails[0].value,
+                            photo: profile._json.avatar_url
+                        };
+
+
+                        newUser.addCommonData(profile.id, commonProfile);
+                        console.log(newUser);
 
                         newUser.save(function (err) {
                             if (err) {
