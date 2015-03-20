@@ -1,4 +1,3 @@
-
 var user = require('../controllers/user');
 var access = require('../middlewares.js');
 var templates = require('../config/templates');

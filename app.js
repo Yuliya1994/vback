@@ -41,7 +41,10 @@ app.use(flash());
 var accessLogStream = fs.createWriteStream('access.log', {flags: 'a'});
 app.use(logger('combined', {stream: accessLogStream}));
 
+//main routes
 var routes = require('./routes/index')(app, passport);
+
+//api routes
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

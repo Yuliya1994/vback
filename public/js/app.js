@@ -50,7 +50,7 @@ app.controller('CalendarController', ['$scope', 'ngDialog', 'CalendarService', f
 
                     case 1:
                         return $scope.rangeClasses.accepted;
-                        break
+                        break;
 
                     case 2:
                         return $scope.rangeClasses.refused;

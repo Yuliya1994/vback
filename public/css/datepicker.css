@@ -44,10 +44,9 @@
 [date-range] [date-picker] .after.before {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #499dcd;
-  background-color: #2f6ab4;
+  background-color: #3F51B5;
   background-repeat: repeat-x;
-  border-color: #2f6ab4 #2f6ab4 #1f4677;
+  border-color: #3F51B5;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f6ab4', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
@@ -59,13 +58,13 @@
 [date-range] [date-picker] .after.before.disabled,
 [date-range] [date-picker] .after.before[disabled] {
   color: #ffffff;
-  background-color: #2f6ab4;
-  *background-color: #2a5ea0;
+  background-color: #3F51B5;
+  *background-color: #3F51B5;
 }
 
 [date-range] [date-picker] .after.before:active,
 [date-range] [date-picker] .after.before.active {
-  background-color: #24528c \9;
+  background-color: #3F51B5;
 }
 
 [date-picker] {
@@ -129,11 +128,10 @@
   color: #ffffff;
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #006dcc;
-  *background-color: #0044cc;
+  background-color: #3F51B5;
 
   background-repeat: repeat-x;
-  border-color: #0044cc #0044cc #002a80;
+  border-color: #3F51B5;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
@@ -148,41 +146,35 @@
 [date-picker] .active[disabled],
 [date-picker] .now[disabled] {
   color: #ffffff;
-  background-color: #0044cc;
-  *background-color: #003bb3;
+  background-color: #3F51B5;
 }
 
 [date-picker] .active:active,
 [date-picker] .now:active,
 [date-picker] .active.active,
 [date-picker] .now.active {
-  background-color: #003399 \9;
+  background-color: #3F51B5;
 }
 
 [date-picker] .now {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #ee735b;
-  background-color: #ee905b;
-
-  background-repeat: repeat-x;
-  border-color: #ee905b #ee905b #e56218;
+  background-color: #FF5722;
+  border-color: #FF5722;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-[date-picker] .now:hover,
+[date-picker] .now:hover {
+    background-color: #FF5722;
+    color: #000;
+}
 [date-picker] .now:active,
 [date-picker] .now.active,
 [date-picker] .now.disabled,
 [date-picker] .now[disabled] {
-  color: #ffffff;
-  background-color: #ee905b;
-  *background-color: #ec8044;
-}
+     color: #ffffff;
+    background-color: #FF5722;
 
-[date-picker] .now:active,
-[date-picker] .now.active {
-  background-color: #e9712d \9;
 }
 
 [date-picker] .disabled {
