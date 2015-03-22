@@ -159,13 +159,13 @@
 [date-picker] .now {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #FF5722;
-  border-color: #FF5722;
+  background-color: #ff9100;
+  border-color: #ff9100;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
 [date-picker] .now:hover {
-    background-color: #FF5722;
+    background-color: #ff9100;
     color: #000;
 }
 [date-picker] .now:active,
@@ -173,7 +173,7 @@
 [date-picker] .now.disabled,
 [date-picker] .now[disabled] {
      color: #ffffff;
-    background-color: #FF5722;
+    background-color: #ff9100;
 
 }
 
