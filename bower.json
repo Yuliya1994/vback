@@ -15,6 +15,8 @@
   ],
   "dependencies": {
     "angular": "~1.4.*",
+    "angular-animate": "*",
+    "angular-route": "*",
     "bootstrap": "*",
     "ngDialog": "*",
     "materialize": "~0.95.3",

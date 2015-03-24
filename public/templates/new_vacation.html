@@ -1,22 +1,24 @@
-<div class="container-vac">
+<div class="container-vac" ng-controller="NewVacationController">
     <div class="text-center">
         <h4>Новая заявка</h4>
     </div>
 
     <div class="new-vacation-div">
-        <input class="datepicker-input form-control" placeholder = "Начало" type="text" date-time ng-model="start" required="true" min-view="date" view="month">
+        <input class="datepicker-input form-control" placeholder = "Начало" type="text" date-time ng-model="range.start" required="true" min-view="date" view="month">
     </div>
 
     <div class="new-vacation-div">
-        <input class="datepicker-input form-control"  placeholder = "Конец" type="text" date-time ng-model="end" required="true"  min-view="date" view="month">
+        <input class="datepicker-input form-control"  placeholder = "Конец" type="text" date-time ng-model="range.end" required="true"  min-view="date" view="month">
     </div>
 
+    {{range.start}} && {{range.end}}
+
     <div class="new-vacation-div">
-        <textarea placeholder="Комментарий" class="form-control datepicker-input"></textarea>
+        <textarea placeholder="Комментарий" class="form-control datepicker-input" ng-model="vacation.comment"></textarea>
     </div>
 
     <div class="text-center">
-     <button type="submit" class="btn btn-success btn-lg">Отправить</button>
+     <button ng-click="showResult()" type="submit" class="btn btn-success btn-lg">Отправить</button>
     </div>
 </div>
 

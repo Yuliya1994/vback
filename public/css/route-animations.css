@@ -1,0 +1,43 @@
+/* Default view */
+.view{
+    position: relative;
+    transition: 300ms;
+}
+
+/* First animation*/
+.first .view.ng-enter{
+    left: -100%;
+    opacity: 0;
+}
+
+.first .view.ng-enter.ng-enter-active{
+    left: 0%;
+    opacity: 1;
+}
+
+.first .view.ng-leave{
+    left: 0%;
+    opacity: 1;
+}
+
+.first .view.ng-leave.ng-leave-active{
+    left: 100%;
+    opacity: 0;
+}
+
+/* Second animation*/
+.second .view.ng-enter{
+    left: 100%;
+}
+
+.second .view.ng-enter.ng-enter-active{
+    left: 0%;
+}
+
+.second .view.ng-leave{
+    left: 0%;
+}
+
+.second .view.ng-leave.ng-leave-active{
+    left: -100%;
+}

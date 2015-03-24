@@ -31,16 +31,6 @@ td.rangeEmpty {
     background-color: #fff;
 }
 
-td.rangeActive {
-    background-color: #e2e2e2;
-    cursor:pointer;
-    border-right: none;
-}
-
-td.rangeActive:hover {
-    background-color: #f2dede;
-
-}
 
 td.table-header {
     -webkit-transition: background-color 1s; /* Safari */
@@ -54,7 +44,19 @@ td.table-header:first-of-type {
 }
 
 td.table-header:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+td.rangeActive {
     background-color: #e2e2e2;
+    cursor:pointer;
+    border-right: none;
+    -webkit-transition: background-color 1s; /* Safari */
+    transition: background-color 1s;
+}
+
+td.rangeActive:hover {
+    background-color: rgba(76,76,76,0.5);
 }
 
 td.rangeAccepted {
@@ -112,8 +114,10 @@ i {
 .week-day {
     font-size: 7pt;
     color: #a8a8a8;
+    display: block;
 }
 
 .week-end {
     color: #fc8c84;
+
 }

@@ -26,11 +26,11 @@
     <div class="main">
         <div class="row range-control">
             <div class="col-md-4">
-              <div class='logo'>
-                <a class="navbar-brand" href="#">
-                  <i class="fa fa-sun-o"></i> vacation control
-                </a>
-              </div>
+                <div class='logo'>
+                    <a class="navbar-brand" href="#">
+                        <i class="fa fa-sun-o"></i> vacation control
+                    </a>
+                </div>
             </div>
 
             <div class="col-md-4">
@@ -53,38 +53,38 @@
         </div>
 
         <div class="row sort-calendar">
-          <div class="col-md-4" style="text-align: left;">
-          </div>
-
-          <div class="col-md-4 date-pick">
-
-
-            <div class="col-md-6">
-              <i ng-click="changeVisibleRange('year', 'minus')" class="fa fa-long-arrow-left"></i>
-              {{baseConfig.year}}
-              <i ng-click="changeVisibleRange('year', 'plus')" class="fa fa-long-arrow-right"></i>
+            <div class="col-md-4" style="text-align: left;">
             </div>
 
-            <div class="col-md-6 month-pick">
-
-                <i ng-click="changeVisibleRange('month', 'minus')" class="fa fa-long-arrow-left"></i>
+            <div class="col-md-4 date-pick">
 
 
+                <div class="col-md-6">
+                    <i ng-click="changeVisibleRange('year', 'minus')" class="fa fa-long-arrow-left"></i>
+                    {{baseConfig.year}}
+                    <i ng-click="changeVisibleRange('year', 'plus')" class="fa fa-long-arrow-right"></i>
+                </div>
 
-                {{baseConfig.month|monthName}}
+                <div class="col-md-6 month-pick">
+
+                    <i ng-click="changeVisibleRange('month', 'minus')" class="fa fa-long-arrow-left"></i>
 
 
 
-                <i ng-click="changeVisibleRange('month', 'plus')" class="fa fa-long-arrow-right"></i>
+                    {{baseConfig.month|monthName}}
+
+
+
+                    <i ng-click="changeVisibleRange('month', 'plus')" class="fa fa-long-arrow-right"></i>
+
+                </div>
+
+
 
             </div>
 
-
-
-          </div>
-
-          <div class="col-md-4" style="text-align: right;">
-          </div>
+            <div class="col-md-4" style="text-align: right;">
+            </div>
 
         </div>
 
@@ -104,13 +104,10 @@
                 </td>
 
                 <td class="table-header" ng-repeat="day in baseConfig.daysRange()">
-
-
                     <span class="week-day">
                         {{baseConfig.getDay(day)|dayName}}
                     </span>
                     {{day}}
-
                 </td>
             </tr>
 
@@ -132,23 +129,30 @@
 
 
 <footer class="footer navbar-fixed-bottom row-fluid">
-  <div class="container">
-    <div class="col-md-6 text-right">
-        <a href="/logout">Выйти</a>
+    <div class="container">
+        <div class="col-md-6 text-right">
+            <a href="#" onclick="document.location.href='/auth/logout'">Выйти</a>
+        </div>
+        <div class="col-md-6"></div>
+
     </div>
-    <div class="col-md-6"></div>
-    </p>
-  </div>
 </footer>
 <!-- end -->
 <script src="../../bower_components/angular/angular.min.js"></script>
-<script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../../bower_components/angular-route/angular-route.min.js"></script>
+<script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="../../bower_components/ngDialog/js/ngDialog.min.js"></script>
-<script src="../bower_components/ng-dropdown/dist/js/ng-dropdown.min.js"></script>
+<!--ru locale-->
+<script src="../../bower_components/angular-i18n/angular-locale_ru-ru.js"></script>
+<script src="../js/datepicker.js"></script>
 <script src="../js/app.js"></script>
-<script src="../../bower_components/angular-datepicker/dist/index.min.js"></script>
+<script src="../js/vacation_service.js"></script>
+<script src="../js/user_service.js"></script>
+<script src="../js/vacation.js"></script>
+<script src="../js/calendar.js"></script>
 <script src="../js/calendar_filters.js"></script>
 <script src="../js/calendar_service.js"></script>
+
 
 </body>
 </html>

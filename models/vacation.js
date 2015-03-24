@@ -1,16 +1,16 @@
 var mongoose = require('mongoose');
 
 var vacationSchema = mongoose.Schema({
- /*
-  id: 2,
-  user: "Another P.P.",
-  rank: "Dev.",
-  year: 2015,
-  month: [3, null],
-  days: [[3,4,5,6,7,8,9], null],
-  comment: "Gonna go Turkey",
-  acceptionState: 2
-  */
+/*
+      id: 2,
+      user: "Another P.P.",
+      rank: "Dev.",
+      year: 2015,
+      month: [3, null],
+      days: [[3,4,5,6,7,8,9], null],
+      comment: "Gonna go Turkey",
+      acceptionState: 2
+*/
 
     user_id: String,
     rank: Number,

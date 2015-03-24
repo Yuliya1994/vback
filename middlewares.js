@@ -2,7 +2,11 @@ var user = require('./controllers/user');
 exports.isAuth = function (req, res, next){
     req.isAuthenticated()
         ? next()
-        : res.redirect('/login');
+        : res.redirect('/auth/login');
+};
+
+exports.apiAccess = function (req, res, next) {
+    req.isAuthenticated() ? next() : res.status(403).send('Access forbidden');
 };
 
 exports.isGuest = function (req, res, next){

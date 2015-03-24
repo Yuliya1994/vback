@@ -6,7 +6,7 @@ block content
 
     .wrap
         | Войти
-        form(method='post', action='/login')
+        form(method='post', action='/auth/login')
             div.error.text-warning= message
 
             input#username(type='text', placeholder='Email...', name='email')
@@ -15,7 +15,7 @@ block content
 
             .text-center.social
                 p.sign_up
-                    a(href='signup') Регистрация
+                    a(href='/auth/signup') Регистрация
                 | Авторизоваться через социальные сети
                 .social-links
                     i.fa.fa-vk(title='vk')

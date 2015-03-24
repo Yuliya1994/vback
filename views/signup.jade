@@ -7,7 +7,7 @@ block content
             i.fa.fa-long-arrow-left   Назад
     .wrap
         | Регистрация
-        form(method='post', action='/signup')
+        form(method='post', action='/auth/signup')
             div.error.text-warning= message
 
             input#username(type='text', placeholder='Email...', name='email')

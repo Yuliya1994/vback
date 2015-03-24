@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../../bower_components/ngDialog/css/ngDialog-theme-default.min.css"/>
     <link rel="stylesheet" href="../../bower_components/ngDialog/css/ngDialog.min.css"/>
     <link rel="stylesheet" href="../css/datepicker.css"/>
+    <link rel="stylesheet" href="../css/route-animations.css"/>
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -38,7 +39,6 @@
 
             </div>
             <div class="col-md-4 nav-list">
-
                 <span class="nav-text">
                   <a href="#">СПИСОК</a>
                 </span>
@@ -46,10 +46,6 @@
                 <span class="nav-text">
                   <a href="#">НАСТРОЙКИ</a>
                 </span>
-                <span class="nav-text">
-                  <a href="#">РАСПЕЧАТАТЬ</a>
-                </span>
-
             </div>
         </div>
     </div>
@@ -68,56 +64,25 @@
             <div class="container user_control">
                 <div class="row">
                     <div class="col-md-6">
-                        <button ng-click="newVacation()" class="btn btn-lg btn-warning btn-vac">
+                        <button ng-click="redirect('vacation')" class="btn btn-lg btn-warning btn-vac">
                             <img src="../img/beach.png" class="btn-img" alt=""/>
                             Новая заявка
                         </button>
                     </div>
 
                     <div class="col-md-6">
-                        <button ng-click="editProfile()" class="btn btn-lg btn-success btn-vac">
+                        <button ng-click="redirect('profile')" class="btn btn-lg btn-success btn-vac">
                             <img src="../img/settings.png" class="btn-img" alt=""/>
                             Редактировать профиль
                         </button>
                     </div>
                 </div>
 
-                <div class="row history">
-                    <h4>История заявок</h4>
-                    <table class="table table-condensed">
-                        <tr>
-                            <td>#</td>
-                            <td>Период</td>
-                            <td>Количество дней</td>
-                            <td>Статус</td>
-                        </tr>
 
-                        <tr>
-                            <td>1</td>
-                            <td>20.02-28.02.2015</td>
-                            <td>12</td>
-                            <td>Одобрена</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>20.02-28.02.2015</td>
-                            <td>8</td>
-                            <td>Одобрена</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>20.02-28.02.2015</td>
-                            <td>8</td>
-                            <td>Отклонена</td>
-                        </tr>                        <tr>
-                        <td>1</td>
-                        <td>20.02-28.02.2015</td>
-                        <td>12</td>
-                        <td>Одобрена</td>
-                    </tr>
+                <div class="container" ng-class="animation">
+                    <div ng-view class="view">
 
-                    </table>
-
+                    </div>
                 </div>
             </div>
         </div>
@@ -129,7 +94,7 @@
 <footer class="footer navbar-fixed-bottom row-fluid">
     <div class="container">
         <div class="col-md-6 text-right">
-            <a href="/logout">Выйти</a>
+            <a href="#" onclick="document.location.href='/auth/logout'">Выйти</a>
         </div>
         <div class="col-md-6"></div>
 
@@ -137,13 +102,18 @@
 </footer>
 <!-- end -->
 <script src="../../bower_components/angular/angular.min.js"></script>
-<script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../../bower_components/angular-route/angular-route.min.js"></script>
+<script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="../../bower_components/ngDialog/js/ngDialog.min.js"></script>
 <!--ru locale-->
 <script src="../../bower_components/angular-i18n/angular-locale_ru-ru.js"></script>
 <script src="../js/datepicker.js"></script>
 <script src="../js/app.js"></script>
 <script src="../js/user_main.js"></script>
+<script src="../js/edit_profile.js"></script>
+<script src="../js/vacation_service.js"></script>
+<script src="../js/user_service.js"></script>
+<script src="../js/vacation.js"></script>
 <script src="../js/calendar_filters.js"></script>
 <script src="../js/calendar_service.js"></script>
 

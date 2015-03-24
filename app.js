@@ -13,6 +13,7 @@ var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+var apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -44,6 +45,17 @@ app.use(logger('combined', {stream: accessLogStream}));
 //main routes
 var routes = require('./routes/index')(app, passport);
 
+
+//indus
+app.use('/profile', function(req, res){
+    res.sendFile(__dirname + '/public/templates/main-user.html');
+});
+app.use('/vacation', function(req, res){
+    res.sendFile(__dirname + '/public/templates/main-user.html');
+});
+
+
+app.use('/api', apiRouter);
 //api routes
 
 // catch 404 and forward to error handler
