@@ -7,12 +7,24 @@ app.service("VacationService", ['$http', function($http) {
         return $http.get('/api/vacation');
     };
 
-    this.getVacationByUser = function(user) {
-        return $http.get('/api/vacation/' + user);
+    this.getVacationsByUser = function(user_id) {
+        return $http.get('/api/vacation/' + user_id);
     };
 
     this.changeState = function(id, setState) {
         return $http.put('/api/vacation/'+id, {state: setState});
+    };
+
+    this.defineRangeFromData = function(days, month, year) {
+        var range = '';
+
+        if(month[1] === null) {
+            range = '' + days[0][0] + '.' + month[0] + ' - ' + days[0][days[0].length-1] + '.' + month[0] + '.' + year;
+        } else {
+            range = '' + days[0][0] + '.' + month[0] + ' - ' + days[1][days[1].length-1] + '.' + month[1] + '.' + year;
+        }
+
+        return range;
     };
 }]);
 

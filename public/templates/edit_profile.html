@@ -1,3 +1,17 @@
 <div class="container" ng-controller="EditProfileController">
-    Привет, {{user.common.profile.email}}
+    Привет, {{newEmail}}
+    <h4>Ваши данные:</h4>
+    <form>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input ng-model="newEmail" type="email" class="datepicker-input form-control" id="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Имя</label>
+            <input ng-model="newUsername" placeholder="Укажите имя..." type="text" class="datepicker-input form-control" id="exampleInputPassword1">
+        </div>
+        <div class="text-center">
+            <button ng-click="updateUser()" type="submit" class="btn btn-success btn-lg">Отправить</button>
+        </div>
+    </form>
 </div>

@@ -7,9 +7,7 @@
     <tr>
         <td><strong>Период:</strong><td>
 
-            {{vac.days[0][0]}}.{{baseConfig.month|addZeroToMontNum}}
-            -
-            {{vac.days[0][vac.days[0].length-1]}}.{{baseConfig.month|addZeroToMontNum}}.{{vac.year}}
+        {{defineRangeFromData(vac.days, vac.month, vac.year)}}
 
     </tr>
     <tr>
@@ -19,6 +17,11 @@
         <td>
             {{vac.comment}}
         </td>
+    </tr>
+
+    <tr>
+        <td><strong>Текущий статус:</strong> </td>
+        <td>{{showState(vac.acceptionState)}}</td>
     </tr>
 </table>
 

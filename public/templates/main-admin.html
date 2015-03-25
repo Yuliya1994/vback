@@ -12,6 +12,7 @@
     <link href="../css/fashion.css" rel="stylesheet">
     <link rel="stylesheet" href="../../bower_components/ngDialog/css/ngDialog-theme-default.min.css"/>
     <link rel="stylesheet" href="../../bower_components/ngDialog/css/ngDialog.min.css"/>
+    <link rel="stylesheet" href="../css/route-animations.css"/>
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -37,92 +38,32 @@
 
             </div>
             <div class="col-md-4 nav-list">
+                <span class="nav-text">
+                  <a href="/">ЗАЯВКИ</a>
+                </span>
+
 
                 <span class="nav-text">
-                  <a href="#">СПИСОК</a>
+                  <a href="/list">СПИСОК</a>
                 </span>
 
                 <span class="nav-text">
-                  <a href="#">НАСТРОЙКИ</a>
+                  <a href="/settings">НАСТРОЙКИ</a>
                 </span>
+                <!--
                 <span class="nav-text">
                   <a href="#">РАСПЕЧАТАТЬ</a>
                 </span>
+                -->
 
             </div>
         </div>
 
-        <div class="row sort-calendar">
-            <div class="col-md-4" style="text-align: left;">
-            </div>
-
-            <div class="col-md-4 date-pick">
-
-
-                <div class="col-md-6">
-                    <i ng-click="changeVisibleRange('year', 'minus')" class="fa fa-long-arrow-left"></i>
-                    {{baseConfig.year}}
-                    <i ng-click="changeVisibleRange('year', 'plus')" class="fa fa-long-arrow-right"></i>
-                </div>
-
-                <div class="col-md-6 month-pick">
-
-                    <i ng-click="changeVisibleRange('month', 'minus')" class="fa fa-long-arrow-left"></i>
-
-
-
-                    {{baseConfig.month|monthName}}
-
-
-
-                    <i ng-click="changeVisibleRange('month', 'plus')" class="fa fa-long-arrow-right"></i>
-
-                </div>
-
-
+        <div class="container" ng-class="animation">
+            <div ng-view class="view">
 
             </div>
-
-            <div class="col-md-4" style="text-align: right;">
-            </div>
-
         </div>
-
-        <table class="table table-condensed table-calendar">
-            <thead>
-            <tr class="control-row active">
-                <td class="table-header">
-                    <p> Сотрудник </p>
-                </td>
-
-                <td class="table-header">
-                    <p>Должность</p>
-                </td>
-
-                <td class="table-header">
-
-                </td>
-
-                <td class="table-header" ng-repeat="day in baseConfig.daysRange()">
-                    <span class="week-day">
-                        {{baseConfig.getDay(day)|dayName}}
-                    </span>
-                    {{day}}
-                </td>
-            </tr>
-
-
-            </thead>
-            <tbody>
-            <tr ng-repeat="vac in vacations | filter: {month: baseConfig.month, year: baseConfig.year}">
-                <td class="table-header" ng-click="getInfo()"><small><a href="#">{{vac.user}}</a></small></td>
-                <td class="table-header">{{vac.rank}}</td>
-                <td class="table-header text-center">   <span class="vac-parameter" ng-click="openVacationParameters(vac)"> <i class="fa fa-wrench"></i></span>   </td>
-
-                <td ng-click="checkClass(openVacationParameters, vac)" ng-repeat="day in baseConfig.daysRange()" ng-class="rangeState(day, vac.month, vac.days, vac.acceptionState)" class="table-header"></td>
-            </tr>
-            </tbody>
-        </table>
 
     </div>
 </div>

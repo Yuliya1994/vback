@@ -21,7 +21,6 @@ app.factory("CalendarService", function() {
             return result;
         },
         getDay: function(day) {
-            console.log('1');
             return new Date(this.year, this.month-1, day-1).getDay();
         }
     };

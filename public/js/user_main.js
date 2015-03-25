@@ -9,6 +9,10 @@ app.config(function($routeProvider, $locationProvider){
             templateUrl: "../templates/edit_profile.html",
             animation: 'first'
         })
+        .when('/settings',{
+            templateUrl: "../templates/settings.html",
+            animation: 'first'
+        })
         .otherwise({
             templateUrl: "../templates/history.html",
             animation: 'first'
@@ -20,11 +24,28 @@ app.config(function($routeProvider, $locationProvider){
     });
 });
 
-app.controller('UserMainController', ['$scope', '$rootScope', 'ngDialog', function($scope, $rootScope, ngDialog) {
+app.controller('UserMainController', ['$scope', '$rootScope', 'ngDialog', 'UserService', function($scope, $rootScope, ngDialog, UserService) {
     $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
         $rootScope.animation = currRoute.animation;
     });
     $scope.title = 'Профиль';
+    $scope.username = '';
+
+    function updateData() {
+        UserService.getCurrentUser()
+            .success(function (user, status) {
+                $scope.username = user.common.profile.username || user.common.profile.email;
+            })
+            .error(function (err, status) {
+                throw new Error(er);
+            });
+    }
+
+    updateData();
+
+    $scope.$on('updateUser', function(event, data){
+        updateData();
+    });
 
     $scope.redirect = function(path) {
         document.location.href = '/'+path;

@@ -48,7 +48,7 @@ td.table-header:hover {
 }
 
 td.rangeActive {
-    background-color: #e2e2e2;
+    background-color: rgba(75,75,75,0.4);
     cursor:pointer;
     border-right: none;
     -webkit-transition: background-color 1s; /* Safari */

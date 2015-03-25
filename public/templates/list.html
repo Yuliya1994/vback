@@ -1,0 +1,24 @@
+<div class="container settings">
+
+        <h4>История отпусков:</h4>
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Сотрудник</th>
+                <th>Период</th>
+                <th>Статус</th>
+            </tr>
+            <tr ng-repeat="vac in vacations">
+                <td>
+                    {{vac.user}}
+                </td>
+                <td>
+                    {{defineRangeFromData(vac.days, vac.month, vac.year)}}
+                </td>
+                <td>
+                    {{showState(vac.acceptionState)}}
+                </td>
+            </tr>
+        </table>
+
+</div>

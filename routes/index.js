@@ -23,6 +23,19 @@ module.exports = function(app, passport) {
         res.render(mainTemplate, {template: mainTemplate});
     });
 
+    app.get('/list', access.isAuth, function(req, res) {
+        var mainTemplate = templates[user.getAccessLevel(req, res)];
+
+        res.render(mainTemplate, {template: mainTemplate});
+    });
+
+    app.get('/settings', access.isAuth, function(req, res) {
+        var mainTemplate = templates[user.getAccessLevel(req, res)];
+
+        res.render(mainTemplate, {template: mainTemplate});
+    });
+
+
     app.get('/auth/login', function(req, res) {
         res.render('login', {message: req.flash("error")});
     });

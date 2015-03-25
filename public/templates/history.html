@@ -1,35 +1,19 @@
+<div class="container" ng-controller="UserHistoryController">
+    <h4>История отпусков:</h4>
 
-    <h4>История заявок</h4>
-    <table class="table table-condensed">
+    <table class="table table-bordered table-striped">
         <tr>
-            <td>#</td>
-            <td>Период</td>
-            <td>Количество дней</td>
-            <td>Статус</td>
+            <th>Период</th>
+            <th>Статус</th>
         </tr>
-
-        <tr>
-            <td>1</td>
-            <td>20.02-28.02.2015</td>
-            <td>12</td>
-            <td>Одобрена</td>
+        <tr ng-repeat="vac in userHistory">
+            <td>
+                {{defineRangeFromData(vac.days, vac.month, vac.year)}}
+            </td>
+            <td>
+                {{showState(vac.acceptionState)}}
+            </td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>20.02-28.02.2015</td>
-            <td>8</td>
-            <td>Одобрена</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>20.02-28.02.2015</td>
-            <td>8</td>
-            <td>Отклонена</td>
-        </tr>                        <tr>
-        <td>1</td>
-        <td>20.02-28.02.2015</td>
-        <td>12</td>
-        <td>Одобрена</td>
-    </tr>
-
     </table>
+
+</div>

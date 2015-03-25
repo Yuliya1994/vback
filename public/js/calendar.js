@@ -1,9 +1,33 @@
-app.controller('CalendarController', ['$scope', 'ngDialog', 'CalendarService', 'VacationService', 'UserService', function($scope, ngDialog, CalendarService, VacationService, UserService){
+app.config(function($routeProvider, $locationProvider){
+    $routeProvider
+        .when('/list',{
+            templateUrl: "../templates/list.html",
+            animation: 'first'
+        })
+        .when('/settings',{
+            templateUrl: "../templates/settings.html",
+            animation: 'first'
+        })
+        .otherwise({
+            templateUrl: "../templates/calendar.html",
+            animation: 'first'
+        });
+
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
+});
+
+app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'CalendarService', 'VacationService', 'UserService', function($scope, $rootScope, ngDialog, CalendarService, VacationService, UserService){
+    $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
+        $rootScope.animation = currRoute.animation;
+    });
+
     $scope.searchName = "";
-
     $scope.baseConfig = CalendarService;
-
     $scope.vacations = null;
+    $scope.userHistory = null;
 
     var rank_list = [
         'Разработчик',
@@ -21,17 +45,17 @@ app.controller('CalendarController', ['$scope', 'ngDialog', 'CalendarService', '
                     UserService.getUser(el.user_id)
                         .success(function (user, status) {
                             el.user = user.common.profile.username || user.common.profile.email; // if name isn't defined - set email as user
-                            // set email as user
+                            // set email as username
                             el.rank = rank_list[user.common.rank] || 'Сотрудник';
                         })
                         .error(function (err, status) {
-                            throw err;
+                            throw new Error(err)
                         });
                 });
                 console.log($scope.vacations);
             })
             .error(function (err, status) {
-                throw err;
+                throw new Error(err)
             });
     };
 
@@ -131,11 +155,6 @@ app.controller('CalendarController', ['$scope', 'ngDialog', 'CalendarService', '
 
     };
 
-
-    $scope.getInfo = function(){
-        console.info(this);
-    };
-
     $scope.openVacationParameters = function(vac){
         $scope.vac = vac;
         ngDialog.open({
@@ -143,6 +162,40 @@ app.controller('CalendarController', ['$scope', 'ngDialog', 'CalendarService', '
             className: 'ngdialog-theme-default',
             scope: $scope
         });
+    };
+
+    $scope.defineRangeFromData = function(days, month, year) {
+        return VacationService.defineRangeFromData(days, month, year);
+    };
+
+    $scope.showUserHistory = function(user_id) {
+        $scope.userHistory = null;
+
+        VacationService.getVacationsByUser(user_id)
+            .success(function(data, status) {
+                $scope.userHistory = data;
+
+                UserService.getUser(user_id)
+                    .success(function(user, status) {
+                        $scope.userHistoryName = user.common.profile.username || user.common.profile.email;
+
+                        console.log(data);
+                    })
+                    .error(function(err) {
+                        throw new Error(err);
+                    });
+
+                console.log($scope.userHistory);
+
+                ngDialog.open({
+                    template: '../templates/user-history.html',
+                    className: 'ngdialog-theme-default',
+                    scope: $scope
+                });
+            }).
+            error(function(error, status) {
+                throw new Error(error);
+            });
     };
 
     $scope.checkClass = function(callback, parameters) {
@@ -160,9 +213,15 @@ app.controller('CalendarController', ['$scope', 'ngDialog', 'CalendarService', '
                 run();
             })
             .error(function(err) {
-                throw err;
+                throw new Error(err);
             });
-    }
+    };
+
+    $scope.showState = function(num) {
+        var states = ['Рассматривается', 'Подтверждена', 'Отказ']
+
+        return states[num];
+    };
 
 
 }]);

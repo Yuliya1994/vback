@@ -9,5 +9,9 @@ app.service("UserService", ['$http', function($http) {
 
     this.getUser = function(id) {
         return $http.get('/api/user/'+id);
+    };
+
+    this.updateUser = function(id, data) {
+        return $http.put('/api/user/'+id, {username: data.username, email: data.email});
     }
 }]);
