@@ -1,10 +1,11 @@
 <div class="container" ng-controller="UserHistoryController">
     <h4>История отпусков:</h4>
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered">
         <tr>
             <th>Период</th>
             <th>Статус</th>
+            <th>Комментарий</th>
         </tr>
         <tr ng-repeat="vac in userHistory">
             <td>
@@ -12,6 +13,9 @@
             </td>
             <td>
                 {{showState(vac.acceptionState)}}
+            </td>
+            <td>
+                {{vac.adminComment || 'Пока не прокомментировали'}}
             </td>
         </tr>
     </table>

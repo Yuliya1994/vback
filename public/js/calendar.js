@@ -29,7 +29,8 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.vacations = null;
     $scope.userHistory = null;
 
-    $scope.comment = true;
+    $scope.comment = false;
+    $scope.commented = false;
 
     var rank_list = [
         'Разработчик',
@@ -215,6 +216,18 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
                 run();
             })
             .error(function(err) {
+                throw new Error(err);
+            });
+    };
+
+    $scope.addComment = function(id, comment) {
+        console.log(comment);
+        VacationService.addComment(id, comment)
+            .success(function(data, status) {
+                console.log(data);
+                run();
+            })
+            .error(function(error) {
                 throw new Error(err);
             });
     };

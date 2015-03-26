@@ -60,7 +60,7 @@
 
     </thead>
     <tbody>
-    <tr ng-repeat="vac in vacations | filter: {month: baseConfig.month, year: baseConfig.year}">
+    <tr ng-repeat="vac in vacations | filter: {month: baseConfig.month, year: baseConfig.year}|orderBy: date">
         <td class="table-header" ng-click="getInfo()"><small><a ng-click="showUserHistory(vac.user_id)" href="#">{{vac.user}}</a></small></td>
         <td class="table-header">{{vac.rank}}</td>
         <td class="table-header text-center">   <span class="vac-parameter" ng-click="openVacationParameters(vac)"> <i class="fa fa-wrench"></i></span>   </td>
@@ -69,3 +69,4 @@
     </tr>
     </tbody>
 </table>
+

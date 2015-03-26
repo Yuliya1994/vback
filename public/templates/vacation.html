@@ -23,15 +23,27 @@
         <td><strong>Текущий статус:</strong> </td>
         <td>{{showState(vac.acceptionState)}}</td>
     </tr>
+
+    <tr ng-if="vac.adminComment !== null">
+        <td><strong>Комментарий:</strong></td>
+        <td>{{vac.adminComment}}</td>
+    </tr>
 </table>
 
+
+
 <div class="comment-div">
-    <strong>Комментировать <i ng-click="comment = !comment" ng-class="{'fa-caret-down': !comment, 'fa-caret-up': comment}" class="fa"></i></strong>
+    <strong>
+        <span ng-if="vac.adminComment == null">Комментировать</span>
+        <span ng-if="vac.adminComment !== null">Изменить комментарий</span>
+
+        <i ng-click="comment = !comment" ng-class="{'fa-caret-down': !comment, 'fa-caret-up': comment}" class="fa"></i></strong>
     <div ng-show="comment">
-        <textarea ng-model="vac.adminComment" class="form-control" style="background-color: #fff;" name="comment" id="comment" placeholder="Комментарий..."></textarea>
+        <textarea ng-model="vac.adminComment" class="form-control" style="background-color: #fff;" name="comment" id="comment" placeholder="Комментарий...">{{vac.adminComment}}</textarea>
+        <p ng-show="commented" class="bg-success">Комментарий отправлен</p>
 
         <div class="text-center" style="padding: 10px;">
-            <button ng-click="addComment(vac._id, 1);closeThisDialog()" type="button" class="btn btn-primary active"><i class="fa fa-comment"></i> Комментировать</button>
+            <button ng-click="addComment(vac._id, vac.adminComment); adminComment = ''; commented = true;" type="button" class="btn btn-primary active"><i class="fa fa-comment"></i> Отправить</button>
         </div>
     </div>
 </div>

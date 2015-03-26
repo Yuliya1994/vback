@@ -9,6 +9,10 @@ exports.apiAccess = function (req, res, next) {
     req.isAuthenticated() ? next() : res.status(403).send('Access forbidden');
 };
 
+exports.isAdminApi = function(req, res, next) {
+    user.getAccessLevel() === 2 ? next() : res.status(403).send('Access forbidden');
+};
+
 exports.isGuest = function (req, res, next){
     user.getAccessLevel() === null ? next() : res.redirect('/');
 };

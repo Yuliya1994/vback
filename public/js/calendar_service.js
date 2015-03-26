@@ -12,10 +12,14 @@ app.factory("CalendarService", function() {
                 return new Date(year, month, 0).getDate();
             }
         },
-        daysRange: function () {                                    //days-range array
+        daysRange: function (days) {                                    //days-range array
             var result = [];
 
-            for (var i = 1, a = this.days(); i <= a; i++) result.push(i);
+            if(!days) {
+                days = this.days();
+            }
+
+            for (var i = 1, a = days; i <= a; i++) result.push(i);
 
 
             return result;

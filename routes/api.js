@@ -8,7 +8,7 @@ var Vacation = require('../models/vacation');
 var User = require('../models/user');
 var Mail = require('../models/mail');
 
-//router.use(access.apiAccess);
+router.use(access.apiAccess);
 
 router.route('/vacation')
     .get(function(req, res) {
@@ -73,7 +73,17 @@ router.route('/vacation/:id')
         });
     })
     .put(function(req, res) {
-        Vacation.update({_id:req.params.id}, {$set: { acceptionState: req.body.state}}, function(err){
+        var updateData = {$set: {}};
+
+        if(req.body.state !== null && req.body.state !== undefined) {
+            updateData.$set = { acceptionState: req.body.state};
+        } else if(req.body.adminComment !== null) {
+            updateData.$set = { adminComment: req.body.adminComment};
+        }
+
+        console.log(updateData);
+
+        Vacation.update({_id:req.params.id}, updateData, function(err){
             if(err) {
                 throw err;
             }
@@ -174,7 +184,7 @@ router.route('/mail/:id')
     .put(function(req, res) {
         var updateData = {$set: {}};
             updateData.$set.state = req.body.state;
-        
+
         Mail.update({'_id':req.params.id}, updateData, function(err) {
             if(err) {
                 throw err;
