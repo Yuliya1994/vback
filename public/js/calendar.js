@@ -29,6 +29,8 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.vacations = null;
     $scope.userHistory = null;
 
+    $scope.comment = true;
+
     var rank_list = [
         'Разработчик',
         'Менеджер',

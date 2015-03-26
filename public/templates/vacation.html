@@ -25,6 +25,17 @@
     </tr>
 </table>
 
+<div class="comment-div">
+    <strong>Комментировать <i ng-click="comment = !comment" ng-class="{'fa-caret-down': !comment, 'fa-caret-up': comment}" class="fa"></i></strong>
+    <div ng-show="comment">
+        <textarea ng-model="vac.adminComment" class="form-control" style="background-color: #fff;" name="comment" id="comment" placeholder="Комментарий..."></textarea>
+
+        <div class="text-center" style="padding: 10px;">
+            <button ng-click="addComment(vac._id, 1);closeThisDialog()" type="button" class="btn btn-primary active"><i class="fa fa-comment"></i> Комментировать</button>
+        </div>
+    </div>
+</div>
+
 <p class="text-center">
     <button ng-click="changeState(vac._id, 1);closeThisDialog()" type="button" class="btn btn-success btn-lg active"><i class="fa fa-ship"></i> Принять</button>
     <button ng-click="changeState(vac._id, 2);closeThisDialog()" type="button" class="btn btn-danger btn-lg active"><i class="fa fa-frown-o"></i> Отказать</button>

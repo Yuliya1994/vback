@@ -3,38 +3,27 @@
         <h5>Оповещения:</h5>
         <hr/>
         <strong>Новый адрес: </strong>
-        <input class="form-control settings-input" type="email" placeholder="Email..."/>
-        <input class="form-control settings-input" type="text" placeholder="Имя..."/>
-        <button class="btn btn-lg btn-success">Добавить</button>
+        <input ng-model="subscriber.email" class="form-control settings-input" type="email" placeholder="Email..."/>
+        <input ng-model="subscriber.name" class="form-control settings-input" type="text" placeholder="Имя..."/>
+        <button ng-click="addNewMail()" class="btn btn-lg btn-success">Добавить</button>
 
         <hr>
+        <strong>Текущий список: </strong>
         <table class="table table-bordered table-striped">
             <tr>
-                <td>Начальник 1</td>
-                <td>nachalnik1@boss.com</td>
-                <td><i class="fa fa-times"></i></td>
+                <th>Email</th>
+                <th>Имя</th>
+                <th style="text-align: center;"><i class="fa fa-check-square"></i></th>
+                <th><i class="fa fa-times"></i></th>
             </tr>
-            <tr>
-                <td>Начальник 5</td>
-                <td>nachalnik5@boss.com</td>
-                <td><i class="fa fa-times"></i></td>
-            </tr>
-            <tr>
-                <td>Начальник 4</td>
-                <td>nachalnik4@boss.com</td>
-                <td><i class="fa fa-times"></i></td>
-            </tr>
-            <tr>
-                <td>Начальник 3</td>
-                <td>nachalnik3@boss.com</td>
-                <td><i class="fa fa-times"></i></td>
-            </tr>
-            <tr>
-                <td>Начальник 2</td>
-                <td>nachalnik2@boss.com</td>
-                <td><i class="fa fa-times"></i> </td>
+            <tr ng-repeat="mail in mailList|orderBy: mail.name">
+                <td ng-class="{disable_tr: !mail.state}">{{mail.subscriberEmail}}</td>
+                <td ng-class="{disable_tr: !mail.state}">{{mail.subscriberName}}</td>
+                <td ng-class="{disable_tr: !mail.state}" style="width: 15px;"><input ng-model="mail.state" ng-click="changeState(mail._id)" style="margin-left: 7px;" type="checkbox"/></td>
+                <td ng-class="{disable_tr: !mail.state}" style="width: 15px;"><span ng-click="deleteMail(mail._id)"><i class="fa fa-times"></i></span></td>
             </tr>
         </table>
+        <small>* Чекбокс определяет необходимость учёта адреса при рассылке</small>
     </div>
 
 </div>

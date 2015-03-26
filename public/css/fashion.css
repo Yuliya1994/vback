@@ -125,9 +125,6 @@ a.navbar-brand {
 
 }
 
-.btn-success {
-  background-color: #00796B; !important
-}
 
 footer {
   color: #fff;
@@ -168,4 +165,19 @@ div.link_back a{
 .settings-input {
     background-color: #fff;
     margin-bottom: 5px;
+}
+
+span i.fa-times{
+    color: tomato;
+}
+.disable_tr {
+    background-color: #e7e7e7;
+}
+
+.comment-div {
+    padding: 5px;
+    background-color: #e1e1e8;
+    margin-bottom: 10px;
+    border-top: 3px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
 }

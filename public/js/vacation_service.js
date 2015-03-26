@@ -15,6 +15,8 @@ app.service("VacationService", ['$http', function($http) {
         return $http.put('/api/vacation/'+id, {state: setState});
     };
 
+
+
     this.defineRangeFromData = function(days, month, year) {
         var range = '';
 

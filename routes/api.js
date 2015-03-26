@@ -6,6 +6,7 @@ var currentUserCtrl = require('../controllers/user');
 
 var Vacation = require('../models/vacation');
 var User = require('../models/user');
+var Mail = require('../models/mail');
 
 //router.use(access.apiAccess);
 
@@ -127,6 +128,59 @@ router.route('/user/:id')
                 throw err;
             }
 
+            res.status(200).end('ok');
+        });
+    });
+
+router.route('/mail')
+    .get(function(req, res) {
+        Mail.find({}, function (err, mail) {
+            if (err) {
+                throw err;
+            }
+
+            if (mail !== null) {
+                res.status(200).end(JSON.stringify(mail));
+            }
+
+            res.status(404).end('There are no subscribers');
+        })
+    })
+    .post(function(req, res) {
+        var newMail = new Mail();
+        newMail.subscriberEmail = req.body.email;
+        newMail.subscriberName = req.body.name;
+
+        newMail.save(function(err, data) {
+            if(err) {
+                throw err;
+            }
+
+            res.status(200).end('Добавлен');
+        });
+    });
+
+
+router.route('/mail/:id')
+    .delete(function(req, res) {
+        Mail.remove({_id: req.params.id}, function(err) {
+            if(err) {
+                throw err;
+            }
+
+            res.status(200).end('Удален');
+        });
+    })
+    .put(function(req, res) {
+        var updateData = {$set: {}};
+            updateData.$set.state = req.body.state;
+        
+        Mail.update({'_id':req.params.id}, updateData, function(err) {
+            if(err) {
+                throw err;
+            }
+            console.log(req.params.id);
+            console.log(updateData);
             res.status(200).end('ok');
         });
     });

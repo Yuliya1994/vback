@@ -9,10 +9,6 @@ app.config(function($routeProvider, $locationProvider){
             templateUrl: "../templates/edit_profile.html",
             animation: 'first'
         })
-        .when('/settings',{
-            templateUrl: "../templates/settings.html",
-            animation: 'first'
-        })
         .otherwise({
             templateUrl: "../templates/history.html",
             animation: 'first'

@@ -18,6 +18,7 @@ var vacationSchema = mongoose.Schema({
     month: {type: Array, default: [null, null]},
     days: {type: Array, default: [null, null]},
     comment: String,
+    adminComment: {type: String, default: null},
     acceptionState: {type: Number, default: 0}
 
 });

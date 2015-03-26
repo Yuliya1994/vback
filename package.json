@@ -19,6 +19,7 @@
     "passport-github": "*",
     "passport-google-oauth": "*",
     "passport-local": "*",
-    "bower": "*"
+    "bower": "*",
+    "nodemailer": "1.0"
   }
 }
