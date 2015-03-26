@@ -1,26 +1,17 @@
-app.controller('UserHistoryController', ['$scope', 'UserService', 'VacationService', function($scope, UserService, VacationService) {
-    $scope.user = null;
+app.controller('UserHistoryController', ['$scope', '$rootScope', 'UserService', 'VacationService', function($scope, $rootScope, UserService, VacationService) {
+    $scope.user = $scope.$parent.user;
     $scope.userHistory = null;
 
-    UserService.getCurrentUser()
-        .success(function(data, status){
-            $scope.user = angular.fromJson(data);
+    VacationService.getVacationsByUser($scope.user.common.id)
+        .success(function(data, status) {
+            console.log(data);
 
-            VacationService.getVacationsByUser($scope.user.common.id)
-                .success(function(data, status) {
-                    console.log(data);
-
-                    $scope.userHistory = angular.fromJson(data);
-                    console.log($scope.userHistory)
-                })
-                .error(function(err, status) {
-                    throw new Error(err);
-                });
+            $scope.userHistory = angular.fromJson(data);
+            console.log($scope.userHistory)
         })
-        .error(function (error, status) {
-            throw new Error(error);
+        .error(function(err, status) {
+            throw new Error(err);
         });
-
 
     $scope.defineRangeFromData = function(days, month, year) {
         return VacationService.defineRangeFromData(days, month, year);

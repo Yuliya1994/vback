@@ -1,18 +1,7 @@
-app.controller('EditProfileController', ['$scope', 'UserService', 'ngDialog', function($scope, UserService, ngDialog) {
-    $scope.title = 'Профиль';
-
-    $scope.user = null;
-
-    UserService.getCurrentUser()
-        .success(function(data, status){
-            $scope.user = angular.fromJson(data);
-
-            $scope.newUsername = $scope.user.common.profile.username;
-            $scope.newEmail = $scope.user.common.profile.email;
-        })
-        .error(function (error, status) {
-            throw error;
-        });
+app.controller('EditProfileController', ['$scope', '$rootScope', 'UserService', 'ngDialog', function($scope, $rootScope, UserService, ngDialog) {
+    $scope.user = $scope.$parent.user;
+    $scope.newUsername = $scope.$parent.user.common.profile.username;
+    $scope.newEmail = $scope.$parent.user.common.profile.email;
 
     $scope.updateUser = function(data) {
         UserService.updateUser($scope.user.common.id, {username: $scope.newUsername, email: $scope.newEmail})

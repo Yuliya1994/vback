@@ -28,18 +28,21 @@ app.controller('UserMainController', ['$scope', '$rootScope', 'ngDialog', 'UserS
     $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
         $rootScope.animation = currRoute.animation;
     });
+
     $scope.title = 'Профиль';
     $scope.username = '';
 
     function updateData() {
         UserService.getCurrentUser()
             .success(function (user, status) {
+                $scope.user = user;
                 $scope.username = user.common.profile.username || user.common.profile.email;
             })
             .error(function (err, status) {
-                throw new Error(er);
+                throw new Error(err);
             });
     }
+
 
     updateData();
 
