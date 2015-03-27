@@ -96,6 +96,24 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
             }
         }
     };
+
+    $scope.getState = function(acceptionState) {
+        switch (acceptionState) {
+            case 0:
+                return $scope.rangeClasses.active;
+                break;
+
+            case 1:
+                return $scope.rangeClasses.accepted;
+                break;
+
+            case 2:
+                return $scope.rangeClasses.refused;
+                break;
+        }
+
+        return $scope.rangeClasses.empty;
+    };
     //main method to draw ranges with color and set start/end icons
     $scope.rangeState = function(curDay, month, days, acceptionState) {
 
@@ -166,7 +184,6 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
             scope: $scope
         });
     };
-
     $scope.defineRangeFromData = function(days, month, year) {
         return VacationService.defineRangeFromData(days, month, year);
     };
@@ -204,10 +221,24 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.checkClass = function(callback, parameters) {
         var curClass = this.$$watchers[0].last;
 
-        if(curClass.indexOf($scope.rangeClasses.empty)) {
-            callback(parameters);
+        if(curClass.indexOf) {
+            if (curClass.indexOf($scope.rangeClasses.empty)) {
+                if (!callback) {
+                    return true;
+                }
+                else {
+                    callback(parameters);
+                }
+            } else {
+                return false;
+            }
         }
     };
+
+    $scope.toggleTooltip = function(par) {
+        par.tooltip = par
+    };
+
 
     $scope.changeState = function(id, setState) {
         VacationService.changeState(id, setState)
@@ -238,5 +269,8 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         return states[num];
     };
 
+    $scope.prettyDate = function(day, year, month) {
+        return CalendarService.getPrettyDate(day, year, month);
+    };
 
 }]);

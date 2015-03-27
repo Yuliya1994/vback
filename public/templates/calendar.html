@@ -55,18 +55,27 @@
                     </span>
             {{day}}
         </td>
+        <td style="border-left: 1px solid #e1e1e1" ng-if="baseConfig.month[1] !== null"><i class="fa fa-arrow-down"></i></i></td>
     </tr>
 
 
     </thead>
     <tbody>
-    <tr ng-repeat="vac in vacations | filter: {month: baseConfig.month, year: baseConfig.year}|orderBy: date">
-        <td class="table-header" ng-click="getInfo()"><small><a ng-click="showUserHistory(vac.user_id)" href="#">{{vac.user}}</a></small></td>
-        <td class="table-header">{{vac.rank}}</td>
-        <td class="table-header text-center">   <span class="vac-parameter" ng-click="openVacationParameters(vac)"> <i class="fa fa-wrench"></i></span>   </td>
+        <tr ng-init='tooltip=true' ng-repeat="vac in vacations | filter: {month: baseConfig.month, year: baseConfig.year}|orderBy: date">
+            <td class="table-header" ng-click="getInfo()"><small><a ng-click="showUserHistory(vac.user_id)" href="#">{{vac.user}}</a></small></td>
+            <td class="table-header">{{vac.rank}}</td>
+            <td class="table-header text-center">   <span class="vac-parameter" ng-click="openVacationParameters(vac)"> <i class="fa fa-wrench"></i></span>   </td>
+            <td ng-mouseover="tooltip=false;" ng-mouseleave="tooltip=true;" ng-click="checkClass(openVacationParameters, vac)" ng-repeat="day in baseConfig.daysRange()" ng-class="rangeState(day, vac.month, vac.days, vac.acceptionState)" class="table-header">
+                <span ng-if="checkClass()" class="tooltip" ng-hide="tooltip">Дата окончания: {{prettyDate(vac.days[1][vac.days[1].length-1], vac.year, vac.month[0])|date:'dd.MM.yyyy' || 'руддщ'}}</span>
+            </td>
 
-        <td ng-click="checkClass(openVacationParameters, vac)" ng-repeat="day in baseConfig.daysRange()" ng-class="rangeState(day, vac.month, vac.days, vac.acceptionState)" class="table-header"></td>
-    </tr>
+            <td style="border-left: 1px solid #e1e1e1" >
+                <span ng-if="baseConfig.month !== vac.month[1]">
+                &nbsp;<i ng-if="vac.month[1] !== null" class="fa fa-info-circle tooltips"> <span>Дата окончания: {{prettyDate(vac.days[1][vac.days[1].length-1], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}</span></i>
+                </span>
+               <!-- {{vac.month[1]}} {{vac.days[1][vac.days[1].length-1]}}</span></td>
+            <!--<td ng-if="baseConfig.month === vac.month[1] || vac.month[1] === null">null</td>-->
+
+        </tr>
     </tbody>
 </table>
-

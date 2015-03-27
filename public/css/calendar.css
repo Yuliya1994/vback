@@ -10,6 +10,12 @@
     color: #101010;
 }
 
+div.auxLine {
+    position: absolute;
+    right: -5%;
+    top: 171px;
+}
+
 thead {
     background-color: #e3f2fd;
     border-top: 3px solid #a8a8a8;
@@ -121,3 +127,41 @@ i {
     color: #fc8c84;
 
 }
+
+
+i.tooltips {
+    position: relative;
+    display: inline;
+}
+i.tooltips span {
+    position: absolute;
+    width:140px;
+    color: #FFFFFF;
+    background: #000000;
+    height: 60px;
+    line-height: 30px;
+    text-align: center;
+    visibility: hidden;
+    border-radius: 6px;
+}
+i.tooltips span:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -8px;
+    width: 0; height: 0;
+    border-right: 8px solid #000000;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+i:hover.tooltips span {
+    visibility: visible;
+    opacity: 0.6;
+    left: 100%;
+    top: 50%;
+    margin-top: -15px;
+    margin-left: 15px;
+    z-index: 999;
+}
+
