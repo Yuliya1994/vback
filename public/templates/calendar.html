@@ -76,18 +76,8 @@
 
 
 <div class="month-selector text-center">
-    <div class="col-md-1 month">Январь</div>
-    <div class="col-md-1 month">Февраль</div>
-    <div class="col-md-1 month">Март</div>
-    <div class="col-md-1 month">Апрель</div>
-    <div class="col-md-1 month">Май</div>
-    <div class="col-md-1 month">Июнь</div>
-    <div class="col-md-1 month">Июль</div>
-    <div class="col-md-1 month">Август</div>
-    <div class="col-md-1 month">Сентябрь</div>
-    <div class="col-md-1 month">Октябрь</div>
-    <div class="col-md-1 month">Ноябрь</div>
-    <div class="col-md-1 month">Декабрь</div>
+    <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]" class="col-md-1 month">{{i|monthName}}</div>
+
 </div>
 
 <div class="swipe-calendar row">
@@ -108,33 +98,38 @@
     </div>
 
     <div class="swipe-area">
+        <table class="table table-condensed">
+            <tr>
+                <td ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]">
+                    <strong>{{i|monthName}}</strong>
+                    <table class="table table-condensed table-calendar">
+                        <thead>
+                        <tr class="control-row active">
+                            <td class="table-header">
 
-    <div style="display: inline-block;" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]">
-        <table class="table table-condensed table-calendar">
-            <thead>
-            <tr class="control-row active">
-                <td class="table-header">
+                            </td>
 
-                </td>
+                            <td class="table-header" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
+                                <span class="week-day">
+                                    {{baseConfig.getDay(day, '2015', i)|dayName}}
+                                </span>
+                                {{day}}
+                            </td>
+                        </tr>
 
-                <td class="table-header" ng-repeat="day in baseConfig.daysRange()">
-                    <span class="week-day">
-                        {{baseConfig.getDay(day)|dayName}}
-                    </span>
-                    {{day}}
+
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="vac in vacations | filter: {month: i, year: baseConfig.year}|orderBy: date">
+                            <td ng-click="checkClass(openVacationParameters, vac)" ng-repeat="day in baseConfig.daysRange()" ng-class="rangeState(day, vac.month, vac.days, vac.acceptionState)" class="table-header">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
                 </td>
             </tr>
-
-
-            </thead>
-            <tbody>
-            <tr ng-repeat="vac in vacations | filter: {month: baseConfig.month, year: baseConfig.year}|orderBy: date">
-                <td ng-click="checkClass(openVacationParameters, vac)" ng-repeat="day in baseConfig.daysRange()" ng-class="rangeState(day, vac.month, vac.days, vac.acceptionState)" class="table-header">
-                </td>
-            </tr>
-            </tbody>
         </table>
-    </div>
 
 
     </div>

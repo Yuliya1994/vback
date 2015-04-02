@@ -26,8 +26,12 @@ app.factory("CalendarService", function() {
 
             return result;
         },
-        getDay: function(day) {
-            return new Date(this.year, this.month-1, day-1).getDay();
+        getDay: function(day, year, month) {
+            if(year === undefined || year === null) {
+                return new Date(this.year, this.month - 1, day - 1).getDay();
+            } else {
+                return new Date(year, month - 1, day - 1).getDay();
+            }
         },
 
         getPrettyDate: function(day, year, month) {

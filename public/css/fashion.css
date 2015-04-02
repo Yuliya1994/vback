@@ -91,11 +91,8 @@ a.navbar-brand {
 
 .table-calendar {
   font-family: 'Roboto', sans-serif;
-  -webkit-box-shadow: 0px 4px 0px 0px rgba(29, 38, 95, 0.75);
-  -moz-box-shadow:    0px 4px 0px 0px rgba(29, 38, 95, 0.75);
-  box-shadow:         0px 4px 0px 0px rgba(29, 38, 95, 0.75);
-
-  border: 2px solid #B2DFDB;
+padding: 5px;
+  border: 2px solid #e1e1e1;
   border-top: none;
 }
 
