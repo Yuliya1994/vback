@@ -1,82 +1,5 @@
-<!--
-<div class="row sort-calendar">
-    <div class="col-md-4" style="text-align: left;">
-    </div>
-
-    <div class="col-md-4 date-pick">
-
-
-        <div class="col-md-6">
-            <i ng-click="changeVisibleRange('year', 'minus')" class="fa fa-long-arrow-left"></i>
-            {{baseConfig.year}}
-            <i ng-click="changeVisibleRange('year', 'plus')" class="fa fa-long-arrow-right"></i>
-        </div>
-
-        <div class="col-md-6 month-pick">
-
-            <i ng-click="changeVisibleRange('month', 'minus')" class="fa fa-long-arrow-left"></i>
-
-
-
-            {{baseConfig.month|monthName}}
-
-
-
-            <i ng-click="changeVisibleRange('month', 'plus')" class="fa fa-long-arrow-right"></i>
-
-        </div>
-
-
-
-    </div>
-
-    <div class="col-md-4" style="text-align: right;">
-    </div>
-
-</div>
-
-<!-- start -->
-<!--
-<table class="table table-condensed table-calendar">
-    <thead>
-    <tr class="control-row active">
-        <td class="table-header">
-            <p> Сотрудник </p>
-        </td>
-
-        <td class="table-header">
-            <p>Должность</p>
-        </td>
-
-        <td class="table-header">
-
-        </td>
-
-        <td class="table-header" ng-repeat="day in baseConfig.daysRange()">
-                    <span class="week-day">
-                        {{baseConfig.getDay(day)|dayName}}
-                    </span>
-            {{day}}
-        </td>
-    </tr>
-
-
-    </thead>
-    <tbody>
-        <tr ng-repeat="vac in vacations | filter: {month: baseConfig.month, year: baseConfig.year}|orderBy: date">
-            <td class="table-header" ng-click="getInfo()"><small><a ng-click="showUserHistory(vac.user_id)" href="#">{{vac.user}}</a></small></td>
-            <td class="table-header">{{vac.rank}}</td>
-            <td class="table-header text-center">   <span class="vac-parameter" ng-click="openVacationParameters(vac)"> <i class="fa fa-wrench"></i></span>   </td>
-
-            <td ng-click="checkClass(openVacationParameters, vac)" ng-repeat="day in baseConfig.daysRange()" ng-class="rangeState(day, vac.month, vac.days, vac.acceptionState)" class="table-header">
-            </td>
-        </tr>
-    </tbody>
-</table>-->
-
-
 <div class="month-selector text-center">
-    <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]" class="col-md-1 month">{{i|monthName}}</div>
+    <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]" scroll-on-click target="{{i}}" class="col-md-1 month">{{i|monthName}}</div>
 
 </div>
 
@@ -85,7 +8,7 @@
         <div class="col-md-6">
             <div class="swipe-calendar-header">Сотрудник</div>
 
-            <div ng-repeat="vac in vacations">
+            <div ng-repeat="vac in vacations|uniq: 'user_id'">
                 <a ng-click="showUserHistory(vac.user_id)" href="#">{{vac.user}}</a>
             </div>
         </div>
@@ -93,22 +16,19 @@
         <div class="col-md-6">
             <div class="swipe-calendar-header">Должность</div>
 
-            <div ng-repeat="vac in vacations">{{vac.rank}}</div>
+            <div ng-repeat="vac in vacations|uniq: 'user_id'">{{vac.rank}}</div>
         </div>
     </div>
 
     <div class="swipe-area">
         <table class="table table-condensed">
             <tr>
-                <td ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]">
+                <td ng-repeat="i in [] | range:1:12">
                     <strong>{{i|monthName}}</strong>
+
                     <table class="table table-condensed table-calendar">
                         <thead>
                         <tr class="control-row active">
-                            <td class="table-header">
-
-                            </td>
-
                             <td class="table-header" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
                                 <span class="week-day">
                                     {{baseConfig.getDay(day, '2015', i)|dayName}}
@@ -116,15 +36,27 @@
                                 {{day}}
                             </td>
                         </tr>
-
-
                         </thead>
-                        <tbody>
-                        <tr ng-repeat="vac in vacations | filter: {month: i, year: baseConfig.year}|orderBy: date">
-                            <td ng-click="checkClass(openVacationParameters, vac)" ng-repeat="day in baseConfig.daysRange()" ng-class="rangeState(day, vac.month, vac.days, vac.acceptionState)" class="table-header">
+
+                        <tr ng-repeat="vac in vacationsByUser">
+
+                            <td ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
+                                <span ng-repeat="curVac in vac">
+                                    <span ng-if="curVac.month[0] === i">
+                                        <span ng-if="curVac.days[0].indexOf(day) != '-1'">√</span>
+                                    </span>
+
+                                    <span ng-if="curVac.month[1] !== null">
+                                        <span ng-if="curVac.month[1] === (i)">
+                                            <span ng-if="curVac.days[1].indexOf(day) != '-1'">!</span>
+                                        </span>
+                                    </span>
+
+                                </span>
                             </td>
+
                         </tr>
-                        </tbody>
+
                     </table>
 
                 </td>

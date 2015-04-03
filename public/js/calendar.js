@@ -19,6 +19,28 @@ app.config(function($routeProvider, $locationProvider){
     });
 });
 
+app.directive('scrollOnClick', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, $elm, atrs) {
+            $elm.on('click', function() {
+                var target = $('.table-calendar');
+                var shift = 0;
+                var prevPos = atrs.target-1 < 0 ? 0 : atrs.target-1;
+
+                for(var i = 0; i < (prevPos); i++) {
+                    shift += target[i].clientWidth;
+                    if(i > 3) shift+=20;
+                }
+
+                $(".swipe-area").animate({scrollLeft: shift}, "slow");
+
+
+            });
+        }
+    }
+});
+
 app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'CalendarService', 'VacationService', 'UserService', function($scope, $rootScope, ngDialog, CalendarService, VacationService, UserService){
     $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
         $rootScope.animation = currRoute.animation;
@@ -27,6 +49,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.searchName = "";
     $scope.baseConfig = CalendarService;
     $scope.vacations = null;
+    $scope.vacationsByUser = null;
     $scope.userHistory = null;
 
     $scope.comment = false;
@@ -55,7 +78,8 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
                             throw new Error(err)
                         });
                 });
-                console.log($scope.vacations);
+
+                diffByUsers($scope.vacations);
             })
             .error(function (err, status) {
                 throw new Error(err)
@@ -64,10 +88,27 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
 
     run();
 
-    var icons = {
-        start : "start",
-        end : "end"
+    //Create array sorting vacations by user [user_id] => [{vac...},{vac...},{vac...}]
+    function diffByUsers(vacations) {
+        console.log(vacations);
+        $scope.vacationsByUser = {};
+
+        vacations.forEach(function(vac) {
+            if($scope.vacationsByUser[vac.user_id] === undefined) {
+                $scope.vacationsByUser[vac.user_id] = [];
+            }
+        });
+
+        for(var user in $scope.vacationsByUser) {
+            vacations.forEach(function(vac) {
+                if(vac.user_id === user) {
+                    $scope.vacationsByUser[user].push(angular.fromJson(vac));
+                }
+            });
+        }
     };
+
+
 
     $scope.rangeClasses = {
         active: "rangeActive",
@@ -77,25 +118,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     };
 
     //Range of months (1-12) and years (unlimited)
-    $scope.changeVisibleRange = function(part, sign) {
-        if(part === 'year') {
-            sign === 'plus' ? $scope.baseConfig.year++ : $scope.baseConfig.year--;
-        } else if (part === 'month') {
-            if(sign === 'plus') {
-                if ($scope.baseConfig.month === 12) {
-                    $scope.baseConfig.month = 1;
-                } else {
-                    $scope.baseConfig.month++
-                }
-            } else if (sign === 'minus') {
-                if($scope.baseConfig.month === 1) {
-                    $scope.baseConfig.month = 12;
-                } else {
-                    $scope.baseConfig.month--;
-                }
-            }
-        }
-    };
+
 
     $scope.getState = function(acceptionState) {
         switch (acceptionState) {
@@ -137,39 +160,13 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
             return $scope.rangeClasses.empty;
         };
 
-        var getIcon = function (curDay, days, isSplitted) {
-            if(!isSplitted) {
-                days = days[0];
-                if(curDay === days[0]) {
-                    return 'start';
-                } else if(curDay === days[days.length-1]) {
-                    return 'end';
-                }
-
-                return '';
-            } else {
-                if(curDay === days[0][0]){
-                    if(month[1] !== $scope.baseConfig.month)
-                        return 'start';
-                } else if (curDay === days[1][days[1].length-1]) {
-                    //Checking last month
-                    if(month[1] === $scope.baseConfig.month) {
-                        return 'end';
-                    }
-                }
-
-                return '';
-            }
-        };
-
-
         if(month[1] === null) {
-            return getState(days[0], curDay, acceptionState) + ' ' + getIcon(curDay, days, false);
+            return getState(days[0], curDay, acceptionState);
         } else {
             if(month[1] === $scope.baseConfig.month) {
-                return getState(days[1], curDay, acceptionState) + ' ' + getIcon(curDay, days, true);
+                return getState(days[1], curDay, acceptionState);
             } else {
-                return getState(days[0], curDay, acceptionState) + ' ' + getIcon(curDay, days, true);
+                return getState(days[0], curDay, acceptionState);
             }
         }
 
@@ -235,11 +232,6 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         }
     };
 
-    $scope.toggleTooltip = function(par) {
-        par.tooltip = par
-    };
-
-
     $scope.changeState = function(id, setState) {
         VacationService.changeState(id, setState)
             .success(function(data, status) {
@@ -269,8 +261,5 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         return states[num];
     };
 
-    $scope.prettyDate = function(day, year, month) {
-        return CalendarService.getPrettyDate(day, year, month);
-    };
 
 }]);

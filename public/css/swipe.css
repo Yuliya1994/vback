@@ -54,7 +54,14 @@
     text-decoration: underline;
 }
 
+div.employees {
+    margin-top: 42px;
+}
+
 div.employees div {
     background-color: #fff;
     padding: 5px;
+
 }
+
+.table-calendar td {height: 35px;}
