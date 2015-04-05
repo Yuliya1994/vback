@@ -6,17 +6,17 @@
 <div class="swipe-calendar row">
     <div class="col-md-3 employees">
         <div class="col-md-6">
-            <div class="swipe-calendar-header">Сотрудник</div>
+            <p class="swipe-calendar-header">Сотрудник</p>
 
-            <div ng-repeat="vac in vacations|uniq: 'user_id'">
+            <p ng-repeat="vac in vacations|uniq: 'user_id'">
                 <a ng-click="showUserHistory(vac.user_id)" href="#">{{vac.user}}</a>
-            </div>
+            </p>
         </div>
 
         <div class="col-md-6">
-            <div class="swipe-calendar-header">Должность</div>
+            <p class="swipe-calendar-header">Должность</p>
 
-            <div ng-repeat="vac in vacations|uniq: 'user_id'">{{vac.rank}}</div>
+            <p ng-repeat="vac in vacations|uniq: 'user_id'">{{vac.rank}}</p>
         </div>
     </div>
 
@@ -40,15 +40,19 @@
 
                         <tr ng-repeat="vac in vacationsByUser">
 
-                            <td ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
+                            <td class="line" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
                                 <span ng-repeat="curVac in vac">
                                     <span ng-if="curVac.month[0] === i">
-                                        <span ng-if="curVac.days[0].indexOf(day) != '-1'">√</span>
+                                        <span ng-if="curVac.days[0].indexOf(day) != '-1'">
+                                            <div fill-with-color ctrl-fn="openVacationParameters(curVac)" td="{{curVac}}" ng-click="openVacationParameters(curVac)" class="rangeAccepted"> </div>
+                                        </span>
                                     </span>
 
                                     <span ng-if="curVac.month[1] !== null">
                                         <span ng-if="curVac.month[1] === (i)">
-                                            <span ng-if="curVac.days[1].indexOf(day) != '-1'">!</span>
+                                            <span ng-if="curVac.days[1].indexOf(day) != '-1'">
+                                                !
+                                            </span>
                                         </span>
                                     </span>
 

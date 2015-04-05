@@ -56,12 +56,30 @@
 
 div.employees {
     margin-top: 42px;
+    margin-right: 0;
+    padding-right: 0;
 }
 
 div.employees div {
     background-color: #fff;
     padding: 5px;
+    border: 1px solid #B2DFDB;
+    border-right: none;
+
+    margin-bottom: 2px;
 
 }
 
-.table-calendar td {height: 35px;}
+.table-calendar {
+    border-collapse: collapse;
+    padding: 0px;
+}
+.table-calendar td {height: 35px; padding: 0px;!important; margin: 0;}
+
+div.rangeAccepted {
+    min-height: 19px;
+    min-width: 30px;
+    width: auto;
+    min-width: 5px;
+    background-color: #009688;
+}

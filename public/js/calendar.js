@@ -41,6 +41,24 @@ app.directive('scrollOnClick', function() {
     }
 });
 
+app.directive('fillWithColor', function() {
+    return {
+        restrict: 'A',
+        scope: { ctrlFn: '&' },
+        link: function(scope, $elm, atrs) {
+            var td = $elm.parent().parent().parent().parent();
+            td.css('background-color', '#009688');
+            td.on('click', function(event) {
+                event.stopPropagation();
+                console.log(atrs.td);
+                scope.ctrlFn({curVac: atrs.td});
+
+            });
+
+        }
+    };
+});
+
 app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'CalendarService', 'VacationService', 'UserService', function($scope, $rootScope, ngDialog, CalendarService, VacationService, UserService){
     $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
         $rootScope.animation = currRoute.animation;
@@ -51,6 +69,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.vacations = null;
     $scope.vacationsByUser = null;
     $scope.userHistory = null;
+    $scope.vac = null;
 
     $scope.comment = false;
     $scope.commented = false;
@@ -173,13 +192,21 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
 
     };
 
-    $scope.openVacationParameters = function(vac){
+    $scope.openVacationParameters = function(vac, scope) {
         $scope.vac = vac;
-        ngDialog.open({
-            template: '../templates/vacation.html',
-            className: 'ngdialog-theme-default',
-            scope: $scope
-        });
+        if (scope !== undefined) {
+            ngDialog.open({
+                template: '../templates/vacation.html',
+                className: 'ngdialog-theme-default',
+                scope: scope
+            });
+        } else {
+            ngDialog.open({
+                template: '../templates/vacation.html',
+                className: 'ngdialog-theme-default',
+                scope: $scope
+            });
+        }
     };
     $scope.defineRangeFromData = function(days, month, year) {
         return VacationService.defineRangeFromData(days, month, year);
