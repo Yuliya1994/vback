@@ -2,7 +2,6 @@ var user = require('../controllers/user');
 var access = require('../middlewares.js');
 var templates = require('../config/templates');
 
-
 module.exports = function(app, passport) {
 
     app.get('/', access.isAuth, function(req, res) {
@@ -34,7 +33,6 @@ module.exports = function(app, passport) {
 
         res.render(mainTemplate, {template: mainTemplate});
     });
-
 
     app.get('/auth/login', function(req, res) {
         res.render('login', {message: req.flash("error")});

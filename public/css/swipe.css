@@ -42,6 +42,7 @@
     position: relative;
     z-index: 1;
     overflow-x: scroll;
+    overflow-y: auto;
     min-height: 600px;
     white-space: nowrap;
     background-color: #fff;
@@ -58,6 +59,7 @@ div.employees {
     margin-top: 42px;
     margin-right: 0;
     padding-right: 0;
+    overflow-y: scroll;
 }
 
 div.employees div {
@@ -113,4 +115,11 @@ div.employees div {
     background-color: #b71c1c;
 }
 
-.micro-range{width: 1px; height: 1px;}
+.micro-range{display: none;}
+.preloader {
+    color: #fff;
+    font-size: 25pt;
+    position: absolute;
+    top: 45%;
+    left: 49%;
+}

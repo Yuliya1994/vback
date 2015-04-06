@@ -41,6 +41,32 @@ app.directive('scrollOnClick', function() {
     }
 });
 
+
+app.directive('startPosition', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, $elm, atrs) {
+            $(document).ready(function() {
+                setTimeout(function() {
+                    var target = $('.table-calendar');
+                    var shift = 0;
+
+
+                    for(var i = 0; i < (atrs['startPosition'] - 1); i++) {
+                        console.log(i);
+                        shift += target[i].clientWidth;
+                        if(i > 3) shift+=20;
+                    }
+
+                    $(".swipe-area").animate({scrollLeft: shift}, "slow");
+
+                }, 2000)
+
+            });
+        }
+    };
+});
+
 app.directive('fillWithColor', function() {
     return {
         restrict: 'A',
@@ -100,6 +126,8 @@ app.directive('horizontalScroll', function() {
     };
 });
 
+
+
 app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'CalendarService', 'VacationService', 'UserService', function($scope, $rootScope, ngDialog, CalendarService, VacationService, UserService){
     $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
         $rootScope.animation = currRoute.animation;
@@ -112,6 +140,8 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.userHistory = null;
     $scope.vac = null;
 
+    $scope.loaded = false;
+
     $scope.comment = false;
     $scope.commented = false;
 
@@ -123,6 +153,8 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
 
     //Fill vacations-array with data from db
     var run = function() {
+        $scope.loaded = false;
+
         VacationService.getVacations()
             .success(function (data, status) {
                 $scope.vacations = data;
@@ -133,6 +165,8 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
                             el.user = user.common.profile.username || user.common.profile.email; // if name isn't defined - set email as user
                             // set email as username
                             el.rank = rank_list[user.common.rank] || 'Сотрудник';
+
+                            $scope.loaded = true;
                         })
                         .error(function (err, status) {
                             throw new Error(err)
@@ -235,11 +269,14 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         }
     };
 
-    $scope.changeState = function(id, setState) {
+    $scope.changeState = function(id, setState, cb) {
+        $scope.loaded = false;
         VacationService.changeState(id, setState)
             .success(function(data, status) {
                 $scope.vacations = null;
                 run();
+
+                setTimeout(cb, 300);
             })
             .error(function(err) {
                 throw new Error(err);

@@ -1,5 +1,5 @@
 <div class="month-selector text-center">
-    <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]" scroll-on-click target="{{i}}" class="col-md-1 month">{{i|monthName}}</div>
+    <div ng-repeat="i in [] | range:1:13" scroll-on-click target="{{i}}" class="col-md-1 month">{{i|monthName}}</div>
 
 </div>
 
@@ -20,10 +20,11 @@
         </div>
     </div>
 
-    <div horizontal-scroll class="swipe-area">
+
+    <div horizontal-scroll start-position="{{baseConfig.month}}" class="swipe-area">
         <table class="table table-condensed">
             <tr>
-                <td ng-repeat="i in [] | range:1:12">
+                <td ng-repeat="i in [] | range:1:13">
                     <strong>{{i|monthName}}</strong>
 
                     <table class="table table-condensed table-calendar">

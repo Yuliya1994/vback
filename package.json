@@ -20,6 +20,8 @@
     "passport-google-oauth": "*",
     "passport-local": "*",
     "bower": "*",
-    "nodemailer": "1.0"
+    "nodemailer": "1.0",
+    "faker": "*",
+    "async": "*"
   }
 }
