@@ -53,41 +53,6 @@ td.table-header:hover {
     background-color: rgba(0,0,0,0.1);
 }
 
-td.rangeActive {
-    background-color: rgba(75,75,75,0.4);
-    cursor:pointer;
-    border-right: none;
-    -webkit-transition: background-color 1s; /* Safari */
-    transition: background-color 1s;
-}
-
-td.rangeActive:hover {
-    background-color: rgba(76,76,76,0.5);
-}
-
-.rangeAccepted {
-    background-color: #009688;
-    cursor:pointer;
-    -webkit-transition: background-color 1s; /* Safari */
-    transition: background-color 1s;
-}
-
-.rangeAccepted:hover {
-    background-color: #00796B;
-}
-
-td.rangeRefused {
-    background-color: #D32F2F;
-    cursor:pointer;
-    -webkit-transition: background-color 1s; /* Safari */
-    transition: background-color 1s;
-    border-right: none;
-}
-
-td.rangeRefused:hover {
-    background-color: #b71c1c;
-}
-
 i {
     cursor: pointer;
 }

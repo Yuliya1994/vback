@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="swipe-area">
+    <div horizontal-scroll class="swipe-area">
         <table class="table table-condensed">
             <tr>
                 <td ng-repeat="i in [] | range:1:12">
@@ -44,14 +44,14 @@
                                 <span ng-repeat="curVac in vac">
                                     <span ng-if="curVac.month[0] === i">
                                         <span ng-if="curVac.days[0].indexOf(day) != '-1'">
-                                            <div fill-with-color ctrl-fn="openVacationParameters(curVac)" td="{{curVac}}" ng-click="openVacationParameters(curVac)" class="rangeAccepted"> </div>
+                                            <div fill-with-color  td="{{curVac.acceptionState}}" ng-click="openVacationParameters(curVac)" class="micro-range"></div>
                                         </span>
                                     </span>
 
                                     <span ng-if="curVac.month[1] !== null">
                                         <span ng-if="curVac.month[1] === (i)">
                                             <span ng-if="curVac.days[1].indexOf(day) != '-1'">
-                                                !
+                                                <div fill-with-color  td="{{curVac.acceptionState}}" ng-click="openVacationParameters(curVac)" class="micro-range"></div>
                                             </span>
                                         </span>
                                     </span>

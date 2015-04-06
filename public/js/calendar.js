@@ -44,14 +44,55 @@ app.directive('scrollOnClick', function() {
 app.directive('fillWithColor', function() {
     return {
         restrict: 'A',
-        scope: { ctrlFn: '&' },
         link: function(scope, $elm, atrs) {
-            var td = $elm.parent().parent().parent().parent();
-            td.css('background-color', '#009688');
-            td.on('click', function(event) {
-                event.stopPropagation();
-                console.log(atrs.td);
-                scope.ctrlFn({curVac: atrs.td});
+            var td = $($elm).parents().eq(3);
+
+            if($(td).is('span')){
+                td = $($elm).parents().eq(4);
+            }
+
+            var tdClass = null;
+
+            var states = {
+                active: "rangeActive",
+                refused: "rangeRefused",
+                empty: "rangeEmpty",
+                accepted: "rangeAccepted"
+            };
+
+            switch (atrs.td) {
+                case '0':
+                    console.log(atrs.td);
+                    tdClass = states.active;
+                    break;
+
+                case '1':
+                    console.log(atrs.td);
+                    tdClass = states.accepted;
+                    break;
+
+                case '2':
+                    console.log(atrs.td);
+                    tdClass = states.refused;
+                    break;
+            }
+
+            td.attr('class', tdClass);
+
+            td.on('click', function() {
+                $elm.triggerHandler("click");
+            });
+        }
+    };
+});
+
+app.directive('horizontalScroll', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, $elm, atrs) {
+            $(".swipe-area").mousewheel(function(event, delta) {
+                this.scrollLeft -= (delta * 30);
+                event.preventDefault();
 
             });
 
@@ -125,72 +166,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
                 }
             });
         }
-    };
-
-
-
-    $scope.rangeClasses = {
-        active: "rangeActive",
-        refused: "rangeRefused",
-        empty: "rangeEmpty",
-        accepted: "rangeAccepted"
-    };
-
-    //Range of months (1-12) and years (unlimited)
-
-
-    $scope.getState = function(acceptionState) {
-        switch (acceptionState) {
-            case 0:
-                return $scope.rangeClasses.active;
-                break;
-
-            case 1:
-                return $scope.rangeClasses.accepted;
-                break;
-
-            case 2:
-                return $scope.rangeClasses.refused;
-                break;
-        }
-
-        return $scope.rangeClasses.empty;
-    };
-    //main method to draw ranges with color and set start/end icons
-    $scope.rangeState = function(curDay, month, days, acceptionState) {
-
-        var getState = function(days, curDay, acceptionState) {
-            if (~days.indexOf(curDay)) {
-                switch (acceptionState) {
-                    case 0:
-                        return $scope.rangeClasses.active;
-                        break;
-
-                    case 1:
-                        return $scope.rangeClasses.accepted;
-                        break;
-
-                    case 2:
-                        return $scope.rangeClasses.refused;
-                        break;
-                }
-            }
-
-            return $scope.rangeClasses.empty;
-        };
-
-        if(month[1] === null) {
-            return getState(days[0], curDay, acceptionState);
-        } else {
-            if(month[1] === $scope.baseConfig.month) {
-                return getState(days[1], curDay, acceptionState);
-            } else {
-                return getState(days[0], curDay, acceptionState);
-            }
-        }
-
-
-    };
+    }
 
     $scope.openVacationParameters = function(vac, scope) {
         $scope.vac = vac;
