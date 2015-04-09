@@ -1,4 +1,5 @@
 module.exports = [
     'admin-index',
-    'user-index'
+    'user-index',
+    'manager-index'
 ];

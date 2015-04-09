@@ -16,16 +16,16 @@
     border: 2px solid #B2DFDB;
     cursor: pointer;
     -webkit-box-shadow: 0px 10px 5px -7px rgba(29, 38, 95,0.57);
-    -moz-box-shadow: 0px 10px 5px -7px rgba(29, 38, 95,0.57);
-    box-shadow: 0px 10px 5px -7px rgba(29, 38, 95,0.57);
+    -moz-box-shadow:    0px 10px 5px -7px rgba(29, 38, 95,0.57);
+    box-shadow:         0px 10px 5px -7px rgba(29, 38, 95,0.57);
 }
 
 .month:hover {
     font-weight: 800;
     background-color: #fff;
     -webkit-box-shadow: 0px 13px 5px -7px rgba(29, 38, 95,0.57);
-    -moz-box-shadow: 0px 13px 5px -7px rgba(29, 38, 95,0.57);
-    box-shadow: 0px 13px 5px -7px rgba(29, 38, 95,0.57);
+    -moz-box-shadow:    0px 13px 5px -7px rgba(29, 38, 95,0.57);
+    box-shadow:         0px 13px 5px -7px rgba(29, 38, 95,0.57);
 }
 
 .swipe-calendar {
@@ -56,10 +56,9 @@
 }
 
 div.employees {
-    margin-top: 42px;
+    margin-top: 41px;
     margin-right: 0;
     padding-right: 0;
-    overflow-y: scroll;
 }
 
 div.employees div {
@@ -70,7 +69,25 @@ div.employees div {
 
 
 }
-.table-calendar td {height: 35px; padding: 2px;!important; margin: 0;}
+
+div.employees div div {
+    border: none;
+
+
+}
+
+.empl {
+    height: 35px;
+    border: none;
+}
+
+.table-calendar td {
+    height: 35px;
+    padding: 2px;!important;
+    margin: 0;
+    border: 1px dashed #e1e1e1;
+
+}
 .table-calendar tr {
     margin-bottom: 3px;
 }
@@ -104,6 +121,26 @@ div.employees div {
 .rangeAccepted:hover {
     background-color: #00796B;
 }
+
+.rangeApproved {
+    background-color: #92cf94;
+    cursor:pointer;
+    -webkit-transition: background-color 1s; /* Safari */
+    transition: background-color 1s;
+}
+.rangeApproved:hover {
+    background-color: #449d44;
+}
+.rangeDeclined {
+    background-color: tomato;
+    cursor:pointer;
+    -webkit-transition: background-color 1s; /* Safari */
+    transition: background-color 1s;
+}
+.rangeDeclined:hover {
+    background-color: indianred;
+}
+
 .rangeRefused {
     background-color: #D32F2F;
     cursor:pointer;
@@ -116,6 +153,7 @@ div.employees div {
 }
 
 .micro-range{display: none;}
+
 .preloader {
     color: #fff;
     font-size: 25pt;
@@ -123,3 +161,83 @@ div.employees div {
     top: 45%;
     left: 49%;
 }
+
+
+
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+#loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #3498db;
+    -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #e74c3c;
+    -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #f9c922;
+    -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+@-webkit-keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);  /* IE 9 */
+        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);  /* IE 9 */
+        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+
+}
+@keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);  /* IE 9 */
+        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);  /* IE 9 */
+        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+}
+

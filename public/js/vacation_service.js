@@ -7,16 +7,20 @@ app.service("VacationService", ['$http', function($http) {
         return $http.get('/api/vacation');
     };
 
+    this.getVacation = function(id) {
+        return $http.get('/api/vacation/id/' + id);
+    };
+
     this.getVacationsByUser = function(user_id) {
         return $http.get('/api/vacation/' + user_id);
     };
 
     this.changeState = function(id, setState) {
-        return $http.put('/api/vacation/'+id, {state: setState});
+        return $http.put('/api/vacation/id/'+id, {state: setState});
     };
 
     this.addComment = function(id, comment) {
-        return $http.put('/api/vacation/'+id, {adminComment: comment});
+        return $http.put('/api/vacation/id/'+id, {adminComment: comment});
     };
 
 

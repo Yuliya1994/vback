@@ -6,7 +6,34 @@ app.controller('NewVacationController', ['$scope', 'VacationService', 'ngDialog'
 
     $scope.vacation = {};
 
+    $scope.submitBtn = true;
+    $scope.errors = [];
 
+    //Datepicker validation
+    $scope.$watchCollection('range', function() {
+        $scope.submitBtn = $scope.range.end > $scope.range.start
+            ? isRangeCorrect($scope.range.start, $scope.range.end)
+                ? false
+                : true
+            : true;
+
+        if(!isRangeCorrect($scope.range.start, $scope.range.end)) {
+            $scope.errors.push('Промежуток не должен превышать 14 дней!');
+        } else {
+            $scope.errors.shift();
+        }
+
+    });
+
+
+    function isRangeCorrect(start, end) {
+        var oToday = start;
+        var oDeadLineDate = end;
+
+        var days = oDeadLineDate > oToday ? Math.ceil((oDeadLineDate - oToday) / (1000 * 60 * 60 * 24)) : null;
+
+        return days < 14;
+    }
 
     //defines array with year, months, days
     function makeRange() {
@@ -25,7 +52,6 @@ app.controller('NewVacationController', ['$scope', 'VacationService', 'ngDialog'
 
         var startDay = startDate.getDate();
         var endDay = endDate.getDate();
-
 
         var startMonthNum = (startDate.getMonth() + 1);
         var endMonthNum = (endDate.getMonth() + 1);
@@ -75,7 +101,7 @@ app.controller('NewVacationController', ['$scope', 'VacationService', 'ngDialog'
 
         VacationService.addVacation($scope.vacation).success(function(data, status) {
             ngDialog.open({
-                template: ''+ data + '',
+                template: '<p>Заявка отправлена!</p>',
                 plain: true
             });
         });

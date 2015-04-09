@@ -1,58 +1,57 @@
 <div class="month-selector text-center">
-    <div ng-repeat="i in [] | range:1:13" scroll-on-click target="{{i}}" class="col-md-1 month">{{i|monthName}}</div>
+    <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]" scroll-on-click target="{{i}}" class="col-md-1 month">{{i|monthName}}</div>
 
 </div>
 
 <div class="swipe-calendar row">
     <div class="col-md-3 employees">
-        <div class="col-md-6">
-            <p class="swipe-calendar-header">Сотрудник</p>
+        <div style="margin-top: 2px" class="col-md-12">
+            <p class="swipe-calendar-header" style="margin-bottom: 3px;">Сотрудник</p>
 
-            <p ng-repeat="vac in vacations|uniq: 'user_id'">
-                <a ng-click="showUserHistory(vac.user_id)" href="#">{{vac.user}}</a>
-            </p>
-        </div>
-
-        <div class="col-md-6">
-            <p class="swipe-calendar-header">Должность</p>
-
-            <p ng-repeat="vac in vacations|uniq: 'user_id'">{{vac.rank}}</p>
+            <div class="empl" ng-repeat="vac in vacations|uniq: 'user_id'">
+                <table class="table table-condensed table-striped">
+                    <tr>
+                        <td><a ng-click="showUserHistory(vac.user_id)" href="#">{{vac.user}}</a></td>
+                        <td style="text-align: right;"><span ng-if="vac.rank !== 0">{{::vac.rank}}</span></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 
 
     <div horizontal-scroll start-position="{{baseConfig.month}}" class="swipe-area">
-        <table class="table table-condensed">
+        <table class="table table-condensed" style="">
             <tr>
-                <td ng-repeat="i in [] | range:1:13">
-                    <strong>{{i|monthName}}</strong>
+                <td ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]">
+                    <strong>{{::i|monthName}}</strong>
 
                     <table class="table table-condensed table-calendar">
                         <thead>
                         <tr class="control-row active">
                             <td class="table-header" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
                                 <span class="week-day">
-                                    {{baseConfig.getDay(day, '2015', i)|dayName}}
+                                    {{::baseConfig.getDay(day, '2015', i)|dayName}}
                                 </span>
-                                {{day}}
+                                {{::day}}
                             </td>
                         </tr>
                         </thead>
 
-                        <tr ng-repeat="vac in vacationsByUser">
+                        <tr ng-repeat="vac in ::vacationsByUser">
 
-                            <td class="line" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
-                                <span ng-repeat="curVac in vac">
-                                    <span ng-if="curVac.month[0] === i">
-                                        <span ng-if="curVac.days[0].indexOf(day) != '-1'">
-                                            <div fill-with-color  td="{{curVac.acceptionState}}" ng-click="openVacationParameters(curVac)" class="micro-range"></div>
+                            <td class="line" ng-repeat="day in ::baseConfig.daysRange(baseConfig.days('2015', i))">
+                                <span ng-repeat="curVac in ::vac">
+                                    <span ng-if="::curVac.month[0] === i">
+                                        <span ng-if="::curVac.days[0].indexOf(day) != '-1'">
+                                            <div data-vac="{{::curVac._id}}" fill-with-color td="{{::curVac.acceptionState}}" ng-click="openVacationParameters(curVac)" class="micro-range"></div>
                                         </span>
                                     </span>
 
-                                    <span ng-if="curVac.month[1] !== null">
-                                        <span ng-if="curVac.month[1] === (i)">
-                                            <span ng-if="curVac.days[1].indexOf(day) != '-1'">
-                                                <div fill-with-color  td="{{curVac.acceptionState}}" ng-click="openVacationParameters(curVac)" class="micro-range"></div>
+                                    <span ng-if="::curVac.month[1] !== null">
+                                        <span ng-if="::curVac.month[1] === (i)">
+                                            <span ng-if="::curVac.days[1].indexOf(day) != '-1'">
+                                                <div data-vac="{{::curVac._id}}" fill-with-color  td="{{::curVac.acceptionState}}" ng-click="openVacationParameters(curVac)" class="micro-range"></div>
                                             </span>
                                         </span>
                                     </span>

@@ -324,7 +324,7 @@ Module.constant('dateTimeConfig', {
         (attrs.minView ? 'min-view="' + attrs.minView + '" ' : '') +
         'class="dropdown-menu"></div>';
   },
-  format: 'yyyy-MM-dd',
+  format: 'dd-MM-yyyy',
   views: ['date', 'year', 'month', 'hours', 'minutes'],
   dismiss: false,
   position: 'relative'

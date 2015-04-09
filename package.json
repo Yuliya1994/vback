@@ -22,6 +22,8 @@
     "bower": "*",
     "nodemailer": "1.0",
     "faker": "*",
-    "async": "*"
+    "async": "*",
+    "compression": "*",
+    "express-static-cache": "*"
   }
 }

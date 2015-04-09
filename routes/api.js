@@ -8,7 +8,7 @@ var Vacation = require('../models/vacation');
 var User = require('../models/user');
 var Mail = require('../models/mail');
 
-router.use(access.apiAccess);
+//router.use(access.apiAccess);
 
 router.route('/vacation')
     .get(function(req, res) {
@@ -58,9 +58,9 @@ router.get('/vacation/:user_id', function(req, res) {
     });
 });
 
-router.route('/vacation/:id')
+router.route('/vacation/id/:id')
     .get(function(req, res) {
-        Vacation.findOne({_id: req.params.id}, function(err, vacation) {
+        Vacation.find({_id: req.params.id}, function(err, vacation) {
             if(err) {
                 throw err;
             }
@@ -92,11 +92,6 @@ router.route('/vacation/:id')
         });
     });
 
-router.get('/vacation/:user', function(req, res) {
-
-   // newVacation.
-
-});
 
 router.get('/user/current', function(req, res) {
         var currentUser = currentUserCtrl.getUserInfo(req, res); // common info

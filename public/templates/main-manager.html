@@ -8,23 +8,22 @@
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="../css/calendar.css" rel="stylesheet">
     <link href="../css/fashion.css" rel="stylesheet">
-    <link href="../css/user-main.css" rel="stylesheet">
+    <link href="../css/swipe.css" rel="stylesheet">
     <link rel="stylesheet" href="../../bower_components/ngDialog/css/ngDialog-theme-default.min.css"/>
     <link rel="stylesheet" href="../../bower_components/ngDialog/css/ngDialog.min.css"/>
-    <link rel="stylesheet" href="../css/datepicker.css"/>
     <link rel="stylesheet" href="../css/route-animations.css"/>
-
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 
-<body ng-controller="UserMainController">
+<body>
 <div class='fashion-bg'></div>
 
-<div class="container" >
+<div class="container" ng-controller="CalendarController">
     <div class="main">
         <div class="row range-control">
             <div class="col-md-4">
@@ -39,51 +38,40 @@
 
             </div>
             <div class="col-md-4 nav-list">
+                <span class="nav-text">
+                  <a href="/">ЗАЯВКИ</a>
+                </span>
 
 
                 <span class="nav-text">
-                  <a href="/">ВАШИ ЗАЯВКИ</a>
+                  <a href="/list">СПИСОК</a>
                 </span>
 
-                <span class="nav-text">Привет, {{username}}</span>
+                <span class="nav-text">
+                  <a href="/settings">НАСТРОЙКИ</a>
+                </span>
 
             </div>
         </div>
+
+        <div ng-hide='loaded'>
+            <div id="loader-wrapper">
+                <div id="loader"></div>
+            </div>
+
+        </div>
+
+        <div ng-show='loaded' class="container" ng-class="animation">
+            <div ng-view class="view">
+
+            </div>
+        </div>
+
     </div>
 </div>
-        <div class="jumbotron">
-            <div class="container user_control">
-                <div class="row">
-                    <div class="col-md-6">
-                        <a href="/vacation">
-                            <button class="btn btn-lg btn-warning btn-vac">
-                                <img src="../img/beach.png" class="btn-img" alt=""/>
-                                Новая заявка
-                            </button>
-                        </a>
-                    </div>
 
-                    <div class="col-md-6">
-                        <a href="/profile">
-                            <button class="btn btn-lg btn-success btn-vac">
-                                <img src="../img/settings.png" class="btn-img" alt=""/>
-                                Редактировать профиль
-                            </button>
-                        </a>
-                    </div>
-                </div>
 
-                <div class="container"></div>
-                    <div class="container" ng-class="animation">
-                        <div ng-view class="view">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-<footer class="footer navbar-fixed-bottom row-fluid">
+<footer class="footer row-fluid">
     <div class="container">
         <div class="col-md-6 text-right">
             <a href="#" onclick="document.location.href='/auth/logout'">Выйти</a>
@@ -99,21 +87,23 @@
 <script src="../../bower_components/ngDialog/js/ngDialog.min.js"></script>
 <script src="../../bower_components/angular-filter/dist/angular-filter.min.js"></script>
 <!--ru locale-->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 <script src="../../bower_components/angular-i18n/angular-locale_ru-ru.js"></script>
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 
-
+<script type='text/javascript' src='../js/jquery.mousewheel.min.js'></script>
 <script src="../js/datepicker.js"></script>
 <script src="../js/app.js"></script>
+<script src="../js/manager_routes.js"></script>
 <script src="../js/directives.js"></script>
-<script src="../js/user_main.js"></script>
-<script src="../js/edit_profile.js"></script>
-<script src="../js/user_history.js"></script>
 <script src="../js/vacation_service.js"></script>
-<script src="../js/user_service.js"></script>s
+<script src="../js/user_service.js"></script>
 <script src="../js/vacation.js"></script>
+<script src="../js/calendar.js"></script>
 <script src="../js/calendar_filters.js"></script>
 <script src="../js/calendar_service.js"></script>
+<script src="../js/mail.js"></script>
+<script src="../js/mail_service.js"></script>
+
 
 </body>
 </html>

@@ -16,7 +16,6 @@ function getRandomInt(min, max) {
 }
 
 function run() {
-    async.series([function(callback) {
         var Users = User.find({}, function (err, data) {
             if (data.length < 2) {
                 for (var i = 0; i < 30; i++) {
@@ -50,68 +49,60 @@ function run() {
                 process.exit(code = 0);
             }
         });
-    }, function(callback) {
-
-        userIds.forEach(function (user) {
-            for (var x = 0; x < getRandomInt(1, 5); x++) {
-                var randMonth = getRandomInt(0, 11);
-                var daysCount = new Date(2015, randMonth, 0).getDate();
-                var month = [null, null];
-                var range = [[], null];
-
-                var randSplit = getRandomInt(0, 10);
-
-                randSplit = randSplit < 5;
-
-                var start = getRandomInt(1, daysCount);
-                var end = getRandomInt(start, daysCount);
-
-
-                month[0] = randMonth;
-
-                for (var i = start; i <= end; i++) {
-                    range[0].push(i);
-                }
-
-                if (randSplit) {
-                    randMonth += 1;
-                    month[1] = randMonth;
-
-                    daysCount = new Date(2015, randMonth, 0).getDate();
-                    start = getRandomInt(1, daysCount);
-                    end = getRandomInt(start, daysCount);
-
-                    range[1] = [];
-
-                    for (var y = start; y <= end; i++) {
-                        range[1].push(y);
-                    }
-                }
-
-                var newVacation = new Vacation();
-                newVacation.user_id = user.id;
-                newVacation.rank = user.rank;
-                newVacation.month = month;
-                newVacation.days = range;
-                newVacation.year = 2015;
-                newVacation.comment = faker.lorem.sentence();
-
-                newVacation.save(function (err, data) {
-                    if (err) {
-                        throw err;
-                    }
-
-                    console.log('Vacation #' + data._id + ' saved');
-                });
-
-            }
-        });
-    }], function(err, results) {
-        if(err) {
-            throw err;
-        }
-        console.log(results);
-    })
+        //userIds.forEach(function (user) {
+        //    for (var x = 0; x < getRandomInt(1, 5); x++) {
+        //        var randMonth = getRandomInt(0, 11);
+        //        var daysCount = new Date(2015, randMonth, 0).getDate();
+        //        var month = [null, null];
+        //        var range = [[], null];
+        //
+        //        var randSplit = getRandomInt(0, 10);
+        //
+        //        randSplit = randSplit < 5;
+        //
+        //        var start = getRandomInt(1, daysCount);
+        //        var end = getRandomInt(start, daysCount);
+        //
+        //
+        //        month[0] = randMonth;
+        //
+        //        for (var i = start; i <= end; i++) {
+        //            range[0].push(i);
+        //        }
+        //
+        //        if (randSplit) {
+        //            randMonth += 1;
+        //            month[1] = randMonth;
+        //
+        //            daysCount = new Date(2015, randMonth, 0).getDate();
+        //            start = getRandomInt(1, daysCount);
+        //            end = getRandomInt(start, daysCount);
+        //
+        //            range[1] = [];
+        //
+        //            for (var y = start; y <= end; i++) {
+        //                range[1].push(y);
+        //            }
+        //        }
+        //
+        //        var newVacation = new Vacation();
+        //        newVacation.user_id = user.id;
+        //        newVacation.rank = user.rank;
+        //        newVacation.month = month;
+        //        newVacation.days = range;
+        //        newVacation.year = 2015;
+        //        newVacation.comment = faker.lorem.sentence();
+        //
+        //        newVacation.save(function (err, data) {
+        //            if (err) {
+        //                throw err;
+        //            }
+        //
+        //            console.log('Vacation #' + data._id + ' saved');
+        //        });
+        //
+        //    }
+        //});
 
 }
  run();

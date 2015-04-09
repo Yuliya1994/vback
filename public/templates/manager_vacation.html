@@ -1,0 +1,34 @@
+<h4>{{vac.user}}</h4>
+<table class="table table-condensed">
+    <tr>
+        <td><strong>Должность:</strong></td> <td>{{vac.rank|rank}}</td>
+    </tr>
+
+    <tr>
+        <td><strong>Период:</strong><td>
+
+        {{defineRangeFromData(vac.days, vac.month, vac.year)}}
+
+    </tr>
+    <tr>
+        <td>
+            <strong>Причина:</strong>
+        </td>
+        <td>
+            {{vac.comment}}
+        </td>
+    </tr>
+
+    <tr>
+        <td><strong>Текущий статус:</strong> </td>
+        <td>{{showState(vac.acceptionState)}}</td>
+    </tr>
+</table>
+
+
+
+<p class="text-center">
+    <button confirm="{{vac._id}}" manager="1" ng-click="changeState(vac._id, 10, closeThisDialog());" type="button" class="btn btn-success btn-lg active"> Одобрить</button>
+    <button refuse="{{vac._id}}" manager="1" ng-click="changeState(vac._id, 11, closeThisDialog());" type="button" class="btn btn-danger btn-lg active"> Отклонить</button>
+    <button ng-click="closeThisDialog()" type="button" class="btn btn-default btn-lg active"><i class="fa fa-home"></i> Назад</button>
+</p>

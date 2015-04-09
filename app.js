@@ -1,6 +1,10 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+
+var compress = require('compression');
+var staticCache = require('express-static-cache')
+
 var methodOverride = require('method-override');
 var fs = require('fs');
 var logger = require('morgan');
@@ -15,13 +19,15 @@ var session = require('express-session');
 var passport = require('passport');
 var apiRouter = require('./routes/api');
 
+
 var app = express();
+app.use(compress({'level': 9}));
 
 app.set('views', path.join(__dirname, 'views'));
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/bower_components',  staticCache(__dirname + '/bower_components', { maxAge: 365 * 24 * 60 * 60 }));
 app.set('view engine', 'jade');
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(staticCache(path.join(__dirname, 'public'), { maxAge: 365 * 24 * 60 * 60 }));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -72,6 +78,10 @@ app.use(function(err, req, res, next) {
         error: err
     });
 });
+setInterval(function() {
+    console.log(process.memoryUsage());
+} ,1000);
+
 
 
 module.exports = app;

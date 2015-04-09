@@ -35,3 +35,14 @@ app.filter('range', function() {
         return input;
     };
 });
+app.filter('rank', [function() {
+    return function(rankNum) {
+        var rank_list = [
+            'Разработчик',
+            'Менеджер',
+            'Начальник'
+        ];
+
+        return rank_list[rankNum];
+    }
+}]);
