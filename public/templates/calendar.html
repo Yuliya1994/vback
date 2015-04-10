@@ -38,9 +38,9 @@
                         </tr>
                         </thead>
 
-                        <tr ng-repeat="vac in ::vacationsByUser">
+                        <tr ng-repeat="vac in vacationsByUser">
 
-                            <td class="line" ng-repeat="day in ::baseConfig.daysRange(baseConfig.days('2015', i))">
+                            <td class="line" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
                                 <span ng-repeat="curVac in ::vac">
                                     <span ng-if="::curVac.month[0] === i">
                                         <span ng-if="::curVac.days[0].indexOf(day) != '-1'">

@@ -50,7 +50,6 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
 
     //Create array sorting vacations by user [user_id] => [{vac...},{vac...},{vac...}]
     function diffByUsers(vacations) {
-        console.log(vacations);
         $scope.vacationsByUser = {};
 
         vacations.forEach(function(vac) {
@@ -68,25 +67,39 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         }
     }
 
-    $scope.openVacationParameters = function(vac, scope, access) {
+
+    $scope.openVacationParameters = function(vac) {
         $scope.vac = null;
+        var access = null;
 
-        var _template = access === 0 ? 'vacation' : 'manager_vacation';
+        UserService.getCurrentUser()
+            .success(function(user) {
+                access = user.common.access;
 
-        VacationService.getVacation(vac._id)
-            .success(function(data) {
-                $scope.vac = data[0];
+                var _template = access === 0 ? 'vacation' : 'manager_vacation';
+
+                VacationService.getVacation(vac._id)
+                    .success(function(data) {
+                        $scope.vac = data[0];
 
 
-                ngDialog.open({
-                    template: '../templates/'+_template+'.html',
-                    className: 'ngdialog-theme-default',
-                    scope: $scope
-                });
+                        ngDialog.open({
+                            template: '../templates/'+_template+'.html',
+                            className: 'ngdialog-theme-default',
+                            scope: $scope
+                        });
+                    })
+                    .error(function(err) {
+                        throw err;
+                    });
+
+
             })
             .error(function(err) {
                 throw err;
             });
+
+
 
     };
 
@@ -155,6 +168,8 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
 
         return states[num];
     };
+
+
 
 
 }]);

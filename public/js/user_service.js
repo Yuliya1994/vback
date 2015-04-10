@@ -13,5 +13,5 @@ app.service("UserService", ['$http', function($http) {
 
     this.updateUser = function(id, data) {
         return $http.put('/api/user/'+id, {username: data.username, email: data.email});
-    }
+    };
 }]);
