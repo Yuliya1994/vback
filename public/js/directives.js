@@ -4,20 +4,18 @@ app.directive('confirm', function() {
         link: function(scope, $elm, atrs) {
             $elm.on('click', function() {
                 var elm = $('div[data-vac="'+atrs.confirm+'"]');
-                var td = null;
-                elm.each(function() {
-                    td = $(this).parents().eq(3);
+                var classes = ['rangeAccepted', 'rangeApproved', 'rangeDeclined', 'rangeRefused'];
 
-                    if($(td).is('span')){
-                        td = $(this).parents().eq(4);
-                    }
-
-                    if(!atrs.manager) {
-                        $(td).attr('class', 'rangeAccepted');
-                    } else {
-                        $(td).attr('class', 'rangeApproved');
-                    }
+                classes.forEach(function(cl) {
+                    $(elm).removeClass(cl);
                 });
+
+                if(!atrs.manager) {
+                    $(elm).addClass('rangeAccepted');
+
+                } else {
+                    $(elm).addClass('rangeApproved');
+                }
             });
 
         }
@@ -30,20 +28,18 @@ app.directive('refuse', function() {
         link: function(scope, $elm, atrs) {
             $elm.on('click', function() {
                 var elm = $('div[data-vac="'+atrs.refuse+'"]');
-                var td = null;
-                elm.each(function() {
-                    td = $(this).parents().eq(3);
+                var classes = ['rangeAccepted', 'rangeApproved', 'rangeDeclined', 'rangeRefused'];
 
-                    if($(td).is('span')){
-                        td = $(this).parents().eq(4);
-                    }
-
-                    if(!atrs.manager) {
-                        $(td).attr('class', 'rangeRefused');
-                    } else {
-                        $(td).attr('class', 'rangeDeclined');
-                    }
+                classes.forEach(function(cl) {
+                    $(elm).removeClass(cl);
                 });
+
+                if(!atrs.manager) {
+                    $(elm).addClass('rangeRefused');
+
+                } else {
+                    $(elm).addClass('rangeDeclined');
+                }
             });
 
         }
@@ -55,13 +51,13 @@ app.directive('scrollOnClick', function() {
         restrict: 'A',
         link: function(scope, $elm, atrs) {
             $elm.on('click', function() {
-                var target = $('.table-calendar');
+                var target = $('.month-wrapper');
                 var shift = 0;
                 var prevPos = atrs.target-1 < 0 ? 0 : atrs.target-1;
 
                 for(var i = 0; i < (prevPos); i++) {
                     shift += target[i].clientWidth;
-                    if(i > 3) shift+=20;
+                    if(i > 3) shift+=10;
                 }
 
                 $(".swipe-area").animate({scrollLeft: shift}, "slow");
@@ -79,7 +75,7 @@ app.directive('startPosition', function() {
         link: function(scope, $elm, atrs) {
             $(document).ready(function() {
                 setTimeout(function() {
-                    var target = $('.table-calendar');
+                    var target = $('.month-wrapper');
                     var shift = 0;
 
 
@@ -91,65 +87,8 @@ app.directive('startPosition', function() {
 
                     $(".swipe-area").animate({scrollLeft: shift}, "slow");
 
-                }, 2000)
+                }, 1000)
 
-            });
-        }
-    };
-});
-
-app.directive('fillWithColor', function() {
-    return {
-        restrict: 'A',
-        link: function(scope, $elm, atrs) {
-            var td = $($elm).parents().eq(3);
-
-            if($(td).is('span')){
-                td = $($elm).parents().eq(4);
-            }
-
-            var tdClass = null;
-
-            var states = {
-                active: "rangeActive",
-                refused: "rangeRefused",
-                empty: "rangeEmpty",
-                accepted: "rangeAccepted",
-
-                approved: "rangeApproved",
-                declined: "rangeDeclined"
-            };
-
-            switch (atrs.td) {
-                case '0':
-                    tdClass = states.active;
-                    break;
-
-                case '1':
-                    tdClass = states.accepted;
-                    break;
-
-                case '2':
-                    tdClass = states.refused;
-                    break;
-
-                case '10':
-                    tdClass = states.approved;
-                    break;
-
-                case '11':
-                    tdClass = states.declined;
-                    break;
-            }
-
-            td.attr('class', tdClass);
-            td.css({
-                'border-right': 'none',
-                'border-left': 'none'
-            });
-
-            td.on('click', function() {
-                $elm.triggerHandler("click");
             });
         }
     };
@@ -169,5 +108,62 @@ app.directive('horizontalScroll', function() {
     };
 });
 
+app.directive('rangeLine', function() {
+    return {
+        restrict: 'C',
+        link: function(scope, $elm, atrs) {
+            var left = (atrs.startPos*25)-25,
+                size  = atrs.size*25;
+
+            $($elm).mouseover(function() {
+                    $elm.text('идрёнбатон');
+            });
+
+            $($elm).mouseout(function() {
+                    $elm.text('');
+            });
+
+            $($elm).css({
+                'left': left+'px',
+                'min-width': size+'px'
+            });
+
+            var states = {
+                active: "rangeActive",
+                refused: "rangeRefused",
+                empty: "rangeEmpty",
+                accepted: "rangeAccepted",
+
+                approved: "rangeApproved",
+                declined: "rangeDeclined"
+            };
+
+
+            switch (atrs.acceptionState) {
+                case '0':
+                    elmClass = states.active;
+                    break;
+
+                case '1':
+                    elmClass = states.accepted;
+                    break;
+
+                case '2':
+                    elmClass = states.refused;
+                    break;
+
+                case '10':
+                    elmClass = states.approved;
+                    break;
+
+                case '11':
+                    elmClass = states.declined;
+                    break;
+            }
+
+            $($elm).addClass(elmClass);
+        }
+    };
+});
 
 

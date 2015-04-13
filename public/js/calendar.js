@@ -39,6 +39,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
                 });
 
                 diffByUsers($scope.vacations);
+
                 $scope.loaded = true;
             })
             .error(function (err, status) {
@@ -48,9 +49,10 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
 
     run();
 
-    //Create array sorting vacations by user [user_id] => [{vac...},{vac...},{vac...}]
+    //Create array sorting vacations by user and month [user_id] => [1] => [{vac},{vac}...], [2] => ...
     function diffByUsers(vacations) {
         $scope.vacationsByUser = {};
+        var tempMonth = [];
 
         vacations.forEach(function(vac) {
             if($scope.vacationsByUser[vac.user_id] === undefined) {
@@ -59,14 +61,21 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         });
 
         for(var user in $scope.vacationsByUser) {
-            vacations.forEach(function(vac) {
-                if(vac.user_id === user) {
-                    $scope.vacationsByUser[user].push(angular.fromJson(vac));
-                }
-            });
-        }
-    }
+            for(var i = 1; i <= 12; i++) {
+                $scope.vacationsByUser[user][i] = [];
 
+                vacations.forEach(function(vac) {
+                    if(~vac.month.indexOf(i) && user === vac.user_id) {
+                        $scope.vacationsByUser[user][i].push(angular.fromJson(vac));
+                    } else {
+                        $scope.vacationsByUser[user][i].push({});
+                    }
+                });
+            }
+        }
+
+        console.log($scope.vacationsByUser);
+    }
 
     $scope.openVacationParameters = function(vac) {
         $scope.vac = null;
