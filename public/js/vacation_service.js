@@ -26,6 +26,17 @@ app.service("VacationService", ['$http', function($http) {
 
     this.defineRangeFromData = function(days, month, year) {
         var range = '';
+        var tempDays = [];
+
+        tempDays[0] = [];
+        tempDays[1] = [];
+
+        days[0].map(function(day) {
+            if(days[0][day] < 10) {
+                tempDays[0][day] = '0' + day + '';
+                console.log(days[0][day]);
+            }
+        });
 
         if(month[1] === null) {
             range = '' + days[0][0] + '.' + month[0] + ' - ' + days[0][days[0].length-1] + '.' + month[0] + '.' + year;

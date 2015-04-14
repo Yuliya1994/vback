@@ -4,19 +4,19 @@
 </div>
 
 <div class="swipe-calendar row">
-    <div class="col-md-3 employees">
-        <div style="margin-top: 5px" class="col-md-12">
+    <div class="col-md-2 employees">
+
+        <div class="col-md-12">
             <span class="swipe-calendar-header" style="margin-bottom: 3px;">Сотрудник</span>
 
-            <div class="empl" ng-repeat="vac in vacations|uniq: 'user_id'">
-                <div style="min-height: 35px; margin-top: 1px; margin-bottom: 1px;"><a title="{{vac.rank}}" ng-click="showUserHistory(vac.user_id)" href="#">{{vac.user}}</a></div>
+            <div ng-repeat="vac in vacations|uniq: 'user_id'" style="margin-top: 2px; min-height: 35px; text-align: right;">
+                <a title="{{vac.rank}}" ng-click="showUserHistory(vac.user_id)" href="#">{{vac.user}}</a>
             </div>
         </div>
     </div>
 
 
-    <!--<div horizontal-scroll start-position="{{baseConfig.month}}" class="swipe-area">-->
-    <div start-position="{{baseConfig.month}}" class="swipe-area">
+    <div horizontal-scroll start-position="{{baseConfig.month}}" class="swipe-area">
         <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]" class="month-wrapper">
             <strong>{{i|monthName}}</strong>
             <div class="days-wrapper">
@@ -31,11 +31,17 @@
             <div class="ranges-wrapper">
                 <div class="range" ng-repeat="vac in vacationsByUser">
                     <section ng-repeat="curVac in vac[i]">
-                        <div ng-if="curVac.month[1] === null" acception-state="{{curVac.acceptionState}}" data-vac="{{::curVac._id}}" class="range-line" start-pos="{{curVac.days[0][0]}}" size="{{curVac.days[0].length}}" ng-click="openVacationParameters(curVac)"></div>
+                        <div ng-if="curVac.month[1] === null" acception-state="{{curVac.acceptionState}}" data-vac="{{::curVac._id}}" class="range-line tooltips" start-pos="{{curVac.days[0][0]}}" size="{{curVac.days[0].length}}" ng-click="openVacationParameters(curVac)">
+                            <!-- -->
+                            <!--{{::prettyDate(curVac.days[0][0], curVac.year, curVac.month[0])|date:'dd.MM.yyyy'}}
+                            -
+                            {{::prettyDate(curVac.days[0][curVac.days[0].length-1], curVac.year, curVac.month[0])|date:'dd.MM.yyyy'}}-->
+                      <!-- -->
+                        </div>
 
-                        <div ng-if="curVac.month[1] !== null && curVac.month[0] === i" acception-state="{{curVac.acceptionState}}" data-vac="{{::curVac._id}}" class="range-line range-line-start" start-pos="{{curVac.days[0][0]}}" size="{{curVac.days[0].length}}" ng-click="openVacationParameters(curVac)"></div>
+                        <div ng-if="curVac.month[1] !== null && curVac.month[0] === i" acception-state="{{curVac.acceptionState}}" data-vac="{{::curVac._id}}" class="range-line tooltips range-line-start" start-pos="{{curVac.days[0][0]}}" size="{{curVac.days[0].length}}" ng-click="openVacationParameters(curVac)"></div>
 
-                        <div ng-if="curVac.month[1] !== null && curVac.month[0] === i-1" acception-state="{{curVac.acceptionState}}" data-vac="{{::curVac._id}}" class="range-line range-line-end" start-pos="{{curVac.days[1][0]}}" size="{{curVac.days[1].length}}" ng-click="openVacationParameters(curVac)"></div>
+                        <div ng-if="curVac.month[1] !== null && curVac.month[0] === i-1" acception-state="{{curVac.acceptionState}}" data-vac="{{::curVac._id}}" class="range-line tooltips range-line-end" start-pos="{{curVac.days[1][0]}}" size="{{curVac.days[1].length}}" ng-click="openVacationParameters(curVac)"></div>
                     </section>
                 </div>
             </div>

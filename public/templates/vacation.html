@@ -1,13 +1,20 @@
 <h4>{{vac.user}}</h4>
 <table class="table table-condensed">
     <tr>
+        <td><strong>Сотрудник:</strong></td> <td>{{vac.user}}</td>
+    </tr>
+    <tr>
         <td><strong>Должность:</strong></td> <td>{{vac.rank|rank}}</td>
     </tr>
 
     <tr>
         <td><strong>Период:</strong><td>
 
-        {{defineRangeFromData(vac.days, vac.month, vac.year)}}
+        <!--{{defineRangeFromData(vac.days, vac.month, vac.year)}}-->
+        {{::prettyDate(vac.days[0][0], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}
+        -
+        {{::prettyDate(vac.days[0][vac.days[0].length-1], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}
+
 
     </tr>
     <tr>

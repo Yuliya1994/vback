@@ -178,7 +178,17 @@ router.route('/mail/:id')
     })
     .put(function(req, res) {
         var updateData = {$set: {}};
+
+        console.log(req.body);
+
+        if(!req.body.state){
+           for(var a in req.body) {
+               updateData.$set[a] = req.body[a];
+           }
+        } else {
             updateData.$set.state = req.body.state;
+        }
+
 
         Mail.update({'_id':req.params.id}, updateData, function(err) {
             if(err) {

@@ -1,6 +1,7 @@
 app.controller('MailController', ['$scope', '$rootScope', 'MailService', function($scope, $rootScope, MailService) {
     $scope.subscriber = {};
     $scope.mailList = {};
+    $scope.mail = {};
 
 
     $scope.$on('anyChanges', function(event, data) {
@@ -45,6 +46,17 @@ app.controller('MailController', ['$scope', '$rootScope', 'MailService', functio
             .success(function(data, status) {
                 console.log(data);
                // $scope.$emit('anyChanges');
+            })
+            .error(function(err) {
+                throw err;
+            });
+    };
+
+    $scope.changeAction = function(id, action) {
+        MailService.updateMailAction(id, action, this.mail.actions[action])
+            .success(function(data, status) {
+                console.log(data);
+                // $scope.$emit('anyChanges');
             })
             .error(function(err) {
                 throw err;

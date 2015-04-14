@@ -56,12 +56,12 @@
 }
 
 div.employees {
-    margin-top: 41px;
+    margin-top: 43px;
     margin-right: 0;
     padding-right: 0;
 }
 
-div.employees div {
+div.employees div.col-md-12 {
     background-color: #fff;
     padding: 5px;
     border: 1px solid #B2DFDB;
@@ -287,5 +287,22 @@ div.employees div div {
         -ms-transform: rotate(360deg);  /* IE 9 */
         transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
     }
+}
+
+.new-vac-btn {
+    background-color: rgba(0,0,0,0.3);
+    position: fixed;
+    width: auto;
+    font-size: 13pt;
+    text-align: center;
+    padding: 5px;
+    z-index: 999;
+    left: 1%;
+    top: 150px;
+    height: 40px;
+}
+
+.new-vac-btn a{
+    color: #fff;
 }
 

@@ -7,7 +7,9 @@
     </tr>
     <tr ng-repeat="vac in userHistory">
         <td>
-            {{defineRangeFromData(vac.days, vac.month, vac.year)}}
+            {{::prettyDate(vac.days[0][0], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}
+            -
+            {{::prettyDate(vac.days[0][vac.days[0].length-1], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}
         </td>
         <td>
             {{showState(vac.acceptionState)}}

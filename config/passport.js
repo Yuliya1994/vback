@@ -5,14 +5,17 @@
 * */
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+var VKontakteStrategy = require('passport-vkontakte').Strategy;
+
 var GitHubStrategy = require('passport-github').Strategy;
 var User = require("../models/user");
 
 var GITHUB_CLIENT_ID = "9fed19d59ffcfce73c1b";
 var GITHUB_CLIENT_SECRET = "78b9a3e98886090d2f8b1397f285767a4569dd3d";
 
-var GOOGLE_CLIENT_ID = "734848012369-smap58ll438ssshkjq74325bo3m82r2s.apps.googleusercontent.com";
-var GOOGLE_CLIENT_SECRET = 'iPrF9hHLWzKV60vG5W5hlpei';
+var VKONTAKTE_APP_ID = "4875977";
+var VKONTAKTE_APP_SECRET = "FG5gyYmwD2NHyY5k9UX0";
 
 module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
@@ -89,42 +92,48 @@ module.exports = function(passport) {
 
         }));
 
-    passport.use(new GoogleStrategy({
-        clientID: GOOGLE_CLIENT_ID,
-        clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://127.0.0.1:3000/auth/google/callback"
-    }, function(accessToken, refreshToken, profile, done){
-        console.log(profile);
-
-        User.findOne({'google.id': profile.id}, function(err, user){
-            if(err) {
-                console.log(err);
-                return done(err);
-            }
-
-            if(!user) {
-                var newUser = new User();
-                newUser.google.id = profile.id;
-                newUser.google.profile = profile;
-
-                var commonProfile = {
-                    username: profile.name,
-                    email: profile.emails[0].value,
-                    photo: null
-                };
-
-                newUser.addCommonData(profile.id, commonProfile);
-
-                newUser.save(function(err) {
-                    if(err) {
-                        throw err;
+    passport.use(new VKontakteStrategy({
+            clientID:     VKONTAKTE_APP_ID, // VK.com docs call it 'API ID'
+            clientSecret: VKONTAKTE_APP_SECRET,
+            callbackURL:  "http://localhost:3000/auth/vkontakte/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+            process.nextTick(function () {
+                User.findOne({'vkontakte.id': profile.id}, function (err, user) {
+                    if (err) {
+                        return done(err);
                     }
-                });
-            }
 
-            return done(null, user||newUser);
-        })
-    }));
+                    if (!user) {
+                        var newUser = new User();
+                        newUser.vkontakte.id = profile._json.id;
+                        newUser.vkontakte.profile = profile;
+
+                        var commonProfile = {
+                            username: profile._json.first_name + ' ' + profile._json.last_name,
+                            email: '',
+                            photo: profile._json.photo
+                        };
+
+
+                        newUser.addCommonData(profile._json.id, commonProfile);
+
+                        console.log(newUser);
+
+                        newUser.save(function (err) {
+                            if (err) {
+                                throw err;
+                            }
+                        });
+                    }
+
+                    console.log(profile);
+
+                    return done(null, user || newUser);
+                });
+            });
+        }
+    ));
 
     passport.use(new GitHubStrategy({
             clientID: GITHUB_CLIENT_ID,

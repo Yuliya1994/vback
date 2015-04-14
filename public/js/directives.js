@@ -115,14 +115,6 @@ app.directive('rangeLine', function() {
             var left = (atrs.startPos*25)-25,
                 size  = atrs.size*25;
 
-            $($elm).mouseover(function() {
-                    $elm.text('идрёнбатон');
-            });
-
-            $($elm).mouseout(function() {
-                    $elm.text('');
-            });
-
             $($elm).css({
                 'left': left+'px',
                 'min-width': size+'px'

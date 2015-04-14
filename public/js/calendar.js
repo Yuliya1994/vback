@@ -91,12 +91,19 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
                     .success(function(data) {
                         $scope.vac = data[0];
 
+                        UserService.getUser(data[0].user_id)
+                            .success(function(data) {
+                                $scope.vac.user = data.common.profile.username || data.common.profile.email;
 
-                        ngDialog.open({
-                            template: '../templates/'+_template+'.html',
-                            className: 'ngdialog-theme-default',
-                            scope: $scope
-                        });
+                                ngDialog.open({
+                                    template: '../templates/'+_template+'.html',
+                                    className: 'ngdialog-theme-default',
+                                    scope: $scope
+                                });
+                            })
+                            .error(function(err) {
+                                throw err;
+                            });
                     })
                     .error(function(err) {
                         throw err;
@@ -178,7 +185,9 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         return states[num];
     };
 
-
-
+    $scope.prettyDate = function(day, year, month) {
+        console.log(day, year, month);
+        return CalendarService.getPrettyDate(day, year, month-1);
+    };
 
 }]);

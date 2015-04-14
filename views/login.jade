@@ -1,6 +1,5 @@
 extends layout
 
-
 block content
     link(rel='stylesheet', href='../css/login-form.css')
 
@@ -18,13 +17,11 @@ block content
                     a(href='/auth/signup') Регистрация
                 | Авторизоваться через социальные сети
                 .social-links
-                    i.fa.fa-vk(title='vk')
+                    a(href='/auth/vkontakte')
+                        i.fa.fa-vk(title='vk')
 
-                    i.fa.fa-google-plus(title='Google+')
-
-                    i.fa.fa-facebook-official(title='Facebook')
-
-                    i.fa.fa-github(title='GitHub')
+                    a(href='/auth/github')
+                        i.fa.fa-github(title='GitHub')
 
                 button.btn.btn-lg(type='submit')
                     i.fa.fa-sign-in Войти

@@ -14,16 +14,28 @@
                 <th>Email</th>
                 <th>Имя</th>
                 <th style="text-align: center;"><i class="fa fa-check-square"></i></th>
+                <th>А</th>
+                <th>П</th>
+                <th>М</th>
                 <th><i class="fa fa-times"></i></th>
             </tr>
             <tr ng-repeat="mail in mailList|orderBy: mail.name">
                 <td ng-class="{disable_tr: !mail.state}">{{mail.subscriberEmail}}</td>
                 <td ng-class="{disable_tr: !mail.state}">{{mail.subscriberName}}</td>
                 <td ng-class="{disable_tr: !mail.state}" style="width: 15px;"><input ng-model="mail.state" ng-click="changeState(mail._id)" style="margin-left: 7px;" type="checkbox"/></td>
+
+                <td ng-class="{disable_tr: !mail.state}" style="width: 15px;"><input ng-model="mail.actions.admin" ng-click="changeAction(mail._id, 'admin')" style="margin-left: 7px;" type="checkbox"/></td>
+                <td ng-class="{disable_tr: !mail.state}" style="width: 15px;"><input ng-model="mail.actions.user" ng-click="changeAction(mail._id, 'user')" style="margin-left: 7px;" type="checkbox"/></td>
+                <td ng-class="{disable_tr: !mail.state}" style="width: 15px;"><input ng-model="mail.actions.manager" ng-click="changeAction(mail._id, 'manager')" style="margin-left: 7px;" type="checkbox"/></td>
+
                 <td ng-class="{disable_tr: !mail.state}" style="width: 15px;"><span ng-click="deleteMail(mail._id)"><i class="fa fa-times"></i></span></td>
             </tr>
         </table>
-        <small>* Чекбокс определяет необходимость учёта адреса при рассылке</small>
+        <p><small>* Чекбокс определяет необходимость учёта адреса при рассылке</small></p>
+        <p><small> <strong>А</strong> - оповещение о действиях администратора</small></p>
+        <p><small> <strong>П</strong> - оповещение о действиях пользователя</small></p>
+        <p><small> <strong>М</strong> - оповещение о действиях менеджера</small></p>
+
     </div>
 
 </div>

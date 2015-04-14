@@ -19,6 +19,11 @@ var userSchema = mongoose.Schema({
         profile: Object
     },
 
+    vkontakte: {
+        id: String,
+        profile: Object
+    },
+
     github: {
         id: String,
         profile: Object

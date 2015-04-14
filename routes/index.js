@@ -68,5 +68,12 @@ module.exports = function(app, passport) {
 
     app.get('/auth/github/callback',
         passport.authenticate('github', { successRedirect: '/',
-            failureRedirect: '/auth//login' }));
+            failureRedirect: '/auth/login' }));
+
+    app.get('/auth/vkontakte',
+        passport.authenticate('vkontakte'));
+
+    app.get('/auth/vkontakte/callback',
+        passport.authenticate('vkontakte', { successRedirect: '/',
+        failureRedirect: '/auth/login' }));
 };
