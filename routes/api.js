@@ -8,6 +8,8 @@ var Vacation = require('../models/vacation');
 var User = require('../models/user');
 var Mail = require('../models/mail');
 
+var mailer = require('../config/mailer');
+
 //router.use(access.apiAccess);
 
 router.route('/vacation')
@@ -39,6 +41,41 @@ router.route('/vacation')
             if(err){
                 throw err;
             }
+
+            Mail.find({state: true, 'actions.user': true, 'actions.manager': true}, function(err, mails) {
+                if(err) {
+                    throw err;
+                }
+
+                var receivers = '';
+                var startDate = new Date(newVacation.year, newVacation.month[0], newVacation.days[0][0]);
+                var endDate = null;
+
+                if(newVacation.month[1] === null) {
+                    endDate = new Date(newVacation.year, newVacation.month[0], newVacation.days[0][newVacation.days[0].length - 1]);
+                } else {
+                    endDate = new Date(newVacation.year, newVacation.month[1], newVacation.days[1][newVacation.days[1].length - 1]);
+                }
+
+                startDate = ('0' + (startDate.getDate())).slice(-2)+'.'+ ('0' + (startDate.getMonth())).slice(-2) +'.'+startDate.getFullYear();
+                endDate = ('0' + (endDate.getDate())).slice(-2)+'.'+ ('0' + (endDate.getMonth())).slice(-2) +'.'+endDate.getFullYear();
+
+
+
+                mails.forEach(function(receiver) {
+                    receivers += receiver.subscriberEmail + ', ';
+                });
+
+                console.log(newVacation);
+                console.log(startDate + ' - ' + endDate);
+
+                var username = currentUser.profile.username || currentUser.profile.email;
+                var subject = 'Пользователь '+ username +' оставил заявку на отпуск.';
+                var _text = ''+ username +' желает пойти в отпуск c ' + startDate + ' по ' + endDate + '!';
+                var _html = '<p><strong>'+ username +'</strong> желает пойти в отпуск c ' + startDate + ' по ' + endDate + '!</p>';;
+
+                mailer(receivers, subject, _text, _html);
+            });
 
             res.status(200).send('Заявка отправлена \n' + data);
         });

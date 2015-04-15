@@ -17,8 +17,6 @@ app.factory("CalendarService", function() {
 
             if(!days) {
                 days = this.days();
-            } else {
-                days = days;
             }
 
             for (var i = 1, a = days; i <= a; i++) result.push(i);

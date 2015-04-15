@@ -82,10 +82,6 @@ app.use(function(err, req, res, next) {
         error: err
     });
 });
-setInterval(function() {
-    console.log(process.memoryUsage());
-} ,1000);
-
 
 
 module.exports = app;
