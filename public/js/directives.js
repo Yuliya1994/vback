@@ -80,7 +80,6 @@ app.directive('startPosition', function() {
 
 
                     for(var i = 0; i < (atrs['startPosition'] - 1); i++) {
-                        console.log(i);
                         shift += target[i].clientWidth;
                         if(i > 3) shift+=20;
                     }

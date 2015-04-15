@@ -11,6 +11,9 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.userHistory = null;
     $scope.vac = null;
 
+    $scope.usersList = {};
+    $scope.userIds = [];
+
     $scope.comment = false;
     $scope.commented = false;
 
@@ -23,7 +26,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     //Fill vacations-array with data from db
     var run = function() {
         VacationService.getVacations()
-            .success(function (data, status) {
+            .success(function (data) {
                 $scope.vacations = data;
 
                 angular.forEach($scope.vacations, function (el) {
@@ -32,6 +35,9 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
                             el.user = user.common.profile.username || user.common.profile.email; // if name isn't defined - set email as user
                             // set email as username
                             el.rank = rank_list[user.common.rank] || 'Сотрудник';
+
+                            $scope.usersList[el.user_id] = angular.fromJson(user);
+
                         })
                         .error(function (err, status) {
                             throw new Error(err)
@@ -42,8 +48,8 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
 
                 $scope.loaded = true;
             })
-            .error(function (err, status) {
-                throw new Error(err)
+            .error(function (err) {
+                throw new err;
             });
     };
 
@@ -61,6 +67,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         });
 
         for(var user in $scope.vacationsByUser) {
+            $scope.userIds.push(user);
             for(var i = 1; i <= 12; i++) {
                 $scope.vacationsByUser[user][i] = [];
 
@@ -74,7 +81,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
             }
         }
 
-        console.log($scope.vacationsByUser);
+
     }
 
     $scope.openVacationParameters = function(vac) {
@@ -186,7 +193,6 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     };
 
     $scope.prettyDate = function(day, year, month) {
-        console.log(day, year, month);
         return CalendarService.getPrettyDate(day, year, month-1);
     };
 
