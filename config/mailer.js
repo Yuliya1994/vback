@@ -8,15 +8,6 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-//var mailOptions = {
-//    from: 'Fred Foo ✔ <ops@katushka.net>', // sender address
-//    to: 'ops@katushka.net', // list of receivers
-//    subject: 'Hello ✔', // Subject line
-//    text: 'Hello world ✔', // plaintext body
-//    html: '<b>Hello world ✔</b>' // html body
-//};
-
-
 module.exports = function(receivers, subject, text, html) {
     var mailOptions = {
         from: 'Отпуск <ops@katushka.net>', // sender address
@@ -36,8 +27,3 @@ module.exports = function(receivers, subject, text, html) {
         }
     });
 };
-
-//Типы писем:
-//    - Пользователь/Менеджер оставил заявку
-//    - Менеджер одобрил/отклонил заявку
-//    - Администратор подтвердил/отменил заявку
