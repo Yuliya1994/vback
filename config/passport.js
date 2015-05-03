@@ -95,7 +95,7 @@ module.exports = function(passport) {
     passport.use(new VKontakteStrategy({
             clientID:     VKONTAKTE_APP_ID, // VK.com docs call it 'API ID'
             clientSecret: VKONTAKTE_APP_SECRET,
-            callbackURL:  "http://localhost:3000/auth/vkontakte/callback"
+            callbackURL:  "http://light-it-02.tk/auth/vkontakte/callback"
         },
         function(accessToken, refreshToken, profile, done) {
             process.nextTick(function () {
@@ -138,7 +138,7 @@ module.exports = function(passport) {
     passport.use(new GitHubStrategy({
             clientID: GITHUB_CLIENT_ID,
             clientSecret: GITHUB_CLIENT_SECRET,
-            callbackURL: "http://localhost:3000/auth/github/callback"
+            callbackURL: "http://light-it-02.tk/auth/github/callback"
         },
         function(accessToken, refreshToken, profile, done) {
             process.nextTick(function () {

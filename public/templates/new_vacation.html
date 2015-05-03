@@ -1,4 +1,4 @@
-<div class="container-vac" ng-controller="NewVacationController" style="background-color: #fff; border: 4px solid #B2DFDB;">
+<div class="container-vac" ng-controller="NewVacationController" style="background-color: #fff; border: 4px solid #B2DFDB; padding: 10px;">
     <form name="vacationForm" ng-submit="showResult()">
     <div class="text-center">
         <h4>Новая заявка</h4>
@@ -11,8 +11,6 @@
     <div class="new-vacation-div">
         <input class="datepicker-input form-control endInput"  placeholder = "Конец" type="text" date-time ng-model="range.end" required="true" min-view="date"  view="date">
     </div>
-
-    {{range.start}} && {{range.end}}
 
     <div class="new-vacation-div">
         <textarea placeholder="Комментарий" class="form-control datepicker-input" ng-model="vacation.comment"></textarea>

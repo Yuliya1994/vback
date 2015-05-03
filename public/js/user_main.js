@@ -9,8 +9,12 @@ app.config(function($routeProvider, $locationProvider){
             templateUrl: "../templates/edit_profile.html",
             animation: 'first'
         })
-        .otherwise({
+        .when('/history', {
             templateUrl: "../templates/history.html",
+            animation: 'first'
+        })
+        .otherwise({
+            templateUrl: "../templates/welcome.html",
             animation: 'first'
         });
 
@@ -20,7 +24,7 @@ app.config(function($routeProvider, $locationProvider){
     });
 });
 
-app.controller('UserMainController', ['$scope', '$rootScope', 'ngDialog', 'UserService', function($scope, $rootScope, ngDialog, UserService) {
+app.controller('UserMainController', ['$scope', '$rootScope', 'ngDialog', 'UserService', 'CalendarService', function($scope, $rootScope, ngDialog, UserService, CalendarService) {
     $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
         $rootScope.animation = currRoute.animation;
     });
@@ -46,9 +50,16 @@ app.controller('UserMainController', ['$scope', '$rootScope', 'ngDialog', 'UserS
         updateData();
     });
 
+    $scope.$on('getHistory', function(event, data) {
+        updateData();
+    });
+
     $scope.redirect = function(path) {
         document.location.href = '/'+path;
     };
 
+    $scope.prettyDate = function(day, year, month) {
+        return CalendarService.getPrettyDate(day, year, month-1);
+    };
 
 }]);

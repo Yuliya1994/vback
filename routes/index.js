@@ -28,6 +28,12 @@ module.exports = function(app, passport) {
         res.render(mainTemplate, {template: mainTemplate});
     });
 
+    app.get('/history', access.isAuth, function(req, res) {
+        var mainTemplate = templates[user.getAccessLevel(req, res)];
+
+        res.render(mainTemplate, {template: mainTemplate});
+    });
+
     app.get('/settings', access.isAuth, function(req, res) {
         var mainTemplate = templates[user.getAccessLevel(req, res)];
 
