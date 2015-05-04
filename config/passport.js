@@ -11,8 +11,8 @@ var VKontakteStrategy = require('passport-vkontakte').Strategy;
 var GitHubStrategy = require('passport-github').Strategy;
 var User = require("../models/user");
 
-var GITHUB_CLIENT_ID = "9fed19d59ffcfce73c1b";
-var GITHUB_CLIENT_SECRET = "78b9a3e98886090d2f8b1397f285767a4569dd3d";
+var GITHUB_CLIENT_ID = "95e264a9b9fbc7f0101d";
+var GITHUB_CLIENT_SECRET = "8ecb3e3a382f0d911a9fd624e5f5f2436b922ffd";
 
 var VKONTAKTE_APP_ID = "4875977";
 var VKONTAKTE_APP_SECRET = "FG5gyYmwD2NHyY5k9UX0";
