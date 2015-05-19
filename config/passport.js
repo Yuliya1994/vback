@@ -42,10 +42,14 @@ module.exports = function(passport) {
                     return done(null, false, {message: 'email is taken'})
                 } else {
                     var newUser = new User();
+                    newUser.local.surname = surname;
+                    newUser.local.name = name;
                     newUser.local.email = email;
                     newUser.local.password = password;
 
                     var commonProfile = {
+                        surname:null,
+                        name:null,
                         username: null,
                         email: email,
                         photo: null

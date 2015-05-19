@@ -9,9 +9,9 @@ block content
         | Регистрация
         form(method='post', action='/auth/signup')
             div.error.text-warning= message
-
-            input#username(type='text', placeholder='Email...', name='email')
-
+            input#surname(type='text', placeholder='Surname...', name='surname')
+            input#name(type='text', placeholder='Name...', name='name')
+            input#username(type='email', placeholder='Email...', name='email')
             input#password(type='password', placeholder='******', name='password')
 
             button.btn.btn-lg(type='submit')
