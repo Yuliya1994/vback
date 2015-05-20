@@ -2,29 +2,21 @@
     <h4>Ваши данные:</h4>
     <form name="myForm" ng-submit="updateUser()">
         <div class="form-group">
-            <label for="foto">Foto</label>
-            <input ng-model="newUserFoto" placeholder="Фамилия..." type="file" class="datepicker-input form-control" id="foto">
-        </div>
-        <div class="form-group">
             <label for="surname">Фамилия</label>
-            <input ng-model="newUsername" placeholder="Фамилия..." type="text" class="datepicker-input form-control" id="surname" required>
+            <input ng-model="newsurname" placeholder="Фамилия..." type="text" class="datepicker-input form-control" id="surname" required>
         </div>
         <div class="form-group">
             <label for="name">Имя</label>
-            <input ng-model="newUsername" placeholder="Имя..." type="text" class="datepicker-input form-control" id="name" required>
-        </div>
-        <div class="form-group">
-            <label for="appointment">Должность</label>
-            <input ng-model="newUserAppointment" placeholder="Должность..." type="text" class="datepicker-input form-control" id="appointment" required>
+            <input ng-model="newname" placeholder="Имя..." type="text" class="datepicker-input form-control" id="name" required>
         </div>
         <div class="form-group">
             <label>Email</label>
             <input type="email" name="input" ng-model="newEmail" class="datepicker-input form-control" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required>
         </div>
-        <div class="form-group">
-            <label>Пароль</label>
-            <input type="password" name="input" ng-model="newPassword" class="datepicker-input form-control"  required>
-        </div>
+        <!--<div class="form-group">-->
+            <!--<label>Пароль</label>-->
+            <!--<input type="password" name="input" ng-model="newPassword" class="datepicker-input form-control" >-->
+        <!--</div>-->
         <div class="text-center">
             <button type="submit" class="btn btn-success btn-lg">Отправить</button>
         </div>
