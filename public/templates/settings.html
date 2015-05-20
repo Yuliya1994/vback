@@ -1,5 +1,5 @@
-<div class="container settings" ng-controller="MailController">
-    <div class="new-mail">
+<div class="container settings">
+    <div class="new-mail" ng-controller="MailController">
         <h5>Оповещения:</h5>
         <hr/>
         <strong>Новый адрес: </strong>
@@ -38,4 +38,25 @@
 
     </div>
 
+    <hr/>
+
+    <div class="new-mail" ng-controller="AdminPanelController">
+        <h5>Пользователи</h5>
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Имя</th>
+                <th>Email</th>
+                <th><i class="fa fa-times"></i></th>
+            </tr>
+
+            <tr ng-repeat="user in userList">
+                <td>{{user.common.profile.username || 'Имя не указано'}}</td>
+                <td>{{user.common.profile.email}}</td>
+                <td><span ng-click="deleteUser(user._id)"><i class="fa fa-times"></i></span></td>
+            </tr>
+        </table>
+    </div>
+
 </div>
+

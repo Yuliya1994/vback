@@ -8,6 +8,8 @@ app.controller('EditProfileController', ['$scope', '$rootScope', 'UserService', 
             .success(function(data, status) {
                 $scope.$emit('updateUser');
 
+                console.log();
+
                 ngDialog.open({
                     template: '<p>Данные успешно обновлены</p> ',
                     plain: true

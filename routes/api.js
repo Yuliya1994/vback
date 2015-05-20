@@ -214,6 +214,18 @@ router.route('/vacation/id/:id')
         });
     });
 
+router.get('/user', function(req, res) {
+    User.find({}, function(err, data) {
+        if(err) {
+            throw err;
+        }
+        if(data !== null) {
+            res.status(200).end(JSON.stringify(data));
+        }
+
+        res.status(404).end('No users exist');
+    });
+});
 
 router.get('/user/current', function(req, res) {
         var currentUser = currentUserCtrl.getUserInfo(req, res); // common info
@@ -256,6 +268,16 @@ router.route('/user/:id')
             }
 
             res.status(200).end('ok');
+        });
+    })
+    .delete(function(req, res) {
+        console.log('try to remove');
+        User.remove({_id: req.params.id}, function(err) {
+            if(err) {
+                throw err;
+            }
+
+            res.status(200).end('Удален');
         });
     });
 

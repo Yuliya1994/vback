@@ -49,7 +49,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
                 $scope.loaded = true;
             })
             .error(function (err) {
-                throw new err;
+                throw new Error(err);
             });
     };
 

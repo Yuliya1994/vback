@@ -42,7 +42,7 @@
     position: relative;
     z-index: 1;
     overflow-x: scroll;
-    overflow-y: auto;
+    overflow-y: hidden;
     min-height: 600px;
     white-space: nowrap;
     background-color: #fff;
