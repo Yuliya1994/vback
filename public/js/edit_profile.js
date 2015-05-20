@@ -9,6 +9,12 @@ app.controller('EditProfileController', ['$scope', '$rootScope', 'UserService', 
         UserService.updateUser($scope.user.common.id, {username: $scope.newUsername, email: $scope.newEmail})
             .success(function(data, status) {
                 $scope.$emit('updateUser');
+<<<<<<< HEAD
+=======
+
+                console.log();
+
+>>>>>>> 2e3863513981354ac72446d7b07a0ef9187e865f
                 ngDialog.open({
                     template: '<p>Данные успешно обновлены</p> ',
                     plain: true

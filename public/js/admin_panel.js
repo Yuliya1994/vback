@@ -8,6 +8,7 @@ app.controller('AdminPanelController', ['$scope', '$rootScope', 'UserService', f
                 for(var i = 0; i<=$scope.userList.length;i++){
                     $scope.userList[i].common.profile.username = $scope.userList[i].common.profile.username.split(' ')[1] + ' ' +$scope.userList[i].common.profile.username.split(' ')[0];
                 }
+                console.log($scope.userList);
             })
             .error(function(err) {
                 throw new Error(err);
