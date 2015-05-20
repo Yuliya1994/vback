@@ -17,6 +17,8 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.comment = false;
     $scope.commented = false;
 
+    $scope.showMonth = [1,2,3,4,5,6,7,8,9,10,11,12];
+
     var rank_list = [
         'Разработчик',
         'Менеджер',
@@ -195,5 +197,19 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.prettyDate = function(day, year, month) {
         return CalendarService.getPrettyDate(day, year, month-1);
     };
+
+    $scope.$on('deleteUser', function (event, data) {
+        console.log('removed user');
+
+        $scope.vacations = null;
+        $scope.vacationsByUser = null;
+        $scope.userHistory = null;
+        $scope.vac = null;
+
+        $scope.usersList = {};
+        $scope.userIds = [];
+
+        run();
+    });
 
 }]);

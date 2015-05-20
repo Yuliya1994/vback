@@ -16,6 +16,8 @@ app.controller('AdminPanelController', ['$scope', '$rootScope', 'UserService', f
     getUserList();
 
     $scope.deleteUser = function(id) {
+        $scope.$emit('deleteUser');
+
         UserService.deleteUser(id)
             .success(function(data) {
                 getUserList();
