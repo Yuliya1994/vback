@@ -166,8 +166,8 @@ app.directive('scrollMouth', function() {
                 var sticky = $('.days-wrapper'),
                     scroll = $(window).scrollTop();
 
-                if (scroll >= 120) sticky.addClass('fixed').css({
-                    top:scroll-120
+                if (scroll >= 110) sticky.addClass('fixed').css({
+                    top:scroll-110
                 });
                 else sticky.removeClass('fixed');
             });
