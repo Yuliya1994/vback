@@ -161,7 +161,6 @@ app.directive('scrollMouth', function() {
     return {
         restrict: 'A',
         link: function(scope, $elm, atrs) {
-            // $elm.bind('scroll', function() {
             $($elm).scroll(function(){
                 var sticky = $('.days-wrapper'),
                     scroll = $($elm).scrollTop();
@@ -171,8 +170,6 @@ app.directive('scrollMouth', function() {
                 });
                 else sticky.removeClass('fixed');
             });
-
-            //   });
 
             console.log($elm);
         }
