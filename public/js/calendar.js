@@ -17,7 +17,42 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.comment = false;
     $scope.commented = false;
 
-    $scope.showMonth = [1,2,3,4,5,6,7,8,9,10,11,12];
+    $scope.monthHider = {
+        startMonth: '1',
+        endMonth: '12'
+    };
+
+    function hideMonth() {
+        $scope.showMonth = [];
+
+        if(+$scope.monthHider.startMonth < +$scope.monthHider.endMonth){
+            for(var i = +$scope.monthHider.startMonth; i <= +$scope.monthHider.endMonth; i++) {
+                console.log(i);
+                $scope.showMonth.push('' + i);
+            }
+        } else {
+            $scope.monthHider.startMonth = '1';
+            $scope.monthHider.endMonth = '12';
+        }
+
+    }
+
+    $scope.getMonthPosition = function(month) {
+        if(~($scope.showMonth.indexOf(month))) {
+            return ($scope.showMonth.indexOf(month) + 1);
+        } else {
+            console.log('no month');
+            return ;
+        }
+    }
+
+    $scope.$watch('monthHider', function() {
+        hideMonth();
+        console.log($scope.monthHider, $scope.showMonth);
+    }, true);
+
+
+    //$scope.showMonth = [1,2,3,4,5,6,7,8,9,10,11,12];
 
     var rank_list = [
         'Разработчик',

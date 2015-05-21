@@ -5,6 +5,13 @@
     position: relative;
 }
 
+.month-hider {
+    background-color: #fff;
+    border: 2px solid #B2DFDB;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
 .month {
     background-color: #eee;
     margin-left: 14px;
