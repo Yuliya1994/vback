@@ -30,7 +30,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         VacationService.getVacations()
             .success(function (data) {
                 $scope.vacations = data;
-
+console.log(data);
                 angular.forEach($scope.vacations, function (el) {
                     UserService.getUser(el.user_id)
                         .success(function (user, status) {

@@ -1,4 +1,7 @@
 <div class="container-vac" ng-controller="NewVacationController" style="background-color: #fff; border: 4px solid #B2DFDB; padding: 10px;">
+    <div ng-show="errors.length > 0" class="error_messages text-center">
+        <h5 style="color: tomato;" ng-repeat="error in errors">{{error}}</h5>
+    </div>
     <form name="vacationForm" ng-submit="showResult()">
     <div class="text-center">
         <h4>Новая заявка</h4>
@@ -15,11 +18,6 @@
     <div class="new-vacation-div">
         <textarea placeholder="Комментарий" class="form-control datepicker-input" ng-model="vacation.comment"></textarea>
     </div>
-
-        <div ng-show="errors.length > 0" class="error_messages">
-            <small style="color: tomato;" ng-repeat="error in errors">{{error}}</small>
-        </div>
-
     <div class="text-center">
      <button ng-disabled="submitBtn" id="addVac" type="submit" class="btn btn-success btn-lg">Отправить</button>
     </div>

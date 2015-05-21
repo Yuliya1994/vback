@@ -56,7 +56,7 @@
 </div>
 
 <p class="text-center">
-    <button confirm="{{vac._id}}" ng-click="changeState(vac._id, 1, closeThisDialog());" type="button" class="btn btn-success btn-lg active"><i class="fa fa-ship"></i> Принять</button>
-    <button refuse="{{vac._id}}" ng-click="changeState(vac._id, 2, closeThisDialog());" type="button" class="btn btn-danger btn-lg active"><i class="fa fa-frown-o"></i> Отказать</button>
-    <button ng-click="closeThisDialog()" type="button" class="btn btn-default btn-lg active"><i class="fa fa-home"></i> Назад</button>
+    <button ng-if="vac.acceptionState != 1 && vac.acceptionState != 2" confirm="{{vac._id}}" ng-click="changeState(vac._id, 1, closeThisDialog());" type="button" class="btn btn-success btn-lg active"><i class="fa fa-ship"></i> Принять</button>
+    <button ng-if="vac.acceptionState != 1 && vac.acceptionState != 2" refuse="{{vac._id}}" ng-click="changeState(vac._id, 2, closeThisDialog());" type="button" class="btn btn-danger btn-lg active"><i class="fa fa-frown-o"></i> Отказать</button>
+    <button  ng-click="closeThisDialog()" type="button" class="btn btn-default btn-lg active"><i class="fa fa-home"></i> Назад</button>
 </p>

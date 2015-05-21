@@ -3,10 +3,11 @@
         <h5>Оповещения:</h5>
         <hr/>
         <strong>Новый адрес: </strong>
-        <input ng-model="subscriber.email" class="form-control settings-input" type="email" placeholder="Email..."/>
-        <input ng-model="subscriber.name" class="form-control settings-input" type="text" placeholder="Имя..."/>
-        <button ng-click="addNewMail()" class="btn btn-lg btn-success">Добавить</button>
-
+        <form name="myForm" ng-submit="addNewMail()">
+            <input ng-model="subscriber.email" class="form-control settings-input" type="email" placeholder="Email..." required/>
+            <input ng-model="subscriber.name" class="form-control settings-input" type="text" placeholder="Имя..." required/>
+            <button type="submit" class="btn btn-lg btn-success">Добавить</button>
+        </form>
         <hr>
         <strong>Текущий список: </strong>
         <table class="table table-bordered table-striped">
@@ -45,13 +46,13 @@
         <p><small>Удаление пользователя предусматривает удаление всех его заявок. Будьте осторожны.</small></p>
         <table class="table table-bordered table-striped">
             <tr>
-                <th>Имя</th>
+                <th><a href="" ng-click="predicate = 'common.profile.username'; reverse=false">Фамилия</a>(<a href="" ng-click="predicate = '-common.profile.username'; reverse=false">^</a>)</th>
                 <th>Email</th>
                 <th><i class="fa fa-times"></i></th>
             </tr>
 
-            <tr ng-repeat="user in userList">
-                <td>{{user.common.profile.username || 'Имя не указано'}}</td>
+            <tr ng-repeat="user in userList | orderBy:predicate:reverse">
+                <td>{{user.common.profile.username.split(' ')[1] +' '+ user.common.profile.username.split(' ')[0] || 'Имя не указано'}}</td>
                 <td>{{user.common.profile.email}}</td>
                 <td><span ng-click="deleteUser(user._id)"><i class="fa fa-times"></i></span></td>
             </tr>
