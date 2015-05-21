@@ -111,8 +111,8 @@ app.directive('rangeLine', function() {
     return {
         restrict: 'C',
         link: function(scope, $elm, atrs) {
-            var left = (atrs.startPos*25)-25,
-                size  = atrs.size*25;
+            var left = (atrs.startPos*18)-18,
+                size  = atrs.size*18;
 
             $($elm).css({
                 'left': left+'px',

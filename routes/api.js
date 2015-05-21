@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var async = require('async');
+
 var access = require('../middlewares');
 var currentUserCtrl = require('../controllers/user');
 
@@ -11,7 +13,7 @@ var Mail = require('../models/mail');
 var mailer = require('../config/mailer');
 var Letter = require('../config/letter');
 
-router.use(access.apiAccess);
+//router.use(access.apiAccess);
 
 router.route('/vacation')
     .get(function(req, res) {
@@ -196,24 +198,22 @@ router.route('/vacation/id/:id')
 
             });
 
-
-            //     var receivers = '';
-
-            //     mails.forEach(function(receiver) {
-            //         receivers += receiver.subscriberEmail + ', ';
-            //     });
-
-            //     var subject = 'Пользователь '+ username +' оставил заявку на отпуск.';
-            //     var _text = ''+ username +' желает пойти в отпуск c ' + startDate + ' по ' + endDate + '!';
-            //     var _html = '<p><strong>'+ username +'</strong> желает пойти в отпуск c ' + startDate + ' по ' + endDate + '!</p>';
-
-            //
-
-
             res.status(200).end('ok');
         });
     });
 
+router.get('/user', function(req, res) {
+    User.find({}, function(err, data) {
+        if(err) {
+            throw err;
+        }
+        if(data !== null) {
+            res.status(200).end(JSON.stringify(data));
+        }
+
+        res.status(404).end('No users exist');
+    });
+});
 
 router.get('/user/current', function(req, res) {
         var currentUser = currentUserCtrl.getUserInfo(req, res); // common info
@@ -257,6 +257,47 @@ router.route('/user/:id')
 
             res.status(200).end('ok');
         });
+    })
+    .delete(function(req, res) {
+        var id = req.params.id;
+        var errors = 0;
+
+        console.log('try to remove');
+
+        async.series([
+            function(callback){
+                User.remove({_id: id}, function(err) {
+                    if(err) {
+                        errors++;
+                        throw err;
+                    }
+
+                    callback(null, 'user removed');
+                });
+            },
+            function(callback){
+                Vacation.remove({'user_id': id}, function(err) {
+                    if(err) {
+                        console.log('error');
+                        throw err;
+                    }
+
+                    callback(null, 'vacations removed');
+
+
+                });
+            }
+        ], function(err, results){
+                console.log(results);
+        });
+
+        if(errors === 0) {
+            res.status(200).end('ok');
+        } else {
+            res.status(404).end('something wrong');
+        }
+
+
     });
 
 router.route('/mail')

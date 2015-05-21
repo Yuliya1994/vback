@@ -26,9 +26,8 @@
 </table>
 
 
-
 <p class="text-center">
-    <button confirm="{{vac._id}}" manager="1" ng-click="changeState(vac._id, 10, closeThisDialog());" type="button" class="btn btn-success btn-lg active"> Одобрить</button>
-    <button refuse="{{vac._id}}" manager="1" ng-click="changeState(vac._id, 11, closeThisDialog());" type="button" class="btn btn-danger btn-lg active"> Отклонить</button>
+    <button ng-if="vac.acceptionState != 10 && vac.acceptionState != 11 && vac.acceptionState != 1 && vac.acceptionState != 2" confirm="{{vac._id}}" manager="1" ng-click="changeState(vac._id, 10, closeThisDialog());" type="button" class="btn btn-success btn-lg active"> Одобрить</button>
+    <button ng-if="vac.acceptionState != 10 && vac.acceptionState != 11 && vac.acceptionState != 1 && vac.acceptionState != 2" refuse="{{vac._id}}" manager="1" ng-click="changeState(vac._id, 11, closeThisDialog());" type="button" class="btn btn-danger btn-lg active"> Отклонить</button>
     <button ng-click="closeThisDialog()" type="button" class="btn btn-default btn-lg active"><i class="fa fa-home"></i> Назад</button>
 </p>

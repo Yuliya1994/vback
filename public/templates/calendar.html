@@ -1,5 +1,5 @@
 <div class="month-selector text-center">
-    <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]" scroll-on-click target="{{i}}" class="col-md-1 month">{{i|monthName}}</div>
+    <div ng-repeat="i in showMonth" scroll-on-click target="{{i}}" class="col-md-1 month">{{i|monthName}}</div>
 
 </div>
 
@@ -9,15 +9,15 @@
         <div class="col-md-12">
             <span class="swipe-calendar-header" style="margin-bottom: 3px;">Сотрудник</span>
 
-            <div ng-repeat="vac in usersList" style="margin-top: 2px; min-height: 35px; text-align: right;">
-                <a title="{{vac.common.profile}}" ng-click="showUserHistory(vac.common.id)" href="#">{{vac.common.profile.username || vac.common.profile.email}}</a>
+            <div ng-repeat="vac in userIds" style="margin-top: 3px; min-height: 22px; font-size:9px; text-align: right;">
+                <a title="{{usersList[vac].common.profile}}" ng-click="showUserHistory(usersList[vac].common.id)" href="#">{{usersList[vac].common.profile.username || usersList[vac].common.profile.email}}</a>
             </div>
         </div>
     </div>
 
 
     <div horizontal-scroll start-position="{{baseConfig.month}}" class="swipe-area">
-        <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]" class="month-wrapper">
+        <div ng-repeat="i in showMonth" class="month-wrapper">
             <strong>{{i|monthName}}</strong>
             <div class="days-wrapper">
                 <div class="day" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
