@@ -31,8 +31,10 @@ module.exports = function(passport) {
     passport.use('local-signup', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
+        nameuserField: 'nameuser',
+        surnameField: 'surname',
         passReqToCallback: true
-    }, function(req, email,  password, done){
+    }, function(req, email,  password, nameuser,  surname, done){
             User.findOne({'local.email': email}, function(err, user) {
                 if(err){
                     return done(err);
@@ -43,14 +45,16 @@ module.exports = function(passport) {
                 } else {
                     var newUser = new User();
                     newUser.local.email = email;
+                    newUser.local.username = nameuser +' '+surname;
+                    console.log(newUser.local.username);
                     newUser.local.password = password;
 
                     var commonProfile = {
-                        username: null,
+                        username: nameuser +' '+surname,
                         email: email,
                         photo: null
                     };
-
+                    console.log(commonProfile);
                     //duplicate object_id in common with local strategy
                     newUser.addCommonData(newUser._id,  commonProfile);
 
