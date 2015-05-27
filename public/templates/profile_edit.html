@@ -1,5 +1,5 @@
 <div class="container" ng-controller="EditProfileController">
-    <h4>Ваши данные:</h4>
+    <h4>Данные пользователя:</h4>
     <form name="myForm" ng-submit="updateUser()">
         <div class="form-group">
             <label for="surname">Фамилия</label>
@@ -13,12 +13,9 @@
             <label>Email</label>
             <input type="email" name="input" ng-model="newEmail" class="datepicker-input form-control" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required>
         </div>
-        <!--<div class="form-group">-->
-        <!--<label>Пароль</label>-->
-        <!--<input type="password" name="input" ng-model="newPassword" class="datepicker-input form-control" >-->
-        <!--</div>-->
+
         <div class="text-center">
-            <button type="submit" class="btn btn-success btn-lg">Отправить</button>
+            <button type="submit" class="btn btn-success btn-lg">Сохранить</button>
         </div>
     </form>
 </div>

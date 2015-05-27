@@ -3,6 +3,7 @@
     text-align: center;
     margin: 0 auto;
     position: relative;
+    margin-bottom: -5px;
 }
 
 .month {
@@ -314,4 +315,12 @@ div.employees div div {
 
 .new-vac-btn a{
     color: #fff;
+
+}
+.month-hider{
+    margin-bottom: 5px;
+}
+.see{
+    color:#fff;
+    font-size: 11pt;
 }
