@@ -50,16 +50,17 @@
 
     <div scroll-mouth horizontal-scroll start-position="{{baseConfig.month}}" class="swipe-area">
         <div  ng-repeat="i in showMonth" class="month-wrapper" >
-            <strong>{{i|monthName}}</strong>
-            <div class="days-wrapper">
-                <div class="day" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
+            <div class="scrolls">
+                <strong>{{i|monthName}}</strong>
+                <div class="days-wrapper">
+                    <div class="day" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
                      <span class="week-day">
                          {{baseConfig.getDay(day, '2015', i)|dayName}}
                      </span>
-                    {{::day}}
+                        {{::day}}
+                    </div>
                 </div>
             </div>
-
             <div class="ranges-wrapper">
                 <div class="range" ng-repeat="vac in vacationsByUser">
                     <section ng-repeat="curVac in vac[i]">

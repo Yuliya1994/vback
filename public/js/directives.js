@@ -163,11 +163,11 @@ app.directive('scrollMouth', function() {
         link: function(scope, $elm, atrs) {
             // $elm.bind('scroll', function() {
             $(window).scroll(function(){
-                var sticky = $('.days-wrapper'),
+                var sticky = $('.scrolls'),
                     scroll = $(window).scrollTop();
 
                 if (scroll >= 110) sticky.addClass('fixed').css({
-                    top:scroll-110
+                    top:scroll-141
                 });
                 else sticky.removeClass('fixed');
             });

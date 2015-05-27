@@ -29,12 +29,12 @@ module.exports = function(passport) {
     });
 
     passport.use('local-signup', new LocalStrategy({
-            //firstnameField: 'firstname',
-            //surnameField: 'surname',
+//            nameuserField: 'firstname',
+//            surnameField: 'surname',
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true
-        }, function(req ,email,  password, done){
+        }, function(req ,email,  password,done){
 //
             User.findOne({'local.email': email}, function(err, user) {
                 if(err){
@@ -49,13 +49,13 @@ module.exports = function(passport) {
                 } else {
                     var newUser = new User();
                     newUser.local.email = email;
-                    newUser.local.username = nameuser +' '+surname;
+//                    newUser.local.username = nameuser +' '+surname;
                     console.log(newUser.local.username);
                     newUser.local.password = password;
                     //newUser.local.firstname = firstname;
                     //newUser.local.surname = surname;
                     var commonProfile = {
-                        username: nameuser +' '+surname,
+//                        username: nameuser +' '+surname,
                         email: email,
                         photo: null
                     };

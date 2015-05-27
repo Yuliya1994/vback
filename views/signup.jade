@@ -9,9 +9,7 @@ block content
         | Регистрация
         form(method='post', action='/auth/signup')
             div.error.text-warning= message
-            input#nameuser(type='text', placeholder='Имя...', name='nameuser')
 
-            input#surname(type='text', placeholder='Фамилия...', name='surname')
 
             input#surname(type='text', placeholder='Name, Surname...', name='name_surname')
             div.alert.alert-success= 'Example: Анатолий Пихидчук'
