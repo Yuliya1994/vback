@@ -9,6 +9,8 @@ block content
         | Регистрация
         form(method='post', action='/auth/signup')
             div.error.text-warning= message
+             input#surname(type='text', placeholder='Name, Surname...', name='name_surname')
+             div.alert.alert-success= 'Example: Анатолий Пихидчук'
 
             input#username(type='text', placeholder='Email...', name='email')
 

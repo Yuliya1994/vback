@@ -157,4 +157,26 @@ app.directive('rangeLine', function() {
     };
 });
 
+app.directive('scrollMouth', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, $elm, atrs) {
+            // $elm.bind('scroll', function() {
+            $(window).scroll(function(){
 
+                                   var sticky = $('.scrolls'),
+                    scroll = $(window).scrollTop();
+
+                if (scroll >= 180) sticky.addClass('fixed').css({
+
+                                    top:scroll-161
+            });
+            else sticky.removeClass('fixed');
+        });
+
+    //   });
+
+    console.log($elm);
+}
+};
+});
