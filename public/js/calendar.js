@@ -44,7 +44,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
             console.log('no month');
             return ;
         }
-    }
+    };
 
     $scope.$watch('monthHider', function() {
         hideMonth();
@@ -65,7 +65,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         VacationService.getVacations()
             .success(function (data) {
                 $scope.vacations = data;
-console.log(data);
+        console.log(data);
                 angular.forEach($scope.vacations, function (el) {
                     UserService.getUser(el.user_id)
                         .success(function (user, status) {
@@ -117,8 +117,6 @@ console.log(data);
                 });
             }
         }
-
-
     }
 
     $scope.openVacationParameters = function(vac) {
