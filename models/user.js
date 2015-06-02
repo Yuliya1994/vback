@@ -5,7 +5,8 @@ var userSchema = mongoose.Schema({
         id: String,
         access: {type: Number, default: 1},
         rank: {type: Number, default: 0},
-        profile: Object
+        profile: Object,
+        vacDays: {type: Number, default: 14}
     },
 
     local: {

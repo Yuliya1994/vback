@@ -11,6 +11,7 @@ app.controller('NewVacationController', ['$scope', 'VacationService', 'ngDialog'
 
     //Datepicker validation
     $scope.$watchCollection('range', function() {
+        console.log($scope);
         $scope.submitBtn = $scope.range.end > $scope.range.start
             ? isRangeCorrect($scope.range.start, $scope.range.end)
                 ? false

@@ -106,6 +106,7 @@ router.route('/vacation/id/:id')
             }
 
             if(vacation !== null) {
+
                 res.status(200).end(JSON.stringify(vacation));
             }
 
@@ -122,7 +123,7 @@ router.route('/vacation/id/:id')
         var toSend = null;
 
         if(req.body.state !== null && req.body.state !== undefined) {
-            updateData.$set = { acceptionState: req.body.state};
+            updateData.$set = { acceptionState: req.body.state, stateTimeStamp: Date.now()};
 
             letterType = 'acceptionState';
 

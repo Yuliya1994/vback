@@ -19,7 +19,6 @@ var session = require('express-session');
 var passport = require('passport');
 var apiRouter = require('./routes/api');
 
-
 var app = express();
 app.use(compress({'level': 9}));
 
@@ -49,12 +48,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-var accessLogStream = fs.createWriteStream('access.log', {flags: 'a'});
-app.use(logger('combined', {stream: accessLogStream}));
-
 //main routes
 var routes = require('./routes/index')(app, passport);
-
 
 //indus
 app.use('/profile', function(req, res){
