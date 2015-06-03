@@ -2,4 +2,6 @@ node_modules/
 errors.log
 access.log
 .idea/
+log/
+npm-debug.log
 bower_components/
