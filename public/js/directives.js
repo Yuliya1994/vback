@@ -157,4 +157,98 @@ app.directive('rangeLine', function() {
     };
 });
 
+app.directive('scrollMouth', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, $elm, atrs) {
+            // $elm.bind('scroll', function() {
+            $(window).scroll(function(){
+            var sticky = $('.scrolls'),
+            scroll = $(window).scrollTop();
 
+                if (scroll >= 180) sticky.addClass('fixed').css({
+                    top:scroll-161
+            });
+            else sticky.removeClass('fixed');
+        });
+
+    //   });
+
+    console.log($elm);
+}
+};
+});
+app.directive('popoversRange',['VacationService', 'UserService', function(VacationService, UserService) {
+    return {
+        restrict: 'A',
+        link: function(scope, $elm, atrs) {
+            $(document).ready(function(){
+            $($elm).popover({trigger:'hover',html:true});
+
+                $($elm).on('show.bs.popover', function () {
+
+                    var pop = $($elm).data('bs.popover');
+                    var access = null;
+
+                    UserService.getCurrentUser()
+                        .success(function(user) {
+                            access = user.common.access;
+                            VacationService.getVacation(scope.curVac._id)
+                                .success(function(data) {
+                                    scope.vac = data[0];
+
+                                    var tempDays = [];
+                                    var range = '';
+                                    var mouth = '';
+                                    var day = '';
+                                    var days = '';
+                                    var status = '';
+                                    var states = ['Рассматривается', 'Подтверждена', 'Отказ'];
+                                    states[10] = 'Одобрена';
+                                    states[11] = 'Отклонена';
+
+                                    tempDays = scope.vac.days;
+
+                                    scope.vac.days[0].map(function(day) {
+                                        if(tempDays[0][day] < 10) {
+                                            tempDays[0][day] = '0' + day + '';
+                                            console.log(tempDays[0][day]);
+                                        }
+                                    });
+
+                                    mouth = (scope.vac.month[0]<10)? '0'+scope.vac.month[0]:scope.vac.month[0];
+                                    day =  tempDays[0][tempDays[0].length-1];
+
+                                    range = '' + tempDays[0][0] + '.' + mouth + '.'+ scope.vac.year + ' - ' + day + '.' + mouth + '.' +  scope.vac.year;
+
+                                    console.log(scope.vac.acceptionState);
+
+                                    status = states[scope.vac.acceptionState];
+
+                                    $($elm).attr('data-content', '' +
+                                        '<strong>Период:</strong> '+range+' <br/> <strong>Статус: </strong> '+status );
+                                    pop.setContent();
+
+                                    UserService.getUser(data[0].user_id)
+                                        .success(function(data) {
+
+                                        })
+                                        .error(function(err) {
+                                            throw err;
+                                        });
+                                })
+                                .error(function(err) {
+                                    throw err;
+                                });
+                        })
+                        .error(function(err) {
+                            throw err;
+                        });
+
+
+                })
+            });
+
+        }
+    };
+}]);

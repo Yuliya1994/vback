@@ -1,5 +1,5 @@
-<div class="month-selector text-center">
-    <div ng-repeat="i in showMonth" scroll-on-click target="{{getMonthPosition(i)}}" class="col-md-1 month">{{i|monthName}}</div>
+<div class="row month-selector text-center">
+    <div ng-repeat="i in showMonth" scroll-on-click target="{{getMonthPosition(i)}}" class="col-lg-10 col-xs-12 col-md-1 month">{{i|monthName}}</div>
 </div>
 
 <div class="month-hider">
@@ -48,22 +48,26 @@
     </div>
 
 
-    <div horizontal-scroll start-position="{{baseConfig.month}}" class="swipe-area">
-        <div ng-repeat="i in showMonth" class="month-wrapper">
-            <strong>{{i|monthName}}</strong>
-            <div class="days-wrapper">
-                <div class="day" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
-                     <span class="week-day">
-                         {{baseConfig.getDay(day, '2015', i)|dayName}}
-                     </span>
-                    {{::day}}
-                </div>
-            </div>
+    <div scroll-mouth horizontal-scroll start-position="{{baseConfig.month}}" class="swipe-area">
+        <div  ng-repeat="i in showMonth" class="month-wrapper" >
+
+                        <div class="scrolls">
+                            <strong>{{i|monthName}}</strong>
+                            <div class="days-wrapper">
+                                <div class="day" ng-repeat="day in baseConfig.daysRange(baseConfig.days('2015', i))">
+                      <span class="week-day">
+                          {{baseConfig.getDay(day, '2015', i)|dayName}}
+                      </span>
+
+                                    {{::day}}
+                                </div>
+        </div>
+        </div>
 
             <div class="ranges-wrapper">
                 <div class="range" ng-repeat="vac in vacationsByUser">
                     <section ng-repeat="curVac in vac[i]">
-                        <div ng-if="curVac.month[1] === null" acception-state="{{curVac.acceptionState}}" data-vac="{{::curVac._id}}" class="range-line tooltips" start-pos="{{curVac.days[0][0]}}" size="{{curVac.days[0].length}}" ng-click="openVacationParameters(curVac)"></div>
+                        <div ng-if="curVac.month[1] === null"  popovers-range  data-toggle="popover" data-placement="bottom" data-content="test" acception-state="{{curVac.acceptionState}}" data-vac="{{::curVac._id}}" class="range-line tooltips popovers" start-pos="{{curVac.days[0][0]}}" size="{{curVac.days[0].length}}" ng-click="openVacationParameters(curVac)"></div>
 
                         <div ng-if="curVac.month[1] !== null && curVac.month[0] === i" acception-state="{{curVac.acceptionState}}" data-vac="{{::curVac._id}}" class="range-line tooltips range-line-start" start-pos="{{curVac.days[0][0]}}" size="{{curVac.days[0].length}}" ng-click="openVacationParameters(curVac)"></div>
 
@@ -73,7 +77,8 @@
             </div>
 
         </div>
-    </div>
-</div>
+        </div>
+        </div>
 
-<div style="clear: both"></div>
+
+        <div style="clear: both"></div>
