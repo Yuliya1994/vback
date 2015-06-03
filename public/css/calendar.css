@@ -1,3 +1,47 @@
+@media(max-width: 992px){
+    .month {
+        font-size: 12px !important;
+        margin-left: 2px !important;
+        width: 8% !important;
+    }
+}
+@media (min-width: 992px) and (max-width: 1180px) {
+    .month{
+        font-size:14px !important;
+        margin-left: 11px !important;
+    }
+}
+@media (min-width: 1180px) {
+    .month{
+        font-size:14px !important;
+        margin-left: 12px !important;
+    }
+}
+@media (max-width: 767px) {
+    .month {
+        font-size: 12px !important;
+        margin-left: 7px !important;
+        width: 15% !important;
+        margin-top: 4px !important;
+        margin-bottom: 0px !important;
+    }
+    .month-hider{
+        margin-top:5px !important;
+        margin-top: 4px !important;
+        margin-bottom: 5px !important;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .month{
+        display:none !important;
+
+
+
+    }
+}
+
+
 .table-calendar {
     font-size: 9pt;
     background: #fff;
@@ -130,3 +174,6 @@ i:hover.tooltips span {
     z-index: 999;
 }
 
+.tooltips{
+    z-index: 1;
+}

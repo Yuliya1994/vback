@@ -169,6 +169,7 @@ div.employees div div {
 }
 .rangeActive:hover {
     background-color: slategray;
+    z-index:99999999999999;
 }
 
 .rangeAccepted {
@@ -184,6 +185,7 @@ div.employees div div {
 
 .rangeAccepted:hover {
     background-color: #00796B;
+    z-index:99999999999999;
 }
 
 .rangeApproved {
@@ -195,6 +197,7 @@ div.employees div div {
 }
 .rangeApproved:hover {
     border: 3px solid  #449d44;
+    z-index:99999999999999;
 }
 .rangeDeclined {
     border: 3px solid tomato;
@@ -205,6 +208,7 @@ div.employees div div {
 }
 .rangeDeclined:hover {
     border: 3px solid indianred;
+    z-index:99999999999999;
 }
 
 .rangeRefused {
@@ -216,6 +220,7 @@ div.employees div div {
 }
 .rangeRefused:hover {
     background-color: #b71c1c;
+    z-index:99999999999999;
 }
 
 .micro-range{display: none;}

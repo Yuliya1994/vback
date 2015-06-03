@@ -178,7 +178,7 @@ span i.fa-times{
 }
 
 .tooltip {
-    background-color: #101010;
+    /*background-color: #101010;*/
     position: absolute;
     opacity: 0.5;
     color: #fff;
