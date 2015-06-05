@@ -41,7 +41,7 @@
             <div class="col-md-4">
 
             </div>
-            <div class="col-md-4 nav-list">
+            <div class="col-md-5 nav-list">
                 <span class="nav-text">
                   <a href="/">ЗАЯВКИ</a>
                 </span>
@@ -54,7 +54,9 @@
                 <span class="nav-text">
                   <a href="/settings">НАСТРОЙКИ</a>
                 </span>
-
+                <span class="nav-text exit-button">
+                    <a href="#" onclick="document.location.href='/auth/logout'" class="exit">Выйти</a>
+                </span>
             </div>
         </div>
 
@@ -77,9 +79,9 @@
 
 <footer class="footer row-fluid">
     <div class="container">
-        <div class="col-md-6 text-right">
-            <a href="#" onclick="document.location.href='/auth/logout'">Выйти</a>
-        </div>
+        <!--<div class="col-md-6 text-right">-->
+            <!--<a href="#" onclick="document.location.href='/auth/logout'">Выйти</a>-->
+        <!--</div>-->
         <div class="col-md-6"></div>
 
     </div>
@@ -107,7 +109,8 @@
 <script src="../js/calendar_service.js"></script>
 <script src="../js/mail.js"></script>
 <script src="../js/mail_service.js"></script>
-
+<script src="/bower_components/bootstrap/js/tooltip.js"></script>
+<script src="/bower_components/bootstrap/js/popover.js"></script>
 
 </body>
 </html>
