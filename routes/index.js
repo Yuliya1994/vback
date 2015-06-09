@@ -12,7 +12,7 @@ module.exports = function(app, passport) {
 
     app.get('/vacation', access.isAuth, function(req, res) {
         var mainTemplate = templates[user.getAccessLevel(req, res)];
-
+        console.log(mainTemplate);
         res.render(mainTemplate, {template: mainTemplate});
     });
 

@@ -10,7 +10,6 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
     $scope.vacationsByUser = null;
     $scope.userHistory = null;
     $scope.vac = null;
-
     $scope.usersList = {};
     $scope.userIds = [];
 
@@ -92,6 +91,15 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
 
     run();
 
+   var showState = function(num) {
+        var states = ['Рассматривается', 'Подтверждена', 'Отказ'];
+
+        states[10] = 'Одобрена';
+        states[11] = 'Отклонена';
+
+        return states[num];
+    };
+
     //Create array sorting vacations by user and month [user_id] => [1] => [{vac},{vac}...], [2] => ...
     function diffByUsers(vacations) {
         $scope.vacationsByUser = {};
@@ -103,21 +111,41 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
             }
         });
 
+      //  var date1 = new Date();
+      //  var now_date = new Date(date1.setDate(date1.getDate() + 3));
+        var now_date = new Date();
+
         for(var user in $scope.vacationsByUser) {
             $scope.userIds.push(user);
             for(var i = 1; i <= 12; i++) {
                 $scope.vacationsByUser[user][i] = [];
 
                 vacations.forEach(function(vac) {
+
                     if(~vac.month.indexOf(i) && user === vac.user_id) {
-                        $scope.vacationsByUser[user][i].push(angular.fromJson(vac));
+                        if (vac.stateTimeStamp > 0) {
+
+                          var change_date = new Date(vac.stateTimeStamp);
+
+                          var new_date = new Date (change_date.setDate(change_date.getDate() + 3));
+
+                        }
+
+                       if ( new_date < now_date  && vac.acceptionState == 2) {
+                          $scope.vacationsByUser[user][i].push();
+                        } else {
+                            $scope.vacationsByUser[user][i].push(angular.fromJson(vac));
+                      }
+
                     } else {
                         $scope.vacationsByUser[user][i].push({});
                     }
                 });
+
             }
         }
     }
+
 
     $scope.openVacationParameters = function(vac) {
         $scope.vac = null;

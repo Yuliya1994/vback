@@ -105,8 +105,14 @@ app.controller('NewVacationController', ['$scope', 'VacationService', 'ngDialog'
                 template: '<p>Заявка отправлена!</p>',
                 plain: true
             });
+            $scope.range = '';
+            $scope.vacation = '';
         });
-        console.log($scope.vacation);
-        console.log('test');
     }
+
+
+
+
+
+
 }]);

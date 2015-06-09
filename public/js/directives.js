@@ -161,29 +161,24 @@ app.directive('scrollMouth', function() {
     return {
         restrict: 'A',
         link: function(scope, $elm, atrs) {
-            // $elm.bind('scroll', function() {
             $(window).scroll(function(){
-            var sticky = $('.scrolls'),
-            scroll = $(window).scrollTop();
+                var sticky = $('.scrolls'),
+                    scroll = $(window).scrollTop();
 
                 if (scroll >= 180) sticky.addClass('fixed').css({
                     top:scroll-161
+                });
+                else sticky.removeClass('fixed');
             });
-            else sticky.removeClass('fixed');
-        });
-
-    //   });
-
-    console.log($elm);
-}
-};
+        }
+    };
 });
 app.directive('popoversRange',['VacationService', 'UserService', function(VacationService, UserService) {
     return {
         restrict: 'A',
         link: function(scope, $elm, atrs) {
             $(document).ready(function(){
-            $($elm).popover({trigger:'hover',html:true});
+                $($elm).popover({trigger:'hover',html:true});
 
                 $($elm).on('show.bs.popover', function () {
 
@@ -207,26 +202,28 @@ app.directive('popoversRange',['VacationService', 'UserService', function(Vacati
                                     states[10] = 'Одобрена';
                                     states[11] = 'Отклонена';
 
-                                    tempDays = scope.vac.days;
+                                    tempDays = scope.vac.days[0];
 
-                                    scope.vac.days[0].map(function(day) {
-                                        if(tempDays[0][day] < 10) {
-                                            tempDays[0][day] = '0' + day + '';
-                                            console.log(tempDays[0][day]);
+                                    for (var i= 0; i<tempDays.length; i++){
+
+                                        if (tempDays[i]<10){
+                                            tempDays[i] = '0' + tempDays[i] + '';
+                                            console.log(tempDays[i]);
                                         }
-                                    });
+                                    }
 
                                     mouth = (scope.vac.month[0]<10)? '0'+scope.vac.month[0]:scope.vac.month[0];
-                                    day =  tempDays[0][tempDays[0].length-1];
 
-                                    range = '' + tempDays[0][0] + '.' + mouth + '.'+ scope.vac.year + ' - ' + day + '.' + mouth + '.' +  scope.vac.year;
+                                    day =  tempDays.pop();
+
+                                    range = '' + tempDays[0] + '.' + mouth + '.'+ scope.vac.year + ' - ' + day + '.' + mouth + '.' +  scope.vac.year;
 
                                     console.log(scope.vac.acceptionState);
 
                                     status = states[scope.vac.acceptionState];
 
                                     $($elm).attr('data-content', '' +
-                                        '<strong>Период:</strong> '+range+' <br/> <strong>Статус: </strong> '+status );
+                                    '<strong>Период:</strong> '+range+' <br/> <strong>Статус: </strong> '+status );
                                     pop.setContent();
 
                                     UserService.getUser(data[0].user_id)

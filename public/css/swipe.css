@@ -314,14 +314,12 @@ div.employees div div {
 
 .new-vac-btn {
     background-color: rgba(0,0,0,0.3);
-    position: fixed;
-    width: auto;
+
+    width: 158px;
     font-size: 13pt;
     text-align: center;
     padding: 5px;
-    z-index: 999;
-    left: 1%;
-    top: 150px;
+
     height: 40px;
 }
 

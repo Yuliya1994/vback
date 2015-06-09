@@ -9,13 +9,8 @@ block content
         | Регистрация
         form(method='post', action='/auth/signup')
             div.error.text-warning= message
-             input#surname(type='text', placeholder='Name, Surname...', name='name_surname')
-             div.alert.alert-success= 'Example: Анатолий Пихидчук'
-
-
-
-            input#usename(type='email', placeholder='Email...', name='email')
+            div.valid.text-warning
+            input#usename(type='text', placeholder='Email...', name='email')
             input#password(type='password', placeholder='******', name='password')
-
             button.btn.btn-lg(type='submit')
                 i.fa.fa-user-plus Зарегистрироваться

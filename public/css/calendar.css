@@ -10,6 +10,13 @@
         font-size:14px !important;
         margin-left: 11px !important;
     }
+    .nav-list{
+        margin-left: 40% !important;
+        margin-top: -34px !important;
+    }
+    .exit{
+        margin-left: -134px;
+    }
 }
 @media (min-width: 1180px) {
     .month{
@@ -176,4 +183,18 @@ i:hover.tooltips span {
 
 .tooltips{
     z-index: 1;
+}
+.exit{
+    background-color: #0C2171;
+    padding: 5px 15px 5px 15px;
+    color: #FFF;
+}
+.nav-text.exit-button:hover {
+    border:0px!important;
+}
+.nav-list{
+    margin-left: 16%;
+}
+.month-option{
+    padding-right: 10px;
 }

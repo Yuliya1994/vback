@@ -16,7 +16,9 @@ var GITHUB_CLIENT_SECRET = "8ecb3e3a382f0d911a9fd624e5f5f2436b922ffd";
 
 var VKONTAKTE_APP_ID = "4875977";
 var VKONTAKTE_APP_SECRET = "FG5gyYmwD2NHyY5k9UX0";
-var re = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+
+var re = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$/;
+
 module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
         done(null, user.id);
@@ -40,8 +42,7 @@ module.exports = function(passport) {
                 if(err){
                     return done(err);
                 }
-
-                if(re.test(email)==false) {
+                if(re.test(email)===false) {
                     return done(null, false, {message: 'email is invalid'});
                 }
                 if(user){

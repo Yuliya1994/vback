@@ -8,6 +8,10 @@ app.config(function($routeProvider, $locationProvider){
             templateUrl: "../templates/settings.html",
             animation: 'first'
         })
+        .when('/vacation',{
+            templateUrl: "../templates/new_vacation.html",
+            animation: 'first'
+        })
         .otherwise({
             templateUrl: "../templates/calendar.html",
             animation: 'first'

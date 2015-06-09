@@ -8,6 +8,12 @@ div.range-control {
     color: #fff;
 
 }
+.exit-button {
+    float: right;
+}
+.exit-button:hover {
+    border:0px!important;
+}
 
 div.range-control a {
     color: #fff;
