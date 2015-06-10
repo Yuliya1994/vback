@@ -106,11 +106,11 @@ padding: 5px;
 }
 
 .nav-text {
-  font-size: 12pt;
-  transition: border 1s;
-  padding-right: 15px;
-  padding-left: 15px;
-  padding-bottom: 5px;
+    font-size: 12pt;
+    transition: border 1s;
+    padding-right: 13px;
+    padding-left: 11px;
+    padding-bottom: 5px;
 }
 
 .nav-text:hover {

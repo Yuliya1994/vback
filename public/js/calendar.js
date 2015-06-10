@@ -29,7 +29,13 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
                 console.log(i);
                 $scope.showMonth.push('' + i);
             }
-        } else {
+        }
+        else if (+$scope.monthHider.startMonth == +$scope.monthHider.endMonth){
+            for(var i = +$scope.monthHider.startMonth; i <= +$scope.monthHider.endMonth; i++) {
+                $scope.showMonth.push('' + i);
+            }
+        }
+        else {
             $scope.monthHider.startMonth = '1';
             $scope.monthHider.endMonth = '12';
         }

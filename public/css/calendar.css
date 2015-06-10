@@ -15,7 +15,7 @@
         margin-top: -34px !important;
     }
     .exit{
-        margin-left: -134px;
+        margin-left: -126px !important;
     }
 }
 @media (min-width: 1180px) {
@@ -32,11 +32,15 @@
         margin-top: 4px !important;
         margin-bottom: 0px !important;
     }
+    .nav-text{
+        margin-left: 19px;
+    }
     .month-hider{
         margin-top:5px !important;
         margin-top: 4px !important;
         margin-bottom: 5px !important;
     }
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -188,6 +192,8 @@ i:hover.tooltips span {
     background-color: #0C2171;
     padding: 5px 15px 5px 15px;
     color: #FFF;
+    margin-left: -61px;
+    font-size: 12pt;
 }
 .nav-text.exit-button:hover {
     border:0px!important;
