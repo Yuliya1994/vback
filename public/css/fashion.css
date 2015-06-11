@@ -11,6 +11,24 @@ div.range-control {
 .exit-button {
     float: right;
 }
+.position {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
 .exit-button:hover {
     border:0px!important;
 }
@@ -105,12 +123,13 @@ padding: 5px;
   margin-top: 20px;
 }
 
-.nav-text {
+.nav-text{
     font-size: 12pt;
     transition: border 1s;
     padding-right: 13px;
     padding-left: 11px;
     padding-bottom: 5px;
+    margin-left: -13px;
 }
 
 .nav-text:hover {
@@ -188,4 +207,7 @@ span i.fa-times{
     position: absolute;
     opacity: 0.5;
     color: #fff;
+}
+.uservacation{
+    margin-left: -90px;
 }

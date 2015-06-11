@@ -12,7 +12,8 @@ app.service("UserService", ['$http', function($http) {
     };
 
     this.updateUser = function(id, data) {
-        return $http.put('/api/user/'+id, {username: data.username, email: data.email});
+        return $http.put('/api/user/'+id, {username: data.username, email: data.email, rank:data.rank,photo:data.photo});
+        console.log(data.position);
     };
 
     this.deleteUser = function(id) {

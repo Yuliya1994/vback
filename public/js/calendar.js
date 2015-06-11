@@ -170,7 +170,12 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
                         UserService.getUser(data[0].user_id)
                             .success(function(data) {
                                 $scope.vac.user = data.common.profile.username || data.common.profile.email;
-
+                                var rank_list = {
+                                    'developer':'Разработчик',
+                                    'manager':'Менеджер',
+                                    'director' :'Начальник'
+                                };
+                                $scope.vac.position = rank_list[data.common.profile.position];
                                 ngDialog.open({
                                     template: '../templates/'+_template+'.html',
                                     className: 'ngdialog-theme-default',

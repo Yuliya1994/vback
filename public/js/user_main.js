@@ -41,6 +41,7 @@ app.controller('UserMainController', ['$scope', '$rootScope', 'ngDialog', 'UserS
             .success(function (user, status) {
                 $scope.user = user;
                 $scope.username = user.common.profile.username || user.common.profile.email;
+                $scope.photo = user.common.profile.photo;
             })
             .error(function (err, status) {
                 throw new Error(err);

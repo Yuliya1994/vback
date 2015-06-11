@@ -58,7 +58,8 @@ module.exports = function(passport) {
                     var commonProfile = {
 //                        username: nameuser +' '+surname,
                         email: email,
-                        photo: null
+                        photo: null,
+                        position:null
                     };
                     console.log(commonProfile);
                     //duplicate object_id in common with local strategy

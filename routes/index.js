@@ -1,7 +1,6 @@
 var user = require('../controllers/user');
 var access = require('../middlewares.js');
 var templates = require('../config/templates');
-
 module.exports = function(app, passport) {
 
     app.get('/', access.isAuth, function(req, res) {
@@ -21,6 +20,8 @@ module.exports = function(app, passport) {
 
         res.render(mainTemplate, {template: mainTemplate});
     });
+
+
 
     app.get('/list', access.isAuth, function(req, res) {
         var mainTemplate = templates[user.getAccessLevel(req, res)];
@@ -61,6 +62,9 @@ module.exports = function(app, passport) {
         failureRedirect: '/auth/signup',
         failureFlash : true
     }));
+
+
+
 
 
     app.get('/auth/google', passport.authenticate('google',{ scope: ['https://www.googleapis.com/auth/plus.login'] }));

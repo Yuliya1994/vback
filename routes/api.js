@@ -9,12 +9,64 @@ var currentUserCtrl = require('../controllers/user');
 var Vacation = require('../models/vacation');
 var User = require('../models/user');
 var Mail = require('../models/mail');
-
+var   multiparty = require('multiparty');
 var mailer = require('../config/mailer');
 var Letter = require('../config/letter');
-
+var fs = require('fs');
 //router.use(access.apiAccess);
+router.post('/upload', function (req, res) {
 
+    var form = new multiparty.Form();
+    var uploadFile = {uploadPath: '', type: '', size: 0};
+    var maxSize = 2 * 1024 * 1024; //2MB
+    var supportMimeTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+    var errors = [];
+
+    form.on('error', function(err){
+        if(fs.existsSync(uploadFile.path)) {
+            fs.unlinkSync(uploadFile.path);
+            console.log('error');
+        }
+    });
+
+    form.on('close', function() {
+        if(errors.length == 0) {
+            res.send({status: 'ok', text: 'Photo uploaded successfully',path_upload:uploadFile.path.substr(8)});
+        }
+        else {
+            if(fs.existsSync(uploadFile.path)) {
+                fs.unlinkSync(uploadFile.path);
+            }
+            res.send({status: 'bad', errors: errors});
+        }
+    });
+
+    form.on('part', function(part) {
+        uploadFile.size = part.byteCount;
+        uploadFile.type = part.headers['content-type'];
+        uploadFile.path = './public/avatar_user/' + part.filename;
+
+        if(uploadFile.size > maxSize) {
+            errors.push('File size is ' + uploadFile.size / 1024 / 1024 + '. Limit is' + (maxSize / 1024 / 1024) + 'MB.');
+        }
+
+        if(supportMimeTypes.indexOf(uploadFile.type) == -1) {
+            errors.push('Unsupported mimetype ' + uploadFile.type);
+        }
+
+        if(errors.length == 0) {
+            var out = fs.createWriteStream(uploadFile.path);
+            part.pipe(out);
+        }
+        else {
+            part.resume();
+        }
+
+    });
+
+
+    form.parse(req);
+});
 router.route('/vacation')
     .get(function(req, res) {
         Vacation.find({}, function(err, data) {
@@ -248,9 +300,10 @@ router.route('/user/:id')
     .put(function(req, res) {
         var updateData = {$set: {
             'common.profile.username': req.body.username,
-            'common.profile.email': req.body.email
+            'common.profile.email': req.body.email,
+            'common.rank': req.body.rank,
+            'common.profile.photo': req.body.photo
         }};
-
         User.update({'common.id':req.params.id}, updateData, function(err) {
             if(err) {
                 throw err;
