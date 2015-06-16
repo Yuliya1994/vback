@@ -6,7 +6,6 @@ div.jumbotron {
     padding: 10px;
     min-height: 580px;
 }
-
 .nav-list {
      margin-left: 25%;
 }
@@ -24,35 +23,29 @@ div.jumbotron {
     height: auto;
 
 }
-
 .user_av:hover {
     height: auto;
 }
 .user_control {
     margin-top: 25px;
 }
-
 .btn-vac {
 padding-top: 12px;
     width: 100%;
 }
-
 .btn-img {
     width: 28px;
     height: auto;
     margin-right: 5px;
     margin-bottom: 3px;
 }
-
 .history {
     margin-top: 25px;
 }
-
 .close {
     margin-right: 10px;
     margin-top: 10px;
 }
-
 .container-vac {
 } 
 
@@ -61,12 +54,10 @@ padding-top: 12px;
     border-top: 3px solid rgba(165,165,165, 0.6);
     color: #000;
 }
-
 .datepicker-input {
     background-color: #fff;
     padding-left: 5px;
 }
-
 .view {
     border-top: 3px solid rgba(165,165,165, 0.6);
     background-color: rgba(0,0,0,0.1);
@@ -85,5 +76,4 @@ padding-top: 12px;
     font-size: 15px;
     padding-left: 13px;
     padding-right: 16px;
-
 }

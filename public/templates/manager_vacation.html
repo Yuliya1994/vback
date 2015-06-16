@@ -6,8 +6,10 @@
 
     <tr>
         <td><strong>Период:</strong><td>
+        {{prettyDate(vac.days[0][0], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}
+        -
+        {{prettyDate(vac.days[0][vac.days[0].length-1], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}
 
-        {{defineRangeFromData(vac.days, vac.month, vac.year)}}
 
     </tr>
     <tr>

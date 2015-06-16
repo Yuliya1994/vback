@@ -70,7 +70,6 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         VacationService.getVacations()
             .success(function (data) {
                 $scope.vacations = data;
-        console.log(data);
                 angular.forEach($scope.vacations, function (el) {
                     UserService.getUser(el.user_id)
                         .success(function (user, status) {
@@ -139,7 +138,10 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
 
                        if ( new_date < now_date  && vac.acceptionState == 2) {
                           $scope.vacationsByUser[user][i].push();
+
+
                         } else {
+                           console.log(vac.days);
                             $scope.vacationsByUser[user][i].push(angular.fromJson(vac));
                       }
 
@@ -152,7 +154,7 @@ app.controller('CalendarController', ['$scope', '$rootScope', 'ngDialog', 'Calen
         }
     }
 
-
+    console.log($scope.usersList);
     $scope.openVacationParameters = function(vac) {
         $scope.vac = null;
         var access = null;

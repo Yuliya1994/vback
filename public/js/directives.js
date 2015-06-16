@@ -166,9 +166,28 @@ app.directive('scrollMouth', function() {
                     scroll = $(window).scrollTop();
 
                 if (scroll >= 180) sticky.addClass('fixed').css({
-                    top:scroll-161
+                    top:scroll-161,
+                    //width:570
                 });
                 else sticky.removeClass('fixed');
+            });
+        }
+    };
+});
+
+app.directive('mouthWidth', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, $elm, atrs) {
+            $(window).ready(function(){
+                setTimeout(function(){
+
+                    $.each($($elm),function(){
+                        $($elm).css('width',$(this).width());
+
+                    });
+                },2000)
+
             });
         }
     };
