@@ -162,18 +162,27 @@ app.directive('scrollMouth', function() {
         restrict: 'A',
         link: function(scope, $elm, atrs) {
             $(window).scroll(function(){
+
                 var sticky = $('.scrolls'),
                     scroll = $(window).scrollTop();
 
-                if (scroll >= 180) sticky.addClass('fixed').css({
-                    top:scroll-161,
-                    //width:570
-                });
-                else sticky.removeClass('fixed');
+                if (scroll >= 180) {
+                    $('.month-wrapper').css('margin-left','0px');
+                    sticky.addClass('fixed').css({
+                        top:scroll-161
+
+                    });
+                }
+                else {
+                    $('.month-wrapper').css('margin-left','5px');
+                    sticky.removeClass('fixed');
+                }
+
             });
         }
     };
 });
+
 
 app.directive('mouthWidth', function() {
     return {
@@ -184,7 +193,7 @@ app.directive('mouthWidth', function() {
 
                     $.each($($elm),function(){
                         $($elm).css('width',$(this).width());
-
+                        $($elm).find('.scrolls').css('width',$(this).width());
                     });
                 },2000)
 

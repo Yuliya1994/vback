@@ -84,7 +84,7 @@ div.employees div div {
     z-index: 999999999;
     background: #e1e1e1;
     width: 100%;
-    margin-left: -5px;
+    /*margin-left: -5px;*/
 
 }
 .fixed strong{
