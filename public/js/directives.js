@@ -169,8 +169,8 @@ app.directive('scrollMouth', function() {
                 if (scroll >= 180) {
                     $('.month-wrapper').css('margin-left','0px');
                     sticky.addClass('fixed').css({
-                        top:scroll-161
-
+                        top:scroll-161,
+                        //width:570
                     });
                 }
                 else {
@@ -183,7 +183,6 @@ app.directive('scrollMouth', function() {
     };
 });
 
-
 app.directive('mouthWidth', function() {
     return {
         restrict: 'A',
@@ -193,6 +192,7 @@ app.directive('mouthWidth', function() {
 
                     $.each($($elm),function(){
                         $($elm).css('width',$(this).width());
+
                         $($elm).find('.scrolls').css('width',$(this).width());
                     });
                 },2000)
@@ -222,92 +222,6 @@ app.directive('uploadFile', function() {
 
 
             }());
-
-//            (function () {
-//                'use strict';
-//                var input = document.getElementById("fileupload");
-//                var formdata =false;
-//
-//                if (window.FormData) {
-//                    formdata = new FormData();
-//                }
-//                input.addEventListener("change", function (evt) {
-//                    //document.getElementById("response").innerHTML = "Uploading . . ."
-//                    var i = 0, len = this.files.length, img, reader, file;
-//
-//                    for ( ; i < len; i++ ) {
-//                        file = this.files[i];
-//console.log(file);
-//                        if (!!file.type.match(/image.*/)) {
-//                            if ( window.FileReader ) {
-//                                reader = new FileReader();
-////                                reader.onloadend = function (e) {
-////                                    showUploadedItem(e.target.result, file.fileName);
-////                                };
-//                                reader.readAsDataURL(file);
-//                            }
-//                            if (formdata) {
-//                                formdata.append("images[]", file);
-//                            }
-//                        }
-//                    }
-//
-//                    if (formdata) {
-//                        $.ajax({
-//                            url: "api/upload",
-//                            type: "POST",
-//                            data: formdata,
-//                            processData: false,
-//                            contentType: false,
-//                            success: function (res) {
-//                                document.getElementById("response").innerHTML = res;
-//                            }
-//                        });
-//                    }
-//                }, false);
-//
-//
-////                $($elm).change(function(){
-////                    var file = this.files[0];
-////                    var name = file.name;
-////                    var size = file.size;
-////                    var type = file.type;
-////                    console.log(file);
-////                    //Your validation
-////                    $.ajax({
-////                        url: 'api/upload',  //Server script to process data
-////                        type: 'POST',
-////                        data: {'files':file},
-////                        //Options to tell jQuery not to process data or worry about content-type.
-////                        cache: false,
-////                        contentType: false,
-////                        processData: false
-////                    });
-////                });
-//
-//                // Define the url to send the image data to
-////                var url = 'api/upload';
-////
-////                // Call the fileupload widget and set some parameters
-////                $($elm).fileupload({
-////                    url: url,
-////                    dataType: 'json',
-////                    done: function (e, data) {
-////                        // Add each uploaded file name to the #files list
-//////                        $.each(data.result.files, function (index, file) {
-//////                            $('<li/>').text(file.name).appendTo('#files');
-//////                        });
-////                    },
-////                    progressall: function (e, data) {
-////                        // Update the progress bar while files are being uploaded
-//////                        var progress = parseInt(data.loaded / data.total * 100, 10);
-//////                        $('#progress .bar').css(
-//////                            'width',
-//////                            progress + '%'
-//////                        );
-////                    }
-////                });
-//            }());
         }
     };
 });
@@ -337,6 +251,7 @@ app.directive('popoversRange',['VacationService', 'UserService', function(Vacati
                                     var days = '';
                                     var status = '';
                                     var states = ['Рассматривается', 'Подтверждена', 'Отказ'];
+                                    var endDate = null;
                                     states[10] = 'Одобрена';
                                     states[11] = 'Отклонена';
 
@@ -350,13 +265,29 @@ app.directive('popoversRange',['VacationService', 'UserService', function(Vacati
                                         }
                                     }
 
-                                    mouth = (scope.vac.month[0]<10)? '0'+scope.vac.month[0]:scope.vac.month[0];
+                                    if (scope.vac.month.length == 2){
 
-                                    day =  tempDays.pop();
+                                        var startDate = new Date(scope.vac.year, scope.vac.month[0], scope.vac.days[0][0]);
+                                        //Check if this month Aug
+                                        if (scope.vac.month[0]==8) {
+                                            startDate = new Date(scope.vac.year, scope.vac.month[0]+1, scope.vac.days[0][0]);
+                                        }
 
-                                    range = '' + tempDays[0] + '.' + mouth + '.'+ scope.vac.year + ' - ' + day + '.' + mouth + '.' +  scope.vac.year;
+                                        if(scope.vac.month[1] === null) {
+                                            endDate = new Date(scope.vac.year, scope.vac.month[0], scope.vac.days[0][scope.vac.days[0].length - 1]);
+                                        } else {
+                                            endDate = new Date(scope.vac.year, scope.vac.month[1], scope.vac.days[1][scope.vac.days[1].length - 1]);
+                                        }
 
-                                    console.log(scope.vac.acceptionState);
+                                        startDate = ('0' + (startDate.getDate())).slice(-2)+'.'+ ('0' + (startDate.getMonth())).slice(-2) +'.'+startDate.getFullYear();
+                                        endDate = ('0' + (endDate.getDate())).slice(-2)+'.'+ ('0' + (endDate.getMonth())).slice(-2) +'.'+endDate.getFullYear();
+                                        range  =  startDate + ' - ' + endDate;
+
+                                    } else {
+                                        mouth = (scope.vac.month[0]<10)? '0'+scope.vac.month[0]:scope.vac.month[0];
+                                        day =  tempDays.pop();
+                                        range = '' + tempDays[0] + '.' + mouth + '.'+ scope.vac.year + ' - ' + day + '.' + mouth + '.' +  scope.vac.year;
+                                    }
 
                                     status = states[scope.vac.acceptionState];
 

@@ -139,7 +139,9 @@ div.employees div div {
     color: #fff;
     text-align: center;
 }
-
+.end-two-month{
+    border-radius: 10px 0px 0px 10px !important;
+}
 .range-line-start {
     border-radius: 0px;
     -webkit-border-top-left-radius: 10px;

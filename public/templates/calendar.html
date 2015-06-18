@@ -71,6 +71,12 @@
             <div class="ranges-wrapper">
                 <div class="range" ng-repeat="vac in vacationsByUser">
                     <section ng-repeat="curVac in vac[i]">
+                        <div ng-if="curVac.month.length == 2 && i==curVac.month[0]" popovers-range data-toggle="popover"
+                             data-placement="bottom" data-content="test" acception-state="{{curVac.acceptionState}}"
+                             data-vac="{{::curVac._id}}" data-month="{{curVac.month[0]}}" class="range-line tooltips popovers end-two-month"
+                             start-pos="{{curVac.days[0][0]}}" size="{{curVac.days[0].length}}"
+                             <!--ng-click="openVacationParameters(curVac)" ></div>-->
+
                         <div ng-if="curVac.month[1] === null" popovers-range data-toggle="popover"
                              data-placement="bottom" data-content="test" acception-state="{{curVac.acceptionState}}"
                              data-vac="{{::curVac._id}}" class="range-line tooltips popovers"
@@ -83,6 +89,8 @@
                              size="{{curVac.days[0].length}}" ng-click="openVacationParameters(curVac)"></div>
 
                         <div ng-if="curVac.month[1] !== null && curVac.month[0] === i-1"
+                             popovers-range data-toggle="popover"
+                             data-placement="bottom" data-content="test"
                              acception-state="{{curVac.acceptionState}}" data-vac="{{::curVac._id}}"
                              class="range-line tooltips range-line-end" start-pos="{{curVac.days[1][0]}}"
                              size="{{curVac.days[1].length}}" ng-click="openVacationParameters(curVac)"></div>
