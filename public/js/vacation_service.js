@@ -26,25 +26,23 @@ app.service("VacationService", ['$http', function($http) {
 
     this.defineRangeFromData = function(days, month, year) {
         var range = '';
-        var tempDays = [];
-
-        tempDays[0] = [];
-        tempDays[1] = [];
-
-        days[0].map(function(day) {
-            if(days[0][day] < 10) {
-                tempDays[0][day] = '0' + day + '';
-                console.log(days[0][day]);
-            }
-        });
-
-        if(month[1] === null) {
-            range = '' + days[0][0] + '.' + month[0] + ' - ' + days[0][days[0].length-1] + '.' + month[0] + '.' + year;
-        } else {
-            range = '' + days[0][0] + '.' + month[0] + ' - ' + days[1][days[1].length-1] + '.' + month[1] + '.' + year;
+        var endDate = null;
+        var startDate = new Date(year, month[0], days[0][0]);
+        //Check if this month Aug
+        if (month[0]==8) {
+            startDate = new Date(year, month[0]+1, days[0][0]);
         }
 
+        if(month[1] === null) {
+            endDate = new Date(year, month[0], days[0][days[0].length - 1]);
+        } else {
+            endDate = new Date(year, month[1], days[1][days[1].length - 1]);
+        }
+
+        startDate = ('0' + (startDate.getDate())).slice(-2)+'.'+ ('0' + (startDate.getMonth())).slice(-2) +'.'+startDate.getFullYear();
+        endDate = ('0' + (endDate.getDate())).slice(-2)+'.'+ ('0' + (endDate.getMonth())).slice(-2) +'.'+endDate.getFullYear();
+
+        range  =  startDate + ' - ' + endDate;
         return range;
     };
 }]);
-

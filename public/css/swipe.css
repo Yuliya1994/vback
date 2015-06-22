@@ -135,12 +135,13 @@ div.employees div div {
     background-color: #003bb3;
     position: absolute;
     min-height: 21px;
-    border-radius: 10px;
+    border-radius: 10px ;
     color: #fff;
     text-align: center;
 }
+
 .end-two-month{
-    border-radius: 10px 0px 0px 10px !important;
+    border-radius: 10px 0px 0px 10px !important ;
 }
 .range-line-start {
     border-radius: 0px;

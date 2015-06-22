@@ -6,11 +6,19 @@
 
     <tr>
         <td><strong>Период:</strong><td>
-        {{prettyDate(vac.days[0][0], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}
-        -
-        {{prettyDate(vac.days[0][vac.days[0].length-1], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}
+        <div ng-if=" vac.month[1]!=null">
 
+            {{defineRangeFromData(vac.days, vac.month, vac.year)}}
 
+        </div>
+
+        <div ng-if=" vac.month[1]==null">
+
+            {{::prettyDate(vac.days[0][0], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}
+            -
+            {{::prettyDate(vac.days[0][vac.days[0].length-1], vac.year, vac.month[0])|date:'dd.MM.yyyy'}}
+
+        </div>
     </tr>
     <tr>
         <td>
